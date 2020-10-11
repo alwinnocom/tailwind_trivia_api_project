@@ -6,6 +6,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+// const getQuestions = require('/getQuestions.js');
+
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
@@ -18,18 +20,15 @@ app.listen(3000, () => {
 
 app.route('/')
   .get((req, res) => {
-    res.send("Hello World")
+    
   })
 
   .post((req, res) => {
+    // HTTPS Module to parse JSON.
 
-  })
-  
-// HTTPS Module to parse JSON.
+let [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
 
-// let [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
-
-let [numberOfQuestions, category, difficulty, type] = [1, 9, "", ""];
+// let [numberOfQuestions, category, difficulty, type] = [1, 9, "", ""];
 
 let url = `https://opentdb.com/api.php?amount=${numberOfQuestions}`
 
@@ -41,35 +40,35 @@ function customAPI (num, cat, dif, typ) {
     }
 
     // Specific Category only
-    else if (cat > 8 && dif === "" && typ === "") {
+    else if (cat > 8 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}`
                     
         httpsResponse();
     }
 
     // Specific Difficulty only
-    else if (cat === 0 && dif !== "" && typ === "") {
+    else if (cat === 0 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${cat}`
                     
         httpsResponse();
     }
 
     // Specific Type only
-    else if (cat === 0 && dif === "" && typ !== "") {
+    else if (cat === 0 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&type=${typ}`
                 
         httpsResponse();
     }
 
     // Specific Category + Difficulty
-    else if (cat > 8 && dif !== "" && typ === "") {
+    else if (cat > 8 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}`
                 
         httpsResponse();
     }
 
     // Specific Category + Type
-    else if (cat > 8 && dif === "" && typ !== "") {
+    else if (cat > 8 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&type=${typ}`
                 
         httpsResponse();
@@ -77,21 +76,21 @@ function customAPI (num, cat, dif, typ) {
 
 
     // Specific Difficulty + Type
-    else if (cat === 0 && dif !== "" && typ !== "") {
+    else if (cat === 0 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${dif}&type=${typ}`
             
         httpsResponse();
     }
 
     // Specific ALL (Category, Difficulty, Type)
-    else if (cat > 8 && dif !== "" && typ !== "") {
+    else if (cat > 8 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}&type=${typ}`
             
         httpsResponse();
     }
 
     // Any Category, Difficulty, and Type.
-    else if (cat === 0 && dif === "" && typ === "") {
+    else if (cat === 0 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}`
     
         httpsResponse();
@@ -125,6 +124,8 @@ function httpsResponse() {
 }
 
 customAPI(numberOfQuestions, category, difficulty, type);
+
+})
 
 /*
 API Possibilities:
