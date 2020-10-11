@@ -5,6 +5,7 @@ const https = require("https");
 const express = require('express'); 
 const app = express();
 const bodyParser = require('body-parser');
+const ejs = require('ejs');
 
 // const getQuestions = require('/getQuestions.js');
 
@@ -20,7 +21,7 @@ app.listen(3000, () => {
 
 app.route('/')
   .get((req, res) => {
-    
+    res.render("index");
   })
 
   .post((req, res) => {
@@ -125,6 +126,13 @@ function httpsResponse() {
         // })
 
     })
+
+    res.render("results", {
+       numberQuestions: req.body.numberOfQuestions,
+       category: req.body.category,
+       difficulty: req.body.difficulty,
+       type: req.body.type
+    });
 }
 
 customAPI(numberOfQuestions, category, difficulty, type);
