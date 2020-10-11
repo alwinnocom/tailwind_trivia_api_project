@@ -110,12 +110,16 @@ function httpsResponse() {
             // console.log(newData);
             // console.log(newData.results);
             // console.log(newData.results[0]);
-            let questionData = newData.results[0];
-            let [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
+            // let questionData = ""
+            // for (i = 0; i++; i < numberOfQuestions) {
+            //     questionData = newData.results[i];
+            //     console.log(questionData);
+                let questionData = newData.results[0];
+                let [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
             
-            console.log(`Question Category = ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`)
-        });
-
+                console.log(`Question Category = ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`)
+            });
+        
         // app.post("/", (req, res) => {
         //     res.render(newData);
         // })
