@@ -4,21 +4,32 @@ const https = require("https");
 
 const express = require('express'); 
 const app = express();
+const bodyParser = require('body-parser');
 
-app.get('/', (req, res) => {
-    res.send("Hello World")
-})
+app.set('view engine', 'ejs');
+
+app.use(express.static('public'));
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.listen(3000, () => {
     console.log("Server started on port 3000.");
 });
 
-app.use(express.static('public'));
+app.route('/')
+  .get((req, res) => {
+    res.send("Hello World")
+  })
 
+  .post((req, res) => {
 
+  })
+  
 // HTTPS Module to parse JSON.
 
-let [numberOfQuestions, category, difficulty, type] = [1, 0, "", ""];
+// let [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
+
+let [numberOfQuestions, category, difficulty, type] = [1, 9, "", ""];
 
 let url = `https://opentdb.com/api.php?amount=${numberOfQuestions}`
 
@@ -97,7 +108,13 @@ function httpsResponse() {
         
         response.on('data', (data) => {
             newData = JSON.parse(data);
-            console.log(newData);
+            // console.log(newData);
+            // console.log(newData.results);
+            // console.log(newData.results[0]);
+            let questionData = newData.results[0];
+            let [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
+            
+            console.log(`Question Category = ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`)
         });
 
         // app.post("/", (req, res) => {
