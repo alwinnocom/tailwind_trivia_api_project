@@ -57,46 +57,47 @@ let [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestion
 
 let url = `https://opentdb.com/api.php?amount=${numberOfQuestions}`
 
-function customAPI (num, cat, dif, typ) {
+const customAPI = (num, cat, dif, typ) => {
 
+    return new Promise((resolve, reject) => {
     // API Call gives 1-50 questions.
     if (num < 1 || num > 50) {
-        console.log("Error: Number of questions must be from 1-50.")
+        reject("Error: Number of questions must be from 1-50.")
     }
 
     // Specific Category only
     else if (cat > 8 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}`
                     
-        httpsResponse();
+        return httpsResponse();
     }
 
     // Specific Difficulty only
     else if (cat === 0 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${cat}`
                     
-        httpsResponse();
+        return httpsResponse();
     }
 
     // Specific Type only
     else if (cat === 0 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&type=${typ}`
                 
-        httpsResponse();
+        return httpsResponse();
     }
 
     // Specific Category + Difficulty
     else if (cat > 8 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}`
                 
-        httpsResponse();
+        return httpsResponse();
     }
 
     // Specific Category + Type
     else if (cat > 8 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&type=${typ}`
                 
-        httpsResponse();
+        return httpsResponse();
     }
 
 
@@ -104,26 +105,27 @@ function customAPI (num, cat, dif, typ) {
     else if (cat === 0 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${dif}&type=${typ}`
             
-        httpsResponse();
+        return httpsResponse();
     }
 
     // Specific ALL (Category, Difficulty, Type)
     else if (cat > 8 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}&type=${typ}`
             
-        httpsResponse();
+        return httpsResponse();
     }
 
     // Any Category, Difficulty, and Type.
     else if (cat === 0 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}`
     
-        httpsResponse();
+        return httpsResponse();
     }
 
     else {
-       console.log(`Error. If statement is not working. Number of Questions = ${num}, Category=${cat}, Difficulty=${dif}, Type=${typ}`);
+       reject(`Error. If statement is not working. Number of Questions = ${num}, Category=${cat}, Difficulty=${dif}, Type=${typ}`);
     }
+});
 
 }
 
@@ -165,8 +167,17 @@ function httpsResponse() {
 //         incorrectAnswers: incorrectAnswers
 //      });
 // }
+const displayResultsEJS = async () => {
+    const triviaResult = await customAPI(numberOfQuestions, category, difficulty, type)
+    return triviaResult
+}
 
-customAPI(numberOfQuestions, category, difficulty, type);
+displayResultsEJS().then((result) => {
+    console.log('result', result)
+}).catch((e) => {
+    console.log('e', e)
+})
+
   });
 
 /*
