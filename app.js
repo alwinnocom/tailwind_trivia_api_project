@@ -51,13 +51,13 @@ app.route('/')
       
     // HTTPS Module to parse JSON.
 
-let [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
+[numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
 
 // let [numberOfQuestions, category, difficulty, type] = [1, 9, "", ""];
 
 let url = `https://opentdb.com/api.php?amount=${numberOfQuestions}`
 
-const customAPI = (num, cat, dif, typ) => {
+const customAPI = (num = 2, cat = 9, dif = "easy", typ = "multiple") => {
 
     return new Promise((resolve, reject) => {
     // API Call gives 1-50 questions.
@@ -145,8 +145,8 @@ function httpsResponse() {
                 let [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
                 console.log("Https response received.");
                 console.log(`Question Category = ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`)
+               
                 res.redirect("/results")
-
             });
         
         // app.post("/", (req, res) => {
