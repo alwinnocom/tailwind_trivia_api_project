@@ -22,6 +22,14 @@ app.listen(3000, () => {
     console.log("Server started on port 3000.");
 });
 
+// Goal of index.ejs page:
+// 1. Take in user input via form.
+// 2. Send form data to change results.ejs page via Post Request
+// 3. The URL is formatted according to the customAPI function before launching the HTTPS response.
+// 4. Get request to results.ejs page via res.redirect("/results")
+// 5. Get request takes user to results.ejs page, where the user-affected variables show up in HTML View
+// for User to see because of ejs.
+
 app.route("/results")
 .get((req, res) => {
     res.render("results", {
