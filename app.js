@@ -7,7 +7,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
-// const getQuestions = require('/getQuestions.js');
+let numberOfQuestions, category, difficulty, type;
+
+// const getQuestions = require('./utils/getQuestions.js').default;
 
 app.set('view engine', 'ejs');
 
@@ -19,12 +21,34 @@ app.listen(3000, () => {
     console.log("Server started on port 3000.");
 });
 
+// app.get("/results", (req, res) => {
+//     res.render("results", {
+//         questionCategory: questionCategory,
+//         questionType: questionType,
+//         questionDifficulty: questionDifficulty,
+//         question: question,
+//         correctAnswer: correctAnswer,
+//         incorrectAnswers: incorrectAnswers
+//      });
+// });
+
+app.route("/results")
+.get((req, res) => {
+    res.render("results", {
+        numberQuestions: numberOfQuestions,
+        category: category,
+        difficulty: difficulty,
+        type: type
+     });
+})
+
 app.route('/')
   .get((req, res) => {
     res.render("index");
   })
 
   .post((req, res) => {
+      
     // HTTPS Module to parse JSON.
 
 let [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
@@ -117,8 +141,10 @@ function httpsResponse() {
             //     console.log(questionData);
                 let questionData = newData.results[0];
                 let [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
-            
+                console.log("Https response received.");
                 console.log(`Question Category = ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`)
+                res.redirect("/results")
+
             });
         
         // app.post("/", (req, res) => {
@@ -126,18 +152,22 @@ function httpsResponse() {
         // })
 
     })
-
-    res.render("results", {
-       numberQuestions: req.body.numberOfQuestions,
-       category: req.body.category,
-       difficulty: req.body.difficulty,
-       type: req.body.type
-    });
 }
+    
+    
+
+//     res.render("results", {
+//         questionCategory: questionCategory,
+//         questionType: questionType,
+//         questionDifficulty: questionDifficulty,
+//         question: question,
+//         correctAnswer: correctAnswer,
+//         incorrectAnswers: incorrectAnswers
+//      });
+// }
 
 customAPI(numberOfQuestions, category, difficulty, type);
-
-})
+  });
 
 /*
 API Possibilities:
