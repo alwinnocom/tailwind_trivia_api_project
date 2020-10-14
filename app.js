@@ -34,7 +34,6 @@ app.listen(3000, () => {
 // 5. Get request takes user to results.ejs page, where the user-affected variables show up in HTML View
 // for User to see because of ejs.
 
-
 app.route("/results")
 .get((req, res) => {
     res.render("results", {
