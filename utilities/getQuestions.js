@@ -1,7 +1,10 @@
-const https = require("https");
+// Path Code - https://stackoverflow.com/questions/26311577/node-js-cannot-require-a-js-file-in-the-same-directory
+const path = require('path');
+const httpsResponse = require( path.resolve(__dirname, "./httpsResponse.js"));
+
 
 const customAPI = (num = 2, cat = 9, dif = "easy", typ = "multiple") => {
-
+    
     return new Promise((resolve, reject) => {
     // API Call gives 1-50 questions.
 
@@ -13,35 +16,35 @@ const customAPI = (num = 2, cat = 9, dif = "easy", typ = "multiple") => {
     else if (cat > 8 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}`
                     
-        return httpsResponse();
+        httpsResponse();
     }
 
     // Specific Difficulty only
     else if (cat === 0 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${cat}`
                     
-        return httpsResponse();
+        httpsResponse();
     }
 
     // Specific Type only
     else if (cat === 0 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&type=${typ}`
                 
-        return httpsResponse();
+        httpsResponse();
     }
 
     // Specific Category + Difficulty
     else if (cat > 8 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}`
                 
-        return httpsResponse();
+        httpsResponse();
     }
 
     // Specific Category + Type
     else if (cat > 8 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&type=${typ}`
                 
-        return httpsResponse();
+        httpsResponse();
     }
 
 
@@ -49,21 +52,21 @@ const customAPI = (num = 2, cat = 9, dif = "easy", typ = "multiple") => {
     else if (cat === 0 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${dif}&type=${typ}`
             
-        return httpsResponse();
+        httpsResponse();
     }
 
     // Specific ALL (Category, Difficulty, Type)
     else if (cat > 8 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}&type=${typ}`
             
-        return httpsResponse();
+        httpsResponse();
     }
 
     // Any Category, Difficulty, and Type.
     else if (cat === 0 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}`
     
-        return httpsResponse();
+        httpsResponse();
     }
 
     else {
@@ -71,31 +74,8 @@ const customAPI = (num = 2, cat = 9, dif = "easy", typ = "multiple") => {
     }
 });
 
-function httpsResponse() {
-    https.get(url, (response) => {
-        
-        response.on('data', (data) => {
-            newData = JSON.parse(data);
-
-            // console.log(newData);
-            // console.log(newData.results);
-            // console.log(newData.results[0]);
-            // let questionData = ""
-            // for (i = 0; i++; i < numberOfQuestions) {
-            //     questionData = newData.results[i];
-            //     console.log(questionData);
-
-                let questionData = newData.results[0];
-                let [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
-                
-                console.log("Https response received.");
-                console.log(`Question Category = ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`)
-            });
-
-    })
 }
 
-}
 
 module.exports = customAPI;
 
