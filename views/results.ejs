@@ -2,12 +2,18 @@
 
 <h1>Welcome to the Results page!</h1>
 
+<!-- <h1> `You got ${correct_answers} correct out of ${total_questions}` </h1> -->
 
-<p> <%= numberQuestions %> </p>
-<p> <%= category %> </p>
-<p> <%= difficulty %> </p>
-<p> <%= type %> </p>
+<!-- switch (percent_correct) -->
+<!-- case (percent_correct <= 50%) {res.render("Try again next time!")} -->
+<!-- case (50% < percent_correct <= 70%) {res.render("Nice! Try to beat your score next time!")} -->
 
+<!-- case (70% < percent_correct <= 80%) {res.render("Good job!")} -->
+
+<!-- case (80% < percent_correct < 90%) {res.render("Very great job!")} -->
+<!-- case (90% < percent_correct < 100%) {res.render("Wow! Close to perfect!")} -->
+<!-- case (percent_correct < 100%) {res.render("Wow! 100%!")} -->
+<!-- default res.render("Would you like to try again?") -->
 
 <p> <%= questionCategory %> </p>
 <p> <%= questionType %> </p>
@@ -15,6 +21,12 @@
 <p> <%= question %> </p>
 <p> <%= correctAnswer %> </p>
 <p> <%= incorrectAnswers %> </p>
+
+<!-- for (i = 0; i++; i < questions_length) { -->
+    
+<!-- <div>`You wrote ${user_answer}</div> <div>The correct answer was ${correct_answer}`</div> -->
+
+<!-- } -->
 
 <%- include('partials/footer'); -%>
 

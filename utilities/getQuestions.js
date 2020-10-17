@@ -1,6 +1,6 @@
-// Path Code - https://stackoverflow.com/questions/26311577/node-js-cannot-require-a-js-file-in-the-same-directory
-const path = require('path');
-const httpsResponse = require( path.resolve(__dirname, "./httpsResponse.js"));
+// // Path Code - https://stackoverflow.com/questions/26311577/node-js-cannot-require-a-js-file-in-the-same-directory
+// const path = require('path');
+// const httpsResponse = require( path.resolve(__dirname, "./httpsResponse.js"));
 
 
 const customAPI = (num = 2, cat = 9, dif = "easy", typ = "multiple") => {
@@ -15,58 +15,58 @@ const customAPI = (num = 2, cat = 9, dif = "easy", typ = "multiple") => {
     // Specific Category only
     else if (cat > 8 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}`
-                    
-        httpsResponse();
+        resolve('url concatenation successful')            
+        // httpsResponse();
     }
 
     // Specific Difficulty only
     else if (cat === 0 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${cat}`
-                    
-        httpsResponse();
+        resolve('url concatenation successful')            
+        // httpsResponse();
     }
 
     // Specific Type only
     else if (cat === 0 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&type=${typ}`
-                
-        httpsResponse();
+        resolve('url concatenation successful')
+        // httpsResponse();
     }
 
     // Specific Category + Difficulty
     else if (cat > 8 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}`
-                
-        httpsResponse();
+        resolve('url concatenation successful')        
+        // httpsResponse();
     }
 
     // Specific Category + Type
     else if (cat > 8 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&type=${typ}`
-                
-        httpsResponse();
+        resolve('url concatenation successful')        
+        // httpsResponse();
     }
 
 
     // Specific Difficulty + Type
     else if (cat === 0 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${dif}&type=${typ}`
-            
-        httpsResponse();
+        resolve('url concatenation successful')    
+        // httpsResponse();
     }
 
     // Specific ALL (Category, Difficulty, Type)
     else if (cat > 8 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}&type=${typ}`
-            
-        httpsResponse();
+        resolve('url concatenation successful')    
+        // httpsResponse();
     }
 
     // Any Category, Difficulty, and Type.
     else if (cat === 0 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}`
-    
-        httpsResponse();
+        resolve('url concatenation successful')
+        // httpsResponse();
     }
 
     else {
