@@ -1,8 +1,5 @@
 const https = require("https");
 
-const express = require('express'); 
-const app = express();
-
 const httpsResponse = () => {
     https.get(url, (response) => {
         
@@ -22,23 +19,25 @@ const httpsResponse = () => {
                 [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
                 
                 console.log(`In the HTTPS Response, Question Category = ${questionCategory}`);
+                
+                console.log(`Question Category finishes as ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`);
+                
+                // if (questionCategory && questionType && questionDifficulty && question && correctAnswer && incorrectAnswers) {
+                //     app.route("/results")
+                //         .get((req, res) => {
+                //             res.render("results", {
+                //                             questionCategory: questionCategory,
+                //                             questionType: questionType,
+                //                             questionDifficulty: questionDifficulty,
+                //                             question: question,
+                //                             correctAnswer: correctAnswer,
+                //                             incorrectAnswers: incorrectAnswers
+                //                         });
 
-                if (questionCategory && questionType && questionDifficulty && question && correctAnswer && incorrectAnswers) {
-                    app.route("/results")
-                        .get((req, res) => {
-                            res.render("results", {
-                                            questionCategory: questionCategory,
-                                            questionType: questionType,
-                                            questionDifficulty: questionDifficulty,
-                                            question: question,
-                                            correctAnswer: correctAnswer,
-                                            incorrectAnswers: incorrectAnswers
-                                        });
-
-                            //  console.log(`Question Data = ${questionData}`)
-                            console.log(`Question Category finishes as ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`);
-                        })
-                }
+                //             //  console.log(`Question Data = ${questionData}`)
+                //             console.log(`Question Category finishes as ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`);
+                //         })
+                // }
 
                 // console.log("Https response received.");
                 // console.log(`Question Category = ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`)

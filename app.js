@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/question');
 
 
 
@@ -25,6 +25,8 @@ const customAPI = require('./utilities/getQuestions.js');
 const httpsResponse = require('./utilities/httpsResponse.js');
 const sendResponseResult = require('./utilities/sendResponseResult.js');
 
+const { questionSchema, Question } = require('./utilities/models/questionModel.js');
+
 // const { questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers } = require('./utilities/httpsResponse.js');
 // console.log(`Question Category starts out as ${questionCategory}`);
 // const httpsResponse = require('./utilities/httpsResponse.js');
@@ -39,20 +41,113 @@ app.listen(3000, () => {
     console.log("Server started on port 3000.");
 });
 
-app.route("/results")
+app.route('/results')
                         .get((req, res) => {
-                            res.render("results", {
-                                            questionCategory: questionCategory,
-                                            questionType: questionType,
-                                            questionDifficulty: questionDifficulty,
-                                            question: question,
-                                            correctAnswer: correctAnswer,
-                                            incorrectAnswers: incorrectAnswers
-                                        });
+
+                          // Question.find({question_number: 1}, function (err, response) {
+
+                          //   if (err) {console.log("Error is ", err)}
+                          //   else {
+                          //   res.render(response); }
+
+                          // res.send('You are on the results page.')
+
+                          res.render("results", {
+                            numberOfQuestions: numberOfQuestions,
+                            category: category,
+                            difficulty: difficulty,
+                            type: type
+                          })
+
+                          })
+
+                          .post((req, res) => {
+  
+                            // const newQuestion = new Question({
+                            //   question_number: "Question 1",
+                            //   actual_question: "Can you see this? If you can, then the Mongoose connection is working."
+                            // })
+                        
+                            // newQuestion.save();
+                        
+                            // HTTPS Module to parse JSON.
+                        
+                            [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
+                        
+                            // Async/Await: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
+                            // the results.ejs page until the customAPI function finds the JSON data required to output to results.ejs.
+                        
+                            
+                        customAPI(numberOfQuestions, category, difficulty, type)
+                            .then(httpsResponse())
+                            .catch((e) => {
+                                        console.log('e', e)
+                                    })
+                            // .then(console.log(`After the Promise, questionCategory is ${questionCategory}`))
+                            // .catch((e) => {
+                            //   console.log('e', e)
+                            // })
+                            
+                            
+                        
+                            // .then(sendResponseResult(questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers))
+                            // .catch((e) => {
+                            //     console.log('e', e)
+                            // })
+                        
+                            .then(res.redirect("/results"))
+                            .catch((e) => {
+                              console.log('e', e)
+                            })
+                        
+                        
+                        
+                            // const displayResultsEJS = async () => {
+                            //     const triviaResult = await customAPI(numberOfQuestions, category, difficulty, type);
+                            //     return triviaResult;
+                            // }
+                        
+                            // // const waitForHttpsVariables = async () => {
+                            // //     const httpsSuccessful = await httpsResponse();
+                            // //     return httpsSuccessful;
+                            // // }
+                            
+                            // displayResultsEJS()
+                            //     .then(httpsResponse())
+                            //     .catch((e) => {
+                            //         console.log('e', e)
+                            //     })
+                                
+                            //     .then(res.redirect("/results"))
+                        
+                            // waitForHttpsVariables().then((result) => {
+                            //     console.log('result', result)
+                            // }).catch((e) => {
+                            //     console.log('e', e)
+                            // })
+                        
+                            // console.log(displayResultsEJS());
+                        
+                            // if (displayResultsEJS()) {
+                            //     res.redirect("/results");
+                            // }
+                        
+                            // If result of async/await exists, then redirect to results.ejs to send a Get request to results.ejs.
+                        
+                        });
+                          
+                            // res.render("results", {
+                            //                 questionCategory: questionCategory,
+                            //                 questionType: questionType,
+                            //                 questionDifficulty: questionDifficulty,
+                            //                 question: question,
+                            //                 correctAnswer: correctAnswer,
+                            //                 incorrectAnswers: incorrectAnswers
+                            //             });
 
                             //  console.log(`Question Data = ${questionData}`)
-                            console.log(`Question Category finishes as ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`);
-                        })
+                            // console.log(`Question Category finishes as ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`);
+                        
 
 // Goal of index.ejs page:
 // 1. Take in user input via form.
@@ -68,71 +163,7 @@ app.route("/results")
 app.route('/')
   .get((req, res) => {
     res.render("index");
+
+    
   })
-  .post((req, res) => {
   
-    // HTTPS Module to parse JSON.
-
-    [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
-
-    // Async/Await: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
-    // the results.ejs page until the customAPI function finds the JSON data required to output to results.ejs.
-
-
-customAPI(numberOfQuestions, category, difficulty, type)
-    .then(httpsResponse())
-    .catch((e) => {
-                console.log('e', e)
-            })
-    // .then(console.log(`After the Promise, questionCategory is ${questionCategory}`))
-    // .catch((e) => {
-    //   console.log('e', e)
-    // })
-    
-    
-
-    // .then(sendResponseResult(questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers))
-    // .catch((e) => {
-    //     console.log('e', e)
-    // })
-
-    .then(res.redirect("/results"))
-    .catch((e) => {
-      console.log('e', e)
-    })
-
-
-
-    // const displayResultsEJS = async () => {
-    //     const triviaResult = await customAPI(numberOfQuestions, category, difficulty, type);
-    //     return triviaResult;
-    // }
-
-    // // const waitForHttpsVariables = async () => {
-    // //     const httpsSuccessful = await httpsResponse();
-    // //     return httpsSuccessful;
-    // // }
-    
-    // displayResultsEJS()
-    //     .then(httpsResponse())
-    //     .catch((e) => {
-    //         console.log('e', e)
-    //     })
-        
-    //     .then(res.redirect("/results"))
-
-    // waitForHttpsVariables().then((result) => {
-    //     console.log('result', result)
-    // }).catch((e) => {
-    //     console.log('e', e)
-    // })
-
-    // console.log(displayResultsEJS());
-
-    // if (displayResultsEJS()) {
-    //     res.redirect("/results");
-    // }
-
-    // If result of async/await exists, then redirect to results.ejs to send a Get request to results.ejs.
-
-});
