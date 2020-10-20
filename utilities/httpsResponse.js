@@ -1,4 +1,5 @@
 const https = require("https");
+const { questionSchema, Question } = require("./models/questionModel");
 
 const httpsResponse = () => {
     https.get(url, (response) => {
@@ -16,11 +17,33 @@ const httpsResponse = () => {
 
                 let questionData = newData.results[0];
                 
-                [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
+                // [questionCategory, questionType, questionDifficulty, question, correctAnswer, incorrectAnswers] = [questionData.category, questionData.type, questionData.difficulty, questionData.question, questionData.correct_answer, questionData.incorrect_answers];
                 
-                console.log(`In the HTTPS Response, Question Category = ${questionCategory}`);
+                // const questionOne = new Question({
+                //     questionCategory: questionCategory,
+                //     questionType: questionType,
+                //     questionDifficulty: questionDifficulty, 
+                //     question: question,
+                //     correctAnswer: correctAnswer,
+                //     incorrectAnswers: incorrectAnswers
+                // })
                 
-                console.log(`Question Category finishes as ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`);
+                const questionOne = new Question({
+                    questionCategory: questionData.category,
+                    questionType: questionData.type,
+                    questionDifficulty: questionData.difficulty, 
+                    question: questionData.question,
+                    correctAnswer: questionData.correct_answer,
+                    incorrectAnswers: questionData.incorrect_Answers
+                })
+
+
+                questionOne.save();
+
+
+                // console.log(`In the HTTPS Response, Question Category = ${questionCategory}`);
+                
+                // console.log(`Question Category finishes as ${questionCategory}, Question Type = ${questionType}, Question Difficulty = ${questionDifficulty}, Question = ${question}, Correct Answer = ${correctAnswer}, Incorrect Answers = ${incorrectAnswers}`);
                 
                 // if (questionCategory && questionType && questionDifficulty && question && correctAnswer && incorrectAnswers) {
                 //     app.route("/results")

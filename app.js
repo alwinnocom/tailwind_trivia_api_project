@@ -23,7 +23,6 @@ let url = ``;
 
 const customAPI = require('./utilities/getQuestions.js');
 const httpsResponse = require('./utilities/httpsResponse.js');
-const sendResponseResult = require('./utilities/sendResponseResult.js');
 
 const { questionSchema, Question } = require('./utilities/models/questionModel.js');
 
@@ -44,20 +43,31 @@ app.listen(3000, () => {
 app.route('/results')
                         .get((req, res) => {
 
-                          // Question.find({question_number: 1}, function (err, response) {
+                          Question.find(function (err, response) {
 
-                          //   if (err) {console.log("Error is ", err)}
-                          //   else {
-                          //   res.render(response); }
+                            if (err) {console.log("Error is ", err)}
+
+                            else {
+                              // res.send(response);
+                                res.render("results", {
+                                  questionCategory: response[0].questionCategory,
+                                  questionType: response[0].questionType,
+                                  questionDifficulty: response[0].questionDifficulty,
+                                  question: response[0].question,
+                                  correctAnswer: response[0].correctAnswer,
+                                  incorrectAnswers: response[0].incorrectAnswers
+                                }); 
+                              }
+                          });
 
                           // res.send('You are on the results page.')
 
-                          res.render("results", {
-                            numberOfQuestions: numberOfQuestions,
-                            category: category,
-                            difficulty: difficulty,
-                            type: type
-                          })
+                          // res.render("results", {
+                          //   numberOfQuestions: numberOfQuestions,
+                          //   category: category,
+                          //   difficulty: difficulty,
+                          //   type: type
+                          // })
 
                           })
 
