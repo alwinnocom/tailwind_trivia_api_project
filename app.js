@@ -41,25 +41,42 @@ app.listen(3000, () => {
 });
 
 app.route('/results')
-                        .get((req, res) => {
+      .get((req, res) => {
 
-                          Question.find(function (err, response) {
+      
 
-                            if (err) {console.log("Error is ", err)}
+      Question.find(function (err, response) {
+                            
+        
+              if (err) {console.log("Error is ", err)}
 
-                            else {
-                              // res.send(response);
-                                res.render("results", {
-                                  questionCategory: response[0].questionCategory,
-                                  questionType: response[0].questionType,
-                                  questionDifficulty: response[0].questionDifficulty,
-                                  question: response[0].question,
-                                  correctAnswer: response[0].correctAnswer,
-                                  incorrectAnswers: response[0].incorrectAnswers
-                                }); 
-                              }
-                          });
+              else {
+                  res.render("results", {response: response});
+                  //  res.send(response);
+                  //  let renderedData = [];
+                  //  console.log(`Rendered data is ${renderedData}`);
 
+                  //  for (let i = 0; i++; i < response.length) {
+                    
+                  //   //  https://stackoverflow.com/questions/48784166/how-to-run-a-for-loop-in-res-render-on-a-get-request-in-node-js-i-am-using-hbs
+                  //   renderedData.push({questionNumber: `Question ${i}`, questionCategory: `${response[i].questionCategory}`, questionType: `${response[i].questionType}`, questionDifficulty: `${response[i].questionDifficulty}`, question: `${response[i].question}`, correctAnswer: `${response[i].correctAnswer}`, incorrectAnswers: `${response[i].incorrectAnswers}`});
+                  //   console.log(renderedData);
+                  
+                    //  res.render("results", {
+                    //       questionCategory: response[i].questionCategory,
+                    //       questionType: response[i].questionType,
+                    //       questionDifficulty: response[i].questionDifficulty,
+                    //       question: response[i].question,
+                    //       correctAnswer: response[i].correctAnswer,
+                    //       incorrectAnswers: response[i].incorrectAnswers
+                    //  }); 
+                }
+
+                // res.render("results", {renderedData: renderedData});
+          // }
+      });
+
+      
                           // res.send('You are on the results page.')
 
                           // res.render("results", {
@@ -69,7 +86,7 @@ app.route('/results')
                           //   type: type
                           // })
 
-                          })
+   })
 
                           .post((req, res) => {
   
