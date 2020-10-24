@@ -7,14 +7,37 @@
 
     <% for (let index = 0; index < response.length; index++) { %>
 
-        <div style="display: block;">
+        <div class="question" style="display: block;">
             <p> <%= response[index].questionCategory %> </p>
-            <p> <%= response[index].questionType %> </p>
+
+            <!-- if else EJS syntax courtesy of Stack Overflow. Trivia Logic is mine. -->
+            <% if (response[index].questionType === 'boolean') { %>
+                <p> True or False? </p>
+            <% } else { %>
+                <p> Multiple Choice </p>
+            <% } %>
+            
+
             <p> <%= response[index].questionDifficulty %> </p>
             <p> <%= response[index].question %> </p>
-            <p> <%= response[index].correctAnswer %> </p>
-            <p> <%= response[index].incorrectAnswers %> </p>
+            
+            <input type="radio"> <%= response[index].correctAnswer %> </input>
+            
+            <% if (response[index].questionType === 'boolean') { %>
+
+                <input type="radio"><%= response[index].incorrectAnswers[0] %></input>
+             
+            <% } else { %>
+
+                <input type="radio"> <%= response[index].incorrectAnswers[0] %> </input>
+                <input type="radio"> <%= response[index].incorrectAnswers[1] %> </input>
+                <input type="radio"> <%= response[index].incorrectAnswers[2] %> </input>
+
+            <% } %>
+
         </div>
+
+        <hr>
 
     <% } %>
 

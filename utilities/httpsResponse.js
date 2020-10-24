@@ -34,12 +34,11 @@ const httpsResponse = () => {
                     questionDifficulty: questionData.difficulty, 
                     question: questionData.question,
                     correctAnswer: questionData.correct_answer,
-                    incorrectAnswers: questionData.incorrect_Answers
+                    incorrectAnswers: questionData.incorrect_answers
                 })
 
 
                 questionOne.save();
-
 
                 // console.log(`In the HTTPS Response, Question Category = ${questionCategory}`);
                 

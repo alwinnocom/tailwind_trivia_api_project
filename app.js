@@ -65,7 +65,7 @@ app.route('/questions')
               .catch((e) => {
                     console.log('e', e)
               })
-                      
+
               .then(res.redirect("/questions"))
               .catch((e) => {
                     console.log('e', e)
