@@ -2,13 +2,14 @@ const https = require("https");
 const { questionSchema, Question } = require("./models/questionModel");
 
 const httpsResponse = () => {
+    
     https.get(url, (response) => {
         
         response.on('data', (data) => {
 
-            const newData = JSON.parse(data);
-            
-            const questionData = newData.results;
+                const newData = JSON.parse(data);
+                
+                const questionData = newData.results;
 
                 for (i = 0; i < questionData.length; i++) {
 
@@ -27,7 +28,7 @@ const httpsResponse = () => {
 
                 }
 
-            });
+        });
 
     })
 }

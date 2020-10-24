@@ -16,6 +16,7 @@ const https = require('https');
 let numberOfQuestions, category, difficulty, type;
 
 let url = ``;
+let deleteSuccessful = ``;
 
 const customAPI = require('./utilities/getQuestions.js');
 const httpsResponse = require('./utilities/httpsResponse.js');
@@ -71,6 +72,26 @@ app.route('/questions')
                     console.log('e', e)
               })
      });
+
+// Get Request to act as a Delete Request
+app.get("/questions/delete", (req, res) => {
+       Question.deleteMany((err) => {
+        if (!err) {
+
+          deleteSuccessful = "All questions deleted.";
+
+        }
+
+        else {
+          deleteSuccessful = "Sorry, the questions were not deleted.";
+
+          console.log(err);
+        }
+
+        res.redirect("/");
+       })
+       
+     });
                         
 
 // Goal of index.ejs page:
@@ -84,7 +105,7 @@ app.route('/questions')
 
 app.route('/')
   .get((req, res) => {
-    res.render("index");
+    res.render("index", {deleteSuccessful: deleteSuccessful});
   })
 
 app.route('/results')
