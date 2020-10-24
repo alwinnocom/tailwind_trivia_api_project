@@ -1,0 +1,26 @@
+<%- include('partials/header'); -%>
+
+<h1>Welcome to the Questions page!</h1>
+
+
+<form action='/results' method='post' id='form'>
+
+    <% for (let index = 0; index < response.length; index++) { %>
+
+        <div style="display: block;">
+            <p> <%= response[index].questionCategory %> </p>
+            <p> <%= response[index].questionType %> </p>
+            <p> <%= response[index].questionDifficulty %> </p>
+            <p> <%= response[index].question %> </p>
+            <p> <%= response[index].correctAnswer %> </p>
+            <p> <%= response[index].incorrectAnswers %> </p>
+        </div>
+
+    <% } %>
+
+</form>
+
+
+
+<%- include('partials/footer'); -%>
+
