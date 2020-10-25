@@ -4,6 +4,7 @@ const { Schema } = require('mongoose');
 mongoose.connect('mongodb://localhost/question');
 
 const questionSchema = new Schema({
+    totalQuestions: Number,
     questionCategory: String,
     questionType: String,
     questionDifficulty: String,

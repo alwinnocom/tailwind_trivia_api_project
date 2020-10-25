@@ -6,11 +6,34 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/question');
+mongoose.connect('mongodb://localhost/question', {useNewUrlParser: true, useUnifiedTopology: true});
 
 
-
+// Module Imports
 const https = require('https');
+
+const customAPI = require('./utilities/getQuestions.js');
+const httpsResponse = require('./utilities/httpsResponse.js');
+
+const getAnswers = require('./utilities/getAnswers.js');
+// const userAnswers = require('./utilities/userAnswers.js');
+
+const { questionSchema, Question } = require('./utilities/models/questionModel.js');
+const { Answer } = require('./utilities/models/answerModel.js');
+
+
+// Express App
+app.set('view engine', 'ejs');
+
+app.use(express.static('public'));
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.listen(3000, () => {
+    console.log("Server started on port 3000.");
+});
+
 
 // API Data Segmented Into Variables
 let numberOfQuestions, category, difficulty, type;
@@ -18,20 +41,6 @@ let numberOfQuestions, category, difficulty, type;
 let url = ``;
 let deleteSuccessful = ``;
 
-const customAPI = require('./utilities/getQuestions.js');
-const httpsResponse = require('./utilities/httpsResponse.js');
-
-const { questionSchema, Question } = require('./utilities/models/questionModel.js');
-
-app.set('view engine', 'ejs');
-
-app.use(express.static('public'));
-
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.listen(3000, () => {
-    console.log("Server started on port 3000.");
-});
 
 // Get questions from Mongoose "questions" collection.
 app.route('/questions')
@@ -40,11 +49,19 @@ app.route('/questions')
           Question.find(function (err, response) {
                                 
             if (err) {
-              console.log("Error is ", err)
+              console.log("Error is ", err);
             }
 
+            // else if (response.length === 0) {
+            //   console.log("Why is there no response?");
+            // }
+
             else {
-                res.render("questions", {response: response});
+
+                res.render("questions", {
+                  response: response
+                });
+
             }
 
       });
@@ -63,19 +80,23 @@ app.route('/questions')
                             
           customAPI(numberOfQuestions, category, difficulty, type)
               .then(httpsResponse())
-              .catch((e) => {
-                    console.log('e', e)
-              })
-
               .then(res.redirect("/questions"))
               .catch((e) => {
                     console.log('e', e)
               })
      });
 
+
 // Get Request to act as a Delete Request
 app.get("/questions/delete", (req, res) => {
-       Question.deleteMany((err) => {
+    
+    Answer.deleteMany((err) => {
+      if (err) {
+        console.log(err);
+      }
+    })
+  
+    Question.deleteMany((err) => {
         if (!err) {
 
           deleteSuccessful = "All questions deleted.";
@@ -90,7 +111,7 @@ app.get("/questions/delete", (req, res) => {
 
         res.redirect("/");
        })
-       
+
      });
                         
 
@@ -108,7 +129,45 @@ app.route('/')
     res.render("index", {deleteSuccessful: deleteSuccessful});
   })
 
+
 app.route('/results')
-  .get((req, res) => {
-    res.render("results", {response: response});
-  })
+  .post((req, res) => {
+    let userAnswers = JSON.stringify(req.body);
+    let responseArray = [];
+    let trueAnswers = [];
+
+    console.log(`req.body = ${JSON.stringify(req.body)}`);
+    
+    //  for (i = 0; i < req.body.keys().length; i++) {
+    //     userAnswers.push(req.body.i);
+    //     console.log(userAnswers);
+    //     }
+
+    Answer.find(function (err, response) {
+                                
+      if (err) {
+        console.log("Error is ", err);
+      }
+
+      else {
+
+        console.log(`Response is ${response}`);
+
+        responseArray.push([response]);    
+
+        console.log(`Response Array is ${responseArray}`);
+
+        console.log(`Response Array's 1st Item is ${responseArray[0]}`);
+
+        for (i = 0; i < responseArray.length; i++) {
+          
+            console.log(responseArray[i].correctAnswer);
+            trueAnswers.push({i: responseArray[`${i}`].correctAnswer});
+
+          }
+
+        console.log(`True Answers is ${JSON.stringify(trueAnswers)}`);
+      }
+
+    });
+  });

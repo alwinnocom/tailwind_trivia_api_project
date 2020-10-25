@@ -9,6 +9,8 @@
 
 <form action='/results' method='post' id='form'>
 
+    <!-- <p> Number of Questions: <%= response[0].totalQuestions %> </p> -->
+
     <% for (let index = 0; index < response.length; index++) { %>
 
         <div class="question" style="display: block;">
@@ -25,17 +27,19 @@
             <p> <%= response[index].questionDifficulty %> </p>
             <p> <%= response[index].question %> </p>
             
-            <input type="radio"> <%= response[index].correctAnswer %> </input>
+
+            <!-- Allow only 1 Radio Button to be Checked = https://stackoverflow.com/questions/5419459/how-to-allow-only-one-radio-button-to-be-checked#:~:text=Only%201%20radio%20button%20of,same%20name%20can%20be%20checked.&text=Give%20them%20the%20same%20name%2C%20and%20it%20will%20work.,check%20boxes%20can%20have%20many.&text=Just%20give%20them%20the%20same%20name%20throughout%20the%20form%20you%20are%20using. -->
+            <input type="radio" value="<%= response[index].correctAnswer %>" name= <%= index %> > <%= response[index].correctAnswer %> </input>
             
             <% if (response[index].questionType === 'boolean') { %>
 
-                <input type="radio"><%= response[index].incorrectAnswers[0] %></input>
+                <input type="radio" value="<%= response[index].incorrectAnswers[0] %>" name="<%= index %>"><%= response[index].incorrectAnswers[0] %></input>
              
             <% } else { %>
 
-                <input type="radio"> <%= response[index].incorrectAnswers[0] %> </input>
-                <input type="radio"> <%= response[index].incorrectAnswers[1] %> </input>
-                <input type="radio"> <%= response[index].incorrectAnswers[2] %> </input>
+                <input type="radio" value="<%= response[index].incorrectAnswers[0] %>" name= "<%= index %>"> <%= response[index].incorrectAnswers[0] %> </input>
+                <input type="radio" value="<%= response[index].incorrectAnswers[1] %>" name= "<%= index %>"> <%= response[index].incorrectAnswers[1] %> </input>
+                <input type="radio" value="<%= response[index].incorrectAnswers[2] %>" name= "<%= index %>"> <%= response[index].incorrectAnswers[2] %> </input>
 
             <% } %>
 
@@ -44,6 +48,8 @@
         <hr>
 
     <% } %>
+
+    <button type="submit">Submit All Answers</button>
 
 </form>
 
