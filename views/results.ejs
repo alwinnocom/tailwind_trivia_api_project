@@ -18,12 +18,16 @@
 <!-- for (i = 0; i++; i < questions_length) { -->
 
     <!-- <p> `Question ${i+1}</p> -->
-<p> <%= questionCategory %> </p>
-<p> <%= questionType %> </p>
-<p> <%= questionDifficulty %> </p>
-<p> <%= question %> </p>
-<p> <%= correctAnswer %> </p>
-<p> <%= incorrectAnswers %> </p>
+
+<% for (let index = 0; index < response.length; index++) { %>
+
+<div class="question" style="display: block;">
+    <p> Question <%= response[index].question_number %> </p>
+    <p> Points Earned: <%= response[index].points_earned %> </p>
+    <p> Result: <%= response[index].result %> </p>
+</div>
+
+
 
 <!-- } -->
 

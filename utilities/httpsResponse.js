@@ -1,6 +1,6 @@
 const https = require("https");
-const { questionSchema, Question } = require("./models/questionModel");
-const { answerSchema, Answer } = require("./models/answerModel");
+const {  Question } = require("./models/questionModel");
+const { Answer } = require("./models/answerModel");
 
 const httpsResponse = () => {
 

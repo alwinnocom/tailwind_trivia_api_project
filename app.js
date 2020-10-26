@@ -18,8 +18,9 @@ const httpsResponse = require('./utilities/httpsResponse.js');
 const getAnswers = require('./utilities/getAnswers.js');
 // const userAnswers = require('./utilities/userAnswers.js');
 
-const { questionSchema, Question } = require('./utilities/models/questionModel.js');
+const { Question } = require('./utilities/models/questionModel.js');
 const { Answer } = require('./utilities/models/answerModel.js');
+const { Compare_Answer } = require('./utilities/models/compareAnswerModel.js');
 
 
 // Express App
@@ -127,13 +128,40 @@ app.get("/questions/delete", (req, res) => {
 app.route('/')
   .get((req, res) => {
     res.render("index", {deleteSuccessful: deleteSuccessful});
-  })
 
+    Compare_Answer.find(function (err, response) {
+                                
+      if (err) {
+        console.log("Error is ", err);
+      }
+
+      // else if (response.length === 0) {
+      //   console.log("Why is there no response?");
+      // }
+
+      else {
+
+          res.render("results", {
+            response: response
+          });
+
+      }
+
+  })
+});
+
+
+  // Goal of results.ejs page
+  // 1. Grab user inputs from questions.ejs page
+  // 2. Compare req.body with "answers" collection in Mongoose.
+  // 3. Save result into compare_answers collection in Mongoose if it is correct or incorrect.
 
 app.route('/results')
+  // .get((req, res) => {
+
+  // })
   .post((req, res) => {
     let userAnswers = req.body;
-    console.log(`Type of User Answers are ${typeof(userAnswers)}`);
     let realAnswers;
 
     Answer.find(function (err, response) {
@@ -144,39 +172,43 @@ app.route('/results')
 
       else {
         realAnswers = response[0].correctAnswers;
-        console.log(`Type of Correct Mongoose Answers are ${typeof(realAnswers)}`);
 
         let i = 0;
-          while (userAnswers[i] !== undefined)  {
-            if (realAnswers[i] !== userAnswers[i]) {
-              console.log(`Incorrect Answer. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+
+            while (userAnswers[i] !== undefined) {
+
+                if (realAnswers[i] !== userAnswers[i]) {
+                  console.log(`Incorrect Answer. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+                
+                  let compareAnswer = new Compare_Answer({
+                    question_number: `${i+1}`,  
+                    points_earned: 0,
+                    result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                  })
+
+                  compareAnswer.save()
+
+                }
+
+                else {
+                  console.log(`Correct!. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+                
+                  let compareAnswer = new Compare_Answer({
+                    question_number: `${i+1}`,  
+                    points_earned: 1,
+                    result: `Correct!. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                  })
+
+                  compareAnswer.save()
+                
+                }
+
+              i++;
             }
 
-            else {
-              console.log(`Correct!. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
-            }
-
-            console.log(`Answer ${i} is ${userAnswers[i]}`);
-            i++
-          }
+          res.redirect("/results");
       }
 
     });
 
-    
-
-      
-  
-    // for (const answer in userAnswers) {
-    //   // for (const realAnswer in realAnswers) {
-    //     console.log(`Answer is ${userAnswers[answer]}`);
-    //   //   console.log(`Real Answer is ${realAnswers[realAnswer]}`);
-    //   // }
-    // }
-
-     for (const realAnswer in realAnswers) {
-         console.log(`Real Answer is ${realAnswers[realAnswer]}`);
-      }
-
-
-  });
+});
