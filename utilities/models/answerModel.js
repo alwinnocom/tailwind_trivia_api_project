@@ -3,11 +3,19 @@ const { Schema } = require('mongoose');
 
 mongoose.connect('mongodb://localhost/question');
 
+// const answerSchema = new Schema({
+//     _id: {
+//         type: Number,
+//         required: true
+//     },
+//     correctAnswer: {
+//         type: String,
+//         required: true
+//     }
+// });
+
 const answerSchema = new Schema({
-    correctAnswer: {
-        type: String,
-        required: true
-    }
+    correctAnswers: {}
 });
 
 const Answer = mongoose.model("Answer", answerSchema);

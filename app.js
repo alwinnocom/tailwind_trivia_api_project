@@ -132,16 +132,9 @@ app.route('/')
 
 app.route('/results')
   .post((req, res) => {
-    let userAnswers = JSON.stringify(req.body);
-    let responseArray = [];
-    let trueAnswers = [];
-
-    console.log(`req.body = ${JSON.stringify(req.body)}`);
-    
-    //  for (i = 0; i < req.body.keys().length; i++) {
-    //     userAnswers.push(req.body.i);
-    //     console.log(userAnswers);
-    //     }
+    let userAnswers = req.body;
+    console.log(`Type of User Answers are ${typeof(userAnswers)}`);
+    let realAnswers;
 
     Answer.find(function (err, response) {
                                 
@@ -150,24 +143,40 @@ app.route('/results')
       }
 
       else {
+        realAnswers = response[0].correctAnswers;
+        console.log(`Type of Correct Mongoose Answers are ${typeof(realAnswers)}`);
 
-        console.log(`Response is ${response}`);
+        let i = 0;
+          while (userAnswers[i] !== undefined)  {
+            if (realAnswers[i] !== userAnswers[i]) {
+              console.log(`Incorrect Answer. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+            }
 
-        responseArray.push([response]);    
+            else {
+              console.log(`Correct!. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+            }
 
-        console.log(`Response Array is ${responseArray}`);
-
-        console.log(`Response Array's 1st Item is ${responseArray[0]}`);
-
-        for (i = 0; i < responseArray.length; i++) {
-          
-            console.log(responseArray[i].correctAnswer);
-            trueAnswers.push({i: responseArray[`${i}`].correctAnswer});
-
+            console.log(`Answer ${i} is ${userAnswers[i]}`);
+            i++
           }
-
-        console.log(`True Answers is ${JSON.stringify(trueAnswers)}`);
       }
 
     });
+
+    
+
+      
+  
+    // for (const answer in userAnswers) {
+    //   // for (const realAnswer in realAnswers) {
+    //     console.log(`Answer is ${userAnswers[answer]}`);
+    //   //   console.log(`Real Answer is ${realAnswers[realAnswer]}`);
+    //   // }
+    // }
+
+     for (const realAnswer in realAnswers) {
+         console.log(`Real Answer is ${realAnswers[realAnswer]}`);
+      }
+
+
   });

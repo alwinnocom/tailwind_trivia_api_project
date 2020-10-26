@@ -12,9 +12,15 @@ const httpsResponse = () => {
                 
                 const questionData = newData.results;
 
+                let correctAnswers = {};
+
                 for (i = 0; i < questionData.length; i++) {
 
+                    correctAnswers[i] = questionData[i].correct_answer;
+                    console.log(`Id is ${correctAnswers[i]}, and its Corresponding Answer is ${questionData[i].correct_answer}`)
+
                     let questionOne = new Question({
+                        _id: i,
                         totalQuestions: questionData.length,
                         questionCategory: questionData[i].category,
                         questionType: questionData[i].type,
@@ -24,17 +30,15 @@ const httpsResponse = () => {
                         incorrectAnswers: questionData[i].incorrect_answers
                     })
 
-                    let answerOne = new Answer({
-                        correctAnswer: questionData[i].correct_answer
-                    })
-            
-                    // console.log(`Question One is currently ${questionOne}`);
-                    // console.log(`Answer One is currently ${answerOne}`);
-                    
                     questionOne.save();
-                    answerOne.save();
-
+                    
                 }
+
+                let answerOne = new Answer({
+                    correctAnswers: correctAnswers
+                })
+                
+                answerOne.save();
 
         });
 

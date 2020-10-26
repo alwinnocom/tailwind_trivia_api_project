@@ -4,6 +4,10 @@ const { Schema } = require('mongoose');
 mongoose.connect('mongodb://localhost/question');
 
 const questionSchema = new Schema({
+    _id: {
+        type: Number,
+        required: true
+    },
     totalQuestions: Number,
     questionCategory: String,
     questionType: String,
@@ -26,18 +30,3 @@ const Question = mongoose.model("Question", questionSchema);
 
 module.exports.questionSchema = questionSchema;
 module.exports.Question = Question;
-
-
-
-
-
-
-
-// res.render("results", {
-                            //                 questionCategory: questionCategory,
-                            //                 questionType: questionType,
-                            //                 questionDifficulty: questionDifficulty,
-                            //                 question: question,
-                            //                 correctAnswer: correctAnswer,
-                            //                 incorrectAnswers: incorrectAnswers
-                            //             });
