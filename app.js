@@ -91,6 +91,12 @@ app.route('/questions')
 // Get Request to act as a Delete Request
 app.get("/questions/delete", (req, res) => {
     
+    Compare_Answer.deleteMany((err) => {
+      if (err) {
+        console.log(err);
+      }
+    })
+
     Answer.deleteMany((err) => {
       if (err) {
         console.log(err);
@@ -128,7 +134,16 @@ app.get("/questions/delete", (req, res) => {
 app.route('/')
   .get((req, res) => {
     res.render("index", {deleteSuccessful: deleteSuccessful});
+});
 
+
+  // Goal of results.ejs page
+  // 1. Grab user inputs from questions.ejs page
+  // 2. Compare req.body with "answers" collection in Mongoose.
+  // 3. Save result into compare_answers collection in Mongoose if it is correct or incorrect.
+
+app.route('/results')
+  .get((req, res) => {
     Compare_Answer.find(function (err, response) {
                                 
       if (err) {
@@ -146,20 +161,9 @@ app.route('/')
           });
 
       }
-
+    });
   })
-});
 
-
-  // Goal of results.ejs page
-  // 1. Grab user inputs from questions.ejs page
-  // 2. Compare req.body with "answers" collection in Mongoose.
-  // 3. Save result into compare_answers collection in Mongoose if it is correct or incorrect.
-
-app.route('/results')
-  // .get((req, res) => {
-
-  // })
   .post((req, res) => {
     let userAnswers = req.body;
     let realAnswers;
