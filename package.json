@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "postcss css/tailwind.css -o public/build/tailwind.css"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,12 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "mongoose": "^5.10.9",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "postcss": "^8.1.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^8.1.0",
+    "tailwindcss": "^1.9.6"
   }
 }
