@@ -2,17 +2,17 @@
 
 <!-- HTML Pseudocode -->
 
-<h1 class="font-sans text-green-700">Welcome to Tailwind Trivia, a project that uses the Open Trivia API!</h1>
+<h1 class="font-sans text-center py-8 text-green-700 text-2xl">Welcome to Tailwind Trivia, a project that uses the Open Trivia API!</h1>
 
 <h3 class=""> <%= deleteSuccessful %> </h3>
 
-<form action='/questions' method='post' id='form'>
+<form class="bg-green-100" action='/questions' method='post' id='form'>
 
-    <input type="text" placeholder="Number of questions" name="numberOfQuestions">
-    <input type="text" placeholder="Category" name="category">
-    <input type="text" placeholder="Difficulty" name="difficulty">
-    <input type="text" placeholder="Type" name="type">
-    <button type="submit">Submit</button>
+    <input class="block m-6" type="text" placeholder="Number of questions" name="numberOfQuestions">
+    <input class="block m-6" type="text" placeholder="Category" name="category">
+    <input class="block m-6" type="text" placeholder="Difficulty" name="difficulty">
+    <input class="block m-6" type="text" placeholder="Type" name="type">
+    <button class="block m-6" type="submit">Submit</button>
 
 </form>
 

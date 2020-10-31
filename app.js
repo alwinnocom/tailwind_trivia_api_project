@@ -67,6 +67,12 @@ app.route('/questions')
 
       });
 
+      Compare_Answer.deleteMany((err) => {
+        if (err) {
+          console.log(err);
+        }
+      })
+
    })
 
      .post((req, res) => {
