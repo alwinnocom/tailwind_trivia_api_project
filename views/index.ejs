@@ -6,13 +6,29 @@
 
 <h3 class=""> <%= deleteSuccessful %> </h3>
 
-<form class="bg-green-100" action='/questions' method='post' id='form'>
+<form class="bg-green-100 flex-column" action='/questions' method='post' id='form'>
 
-    <input class="block m-6" type="text" placeholder="Number of questions" name="numberOfQuestions">
-    <input class="block m-6" type="text" placeholder="Category" name="category">
-    <input class="block m-6" type="text" placeholder="Difficulty" name="difficulty">
-    <input class="block m-6" type="text" placeholder="Type" name="type">
-    <button class="block m-6" type="submit">Submit</button>
+    <div class="">
+        <label class="m-2" for="numberOfQuestions">Number of Questions</label>
+        <input class="border-black block py-2 m-6" type="text" placeholder="Number of questions" name="numberOfQuestions">
+    </div>
+
+    <div class="">
+        <label class="m-2" for="category">Category</label>
+        <input class="border-black block py-2 m-6" type="text" placeholder="Category" name="category">
+    </div>
+
+    <div class="">
+        <label class="m-2" for="difficulty">Difficulty</label>
+        <input class="border-black block py-2 m-6" type="text" placeholder="Difficulty" name="difficulty">
+    </div>
+
+    <div class="">
+        <label class="m-2" for="type">Type</label>
+        <input class="border-black block py-2 m-6" type="text" placeholder="Type" name="type">
+    </div>
+    
+    <button class="border-black block py-2 m-6" type="submit">Submit</button>
 
 </form>
 

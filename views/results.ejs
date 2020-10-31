@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 
-<h1>Welcome to the Results page!</h1>
+<h1 class="cookie text-center text-blue-800 text-6xl">Welcome to the Results page!</h1>
 
 <!-- <h1> `You got ${correct_answers} correct out of ${total_questions}` </h1> -->
 
@@ -21,10 +21,11 @@
 
 <% for (let index = 0; index < response.length; index++) { %>
 
-<div class="question" style="display: block;">
-    <p> Question <%= response[index].question_number %> </p>
-    <p> Points Earned: <%= response[index].points_earned %> </p>
-    <p> Result: <%= response[index].result %> </p>
+<div class="" style="display: block;">
+    <p class="text-green-800 ml-2 py-2"> Question <%= response[index].question_number %> </p>
+    <p class="text-blue-700 ml-2 py-2"> Points Earned: <%= response[index].points_earned %> </p>
+    <p class="text-orange-900 ml-2 py-2"> Result: <%= response[index].result %> </p>
+    <hr class="mt-2 mb-10">
 </div>
 
 <% } %>
