@@ -14,6 +14,7 @@
     <% for (let index = 0; index < response.length; index++) { %>
 
         <div style="display: block;">
+            <h2 class="ml-4">Question <%= index + 1 %></h2>
             <p class="text-gray-800 p-4"> <%= response[index].questionCategory %> </p>
 
             <!-- if else EJS syntax courtesy of Stack Overflow. Trivia Logic is mine. -->
@@ -74,7 +75,7 @@
 
         </div>
 
-        <hr>
+        <hr class="mb-10">
 
     <% } %>
 

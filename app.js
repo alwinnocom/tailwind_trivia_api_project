@@ -201,7 +201,7 @@ app.route('/results')
                 }
 
                 else {
-                  console.log(`Correct!. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+                  console.log(`Correct! User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
                 
                   let compareAnswer = new Compare_Answer({
                     question_number: `${i+1}`,  
