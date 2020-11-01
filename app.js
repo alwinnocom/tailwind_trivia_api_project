@@ -36,24 +36,33 @@ app.listen(3000, () => {
 let numberOfQuestions, category, difficulty, type;
 
 let url = ``;
-let deleteSuccessful = ``;
+let infoForUser = ``;
 
 
 // Get questions from Mongoose "questions" collection.
 app.route('/questions')
       .get((req, res) => {
 
-            Question.find(function (err, response) {
+            Question.find((err, response) => {
 
               if (err) {
                   console.log("Error is ", err);
               }
 
+              // Response returns [] if nothing is found. - https://stackoverflow.com/questions/9660587/do-something-if-nothing-found-with-find-mongoose 
+              else if (!response.length) {
+
+                // Restrict the number of requests so the browser does not say 'Error: Too Many Requests'
+                setTimeout(() => {res.redirect("/questions")}, 1000);
+
+              }
+
+              // To be safe: 32/50 Max. Alternate: 33/50 Questions Maximum. Too many questions? Try this.
+              // https://stackoverflow.com/questions/3594923/chrome-uncaught-syntaxerror-unexpected-end-of-input
+              // https://stackoverflow.com/questions/20827372/json-parsing-error-syntax-error-unexpected-end-of-input
+
               else {
-
-                // console.log(`Type of Response is ${typeof(response)}`);
-                // console.log(`Response is ${response}`);
-
+                
                   res.render("questions", {
                     numberOfQuestions: numberOfQuestions,
                     ejsResponse: response
@@ -61,9 +70,8 @@ app.route('/questions')
                 
               }
 
-              
-
               });
+
 
           Compare_Answer.deleteMany((err) => {
             if (err) {
@@ -73,145 +81,34 @@ app.route('/questions')
   
      })
 
-        // let renderedResponse = "";
-
-        // function findQuestions() {
-
-          // let success = new Promise((resolve, reject) => {
-          
-          // while (true) {
-          //   Question.find(function (err, response) {
-                   
-            
-
-            // if (err) {
-            //   console.log("Error is ", err);
-            //   // reject("The Question Finder did not work. Check MongoDB.");
-            // }
-
-            // else if (response.length === 0) {
-            //   console.log("Why is there no response?");
-            // }
-
-            // if (response !== "") {
-            //   // res.render("questions", {
-            //   //   ejsResponse: response
-            //   // });
-            //   renderedResponse = response;
-
-            //   return renderedResponse;
-            // }
-
-            // else {
-
-            //   // renderedResponse = response;
-            //   // resolve("Database search successful.");
-            //     res.render("questions", {
-            //       ejsResponse: response
-            //     });
-
-            // }
-          // })
-
-        //   break
-        // }
-
-        // res.render("questions", {
-        //   ejsResponse: renderedResponse
-        // });
-      
-      // return success;
-    // }
-
-    // async function waitForQuestionFinder() {
-    //   let wait = await findQuestions();
-    //   return wait;
-    // }
-
-    //   waitForQuestionFinder()
-    //     .then(res.render("questions", {
-    //       ejsResponse: renderedResponse
-    //     }))
-    //     .catch("Error is ", err);
-
-      // customAPI(numberOfQuestions, category, difficulty, type)
-      //         .then(httpsResponse())
-      //         .then(res.redirect("/questions"))
-      //         .catch((e) => {
-      //               console.log('e', e)
-      //         })
      .post((req, res) => {
                       
-        // HTTPS Module to parse JSON.
-        // let questionData = "";                
+        // HTTPS Module to parse JSON.      
         [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
-                        
+        
+        if (typeof(numberOfQuestions) !== "number" || numberOfQuestions < 1 || numberOfQuestions > 30) {
+          infoForUser = "Please type a valid number of questions between 1 and 30.";
+
+          res.redirect("/");
+        }
         // Synchronous Code: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
         // the questions.ejs page until the customAPI function finds the JSON data required to output to questions.ejs.
-        
-        // customAPI(numberOfQuestions, category, difficulty, type);
 
-        // httpsResponse();
+          async function redirectToQuestions() {
 
-        // res.redirect("/questions");
-        
-        
+            let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
 
-          customAPI(numberOfQuestions, category, difficulty, type);
-          
-          httpsResponse();
+              console.log(`Step One is ${stepOne}`);
 
-          res.redirect("/questions");
+            let stepTwo = await httpsResponse();
 
-          // function checkFind() {
-          //   Question.find(function (err, response) {
+              console.log(`Step Two is ${stepTwo}`);
 
-          //     return new Promise ((resolve, reject) => {
+            return "Complete";
 
-          //         if (err) {
-          //             console.log("Error is ", err);
-          //         }
+          }
 
-          //         // else if (!(response)) {
-
-          //         //   reject("Response not found yet.");
-
-          //         // }
-
-          //         else {
-
-          //           resolve("Successful Find");
-                    
-          //         }
-
-          //       });
-
-          //     });
-          // }
-
-          // async function redirectToQuestions() {
-
-          //   let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
-
-          //     console.log(`Step One is ${stepOne}`);
-
-          //   let stepTwo = await httpsResponse();
-
-          //     console.log(`Step Two is ${stepTwo}`);
-
-          //   let stepThree = getAnswers(questionData);
-
-          //     console.log(`Step Three is ${stepThree}`);
-
-          //   // let stepFour = checkFind();
-
-          //   // console.log(`Step Four is ${stepFour}`);
-            
-          //   return "Complete";
-
-          // }
-
-          // redirectToQuestions().then(res.redirect("/questions"));
+          redirectToQuestions().then(res.redirect("/questions"));
      });
 
 
@@ -233,12 +130,12 @@ app.get("/questions/delete", (req, res) => {
     Question.deleteMany((err) => {
         if (!err) {
 
-          deleteSuccessful = "All questions deleted.";
+          infoForUser = "All questions deleted.";
 
         }
 
         else {
-          deleteSuccessful = "Sorry, the questions were not deleted.";
+          infoForUser = "Sorry, the questions were not deleted.";
 
           console.log(err);
         }
@@ -260,7 +157,9 @@ app.get("/questions/delete", (req, res) => {
 
 app.route('/')
   .get((req, res) => {
-    res.render("index", {deleteSuccessful: deleteSuccessful});
+    res.render("index", {infoForUser: infoForUser});
+
+    
 });
 
 

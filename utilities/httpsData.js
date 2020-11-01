@@ -3,6 +3,8 @@ const saveData = require("./saveData");
 
 const httpsResponse = () => {
         
+    return new Promise ((resolve, reject) => {
+
         https.get(url, (response) => {
             
             response.on('data', (data) => {
@@ -14,6 +16,9 @@ const httpsResponse = () => {
                 saveData(questionData);
             });
         });
+
+        resolve("Successful httpsResponse");
+    })
 
 }
 

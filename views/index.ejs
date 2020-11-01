@@ -4,7 +4,7 @@
 
 <h1 class="font-sans text-center py-8 text-green-700 text-2xl">Welcome to Tailwind Trivia, a project that uses the Open Trivia API!</h1>
 
-<h3 class=""> <%= deleteSuccessful %> </h3>
+<h3 class=""> <%= infoForUser %> </h3>
 
 <form class="bg-green-100 flex-column" action='/questions' method='post' id='form'>
 
@@ -19,7 +19,7 @@
 
 
             <optgroup label="Free-for-all">
-                <option value="none">Any</option>
+                <option value="0">Any</option>
                 <option value="9">General Knowledge</option>
             </optgroup>
 
@@ -86,7 +86,7 @@
     <div class="">
         <label class="m-2" for="type">Type</label>
         <select class="border-black block py-2 m-6" type="text" placeholder="Type" name="type">
-            <option value="">Any</option>
+            <option value="any">Any</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True or False</option>
         </select>

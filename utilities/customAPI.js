@@ -3,58 +3,71 @@
 // const httpsResponse = require( path.resolve(__dirname, "./httpsResponse.js"));
 
 
-const customAPI = (num = 5, cat = "none", dif = "easy", typ = "multiple") => {
+const customAPI = (num, cat, dif, typ) => {
     
+    return new Promise((resolve, reject) => {
     // API Call gives 1-50 questions.
 
     if (num < 1 || num > 50) {
-        // console.log("Error: Number of questions must be from 1-50.")
+        reject("Error: Number of questions must be from 1-50.")
     }
 
     // Specific Category only
     else if (cat > 8 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}`
+        resolve('url concatenation successful')            
     }
 
     // Specific Difficulty only
-    else if (cat === "none" && dif !== "any" && typ === "any") {
+    else if (cat < 9 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${dif}`
+        resolve('url concatenation successful')            
     }
 
     // Specific Type only
-    else if (cat === "none" && dif === "any" && typ !== "any") {
+    else if (cat < 9 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&type=${typ}`
+        resolve('url concatenation successful')
     }
 
     // Specific Category + Difficulty
     else if (cat > 8 && dif !== "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}`
+        resolve('url concatenation successful')        
     }
 
     // Specific Category + Type
     else if (cat > 8 && dif === "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&type=${typ}`
+        resolve('url concatenation successful')        
     }
 
 
     // Specific Difficulty + Type
-    else if (cat === "none" && dif !== "any" && typ !== "any") {
+    else if (cat < 9 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&difficulty=${dif}&type=${typ}`
+        resolve('url concatenation successful')    
     }
 
     // Specific ALL (Category, Difficulty, Type)
     else if (cat > 8 && dif !== "any" && typ !== "any") {
         url = `https://opentdb.com/api.php?amount=${num}&category=${cat}&difficulty=${dif}&type=${typ}`
+        resolve('url concatenation successful')    
+        
     }
 
     // Any Category, Difficulty, and Type.
-    else if (cat === "none" && dif === "any" && typ === "any") {
+    else if (cat < 9 && dif === "any" && typ === "any") {
         url = `https://opentdb.com/api.php?amount=${num}`
+        resolve('url concatenation successful')
     }
 
     else {
-    //    console.log(`Error. If statement is not working. Number of Questions = ${num}, Category=${cat}, Difficulty=${dif}, Type=${typ}`);
+       url = `https://opentdb.com/api.php?amount=${num}`
+       resolve(`Error. If statement is not working. Number of Questions = ${num}, Category=${cat}, Difficulty=${dif}, Type=${typ}`);
     }
+
+});
 
 }
 

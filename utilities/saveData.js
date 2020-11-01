@@ -2,7 +2,7 @@ const { Question } = require("./models/questionModel");
 const { Answer } = require("./models/answerModel");
 
 const saveData = (questionData) => {
-        
+    
         let correctAnswers = {};
 
         for (i = 0; i < questionData.length; i++) {
