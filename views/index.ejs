@@ -8,7 +8,8 @@
 
 <form class="bg-green-100 flex-column" action='/questions' method='post' id='form'>
 
-    <div class="">
+    
+    <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> text-red-500 <% } %> " >
         <label class="m-2" for="numberOfQuestions">Number of Questions</label>
         <input class="border-black block py-2 m-6" type="text" value="5" min="1" max="20" placeholder="Number of questions" name="numberOfQuestions">
     </div>

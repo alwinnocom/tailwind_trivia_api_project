@@ -86,29 +86,34 @@ app.route('/questions')
         // HTTPS Module to parse JSON.      
         [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
         
-        if (typeof(numberOfQuestions) !== "number" || numberOfQuestions < 1 || numberOfQuestions > 30) {
+
+        // Correct Number of Questions
+        if (typeof(numberOfQuestions) === "string" || numberOfQuestions < 1 || numberOfQuestions > 30) {
           infoForUser = "Please type a valid number of questions between 1 and 30.";
 
           res.redirect("/");
         }
+
+
         // Synchronous Code: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
         // the questions.ejs page until the customAPI function finds the JSON data required to output to questions.ejs.
 
-          async function redirectToQuestions() {
+        async function redirectToQuestions() {
 
-            let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
+          let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
 
-              console.log(`Step One is ${stepOne}`);
+            console.log(`Step One is ${stepOne}`);
 
-            let stepTwo = await httpsResponse();
+          let stepTwo = await httpsResponse();
 
-              console.log(`Step Two is ${stepTwo}`);
+            console.log(`Step Two is ${stepTwo}`);
 
-            return "Complete";
+          return "Complete";
 
-          }
+        }
 
-          redirectToQuestions().then(res.redirect("/questions"));
+        redirectToQuestions().then(res.redirect("/questions"));
+
      });
 
 
@@ -158,8 +163,6 @@ app.get("/questions/delete", (req, res) => {
 app.route('/')
   .get((req, res) => {
     res.render("index", {infoForUser: infoForUser});
-
-    
 });
 
 
