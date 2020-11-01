@@ -12,11 +12,8 @@ mongoose.connect('mongodb://localhost/question', {useNewUrlParser: true, useUnif
 // Module Imports
 const https = require('https');
 
-const customAPI = require('./utilities/retrieveAPI.js');
-const httpsResponse = require('./utilities/httpsResponse.js');
-
-const getAnswers = require('./utilities/getAnswers.js');
-// const userAnswers = require('./utilities/userAnswers.js');
+const customAPI = require('./utilities/customAPI.js');
+const httpsResponse = require('./utilities/httpsData.js');
 
 const { Question } = require('./utilities/models/questionModel.js');
 const { Answer } = require('./utilities/models/answerModel.js');
