@@ -1,18 +1,17 @@
 const https = require("https");
-const {  Question } = require("./models/questionModel");
+const getAnswers = require("./getAnswers");
+const { Question } = require("./models/questionModel");
 const { Answer } = require("./models/answerModel");
 
 const httpsResponse = () => {
-
-    https.get(url, (response) => {
         
-        response.on('data', (data) => {
+        https.get(url, (response) => {
+            
+            response.on('data', (data) => {
 
                 const newData = JSON.parse(data);
 
-                const questionData = newData.results;
-                
-                console.log(`Question Data is ${questionData}`);
+                let questionData = newData.results;
 
                 let correctAnswers = {};
 
@@ -37,6 +36,8 @@ const httpsResponse = () => {
                     })
 
                     questionOne.save();
+
+                    console.log(`Current Saved Question is ${questionOne}`);
                     
                 }
 
@@ -46,9 +47,15 @@ const httpsResponse = () => {
                 
                 answerOne.save();
 
-        });
+    });
+                // getAnswers();
+            });
 
-    })
-}
+        }
+
+            // resolve("Successful httpsResponse");
+
+
+
 
 module.exports = httpsResponse;

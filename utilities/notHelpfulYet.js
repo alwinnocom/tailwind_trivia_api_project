@@ -18,6 +18,8 @@ const userAnswers = (data) => {
 
     }
 
+    resolve("Answer population complete.");
+
 }
 
 module.exports = userAnswers;

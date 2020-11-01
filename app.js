@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost/question', {useNewUrlParser: true, useUnif
 // Module Imports
 const https = require('https');
 
-const customAPI = require('./utilities/getQuestions.js');
+const customAPI = require('./utilities/retrieveAPI.js');
 const httpsResponse = require('./utilities/httpsResponse.js');
 
 const getAnswers = require('./utilities/getAnswers.js');
@@ -21,7 +21,6 @@ const getAnswers = require('./utilities/getAnswers.js');
 const { Question } = require('./utilities/models/questionModel.js');
 const { Answer } = require('./utilities/models/answerModel.js');
 const { Compare_Answer } = require('./utilities/models/compareAnswerModel.js');
-
 
 // Express App
 app.set('view engine', 'ejs');
@@ -47,50 +46,175 @@ let deleteSuccessful = ``;
 app.route('/questions')
       .get((req, res) => {
 
-          Question.find(function (err, response) {
-                                
+            Question.find(function (err, response) {
+
+              if (err) {
+                  console.log("Error is ", err);
+              }
+
+              else {
+
+                // console.log(`Type of Response is ${typeof(response)}`);
+                // console.log(`Response is ${response}`);
+
+                  res.render("questions", {
+                    numberOfQuestions: numberOfQuestions,
+                    ejsResponse: response
+                  }) 
+                
+              }
+
+              
+
+              });
+
+          Compare_Answer.deleteMany((err) => {
             if (err) {
-              console.log("Error is ", err);
+              console.log(err);
             }
+          });
+  
+     })
+
+        // let renderedResponse = "";
+
+        // function findQuestions() {
+
+          // let success = new Promise((resolve, reject) => {
+          
+          // while (true) {
+          //   Question.find(function (err, response) {
+                   
+            
+
+            // if (err) {
+            //   console.log("Error is ", err);
+            //   // reject("The Question Finder did not work. Check MongoDB.");
+            // }
 
             // else if (response.length === 0) {
             //   console.log("Why is there no response?");
             // }
 
-            else {
+            // if (response !== "") {
+            //   // res.render("questions", {
+            //   //   ejsResponse: response
+            //   // });
+            //   renderedResponse = response;
 
-                res.render("questions", {
-                  response: response
-                });
+            //   return renderedResponse;
+            // }
 
-            }
+            // else {
 
-      });
+            //   // renderedResponse = response;
+            //   // resolve("Database search successful.");
+            //     res.render("questions", {
+            //       ejsResponse: response
+            //     });
 
-      Compare_Answer.deleteMany((err) => {
-        if (err) {
-          console.log(err);
-        }
-      })
+            // }
+          // })
 
-   })
+        //   break
+        // }
 
+        // res.render("questions", {
+        //   ejsResponse: renderedResponse
+        // });
+      
+      // return success;
+    // }
+
+    // async function waitForQuestionFinder() {
+    //   let wait = await findQuestions();
+    //   return wait;
+    // }
+
+    //   waitForQuestionFinder()
+    //     .then(res.render("questions", {
+    //       ejsResponse: renderedResponse
+    //     }))
+    //     .catch("Error is ", err);
+
+      // customAPI(numberOfQuestions, category, difficulty, type)
+      //         .then(httpsResponse())
+      //         .then(res.redirect("/questions"))
+      //         .catch((e) => {
+      //               console.log('e', e)
+      //         })
      .post((req, res) => {
                       
         // HTTPS Module to parse JSON.
-                        
+        // let questionData = "";                
         [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
                         
-        // Async/Await: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
+        // Synchronous Code: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
         // the questions.ejs page until the customAPI function finds the JSON data required to output to questions.ejs.
-                        
-                            
-          customAPI(numberOfQuestions, category, difficulty, type)
-              .then(httpsResponse())
-              .then(res.redirect("/questions"))
-              .catch((e) => {
-                    console.log('e', e)
-              })
+        
+        // customAPI(numberOfQuestions, category, difficulty, type);
+
+        // httpsResponse();
+
+        // res.redirect("/questions");
+        
+        
+
+          customAPI(numberOfQuestions, category, difficulty, type);
+          
+          httpsResponse();
+
+          res.redirect("/questions");
+
+          // function checkFind() {
+          //   Question.find(function (err, response) {
+
+          //     return new Promise ((resolve, reject) => {
+
+          //         if (err) {
+          //             console.log("Error is ", err);
+          //         }
+
+          //         // else if (!(response)) {
+
+          //         //   reject("Response not found yet.");
+
+          //         // }
+
+          //         else {
+
+          //           resolve("Successful Find");
+                    
+          //         }
+
+          //       });
+
+          //     });
+          // }
+
+          // async function redirectToQuestions() {
+
+          //   let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
+
+          //     console.log(`Step One is ${stepOne}`);
+
+          //   let stepTwo = await httpsResponse();
+
+          //     console.log(`Step Two is ${stepTwo}`);
+
+          //   let stepThree = getAnswers(questionData);
+
+          //     console.log(`Step Three is ${stepThree}`);
+
+          //   // let stepFour = checkFind();
+
+          //   // console.log(`Step Four is ${stepFour}`);
+            
+          //   return "Complete";
+
+          // }
+
+          // redirectToQuestions().then(res.redirect("/questions"));
      });
 
 

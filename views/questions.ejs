@@ -2,31 +2,37 @@
 
 <h1 class="font-sans text-center py-8 text-green-700 text-2xl">Welcome to the Questions page!</h1>
 
+
 <form action="/questions/delete" method='get'>
     <button class="font-sans text-center p-8 text-red-400"type="submit">Delete All Questions</button>
 </form>
 
 
+<form action="/questions" method='get'>
+    <button class="font-sans text-center p-8 text-red-400"type="submit">No Questions? Refresh Here</button>
+</form>
+
+<p>Number of Questions: <%= numberOfQuestions %></p>
+
 <form action='/results' method='post' id='form'>
 
-    <!-- <p> Number of Questions: <%= response[0].totalQuestions %> </p> -->
 
-    <% for (let index = 0; index < response.length; index++) { %>
+    <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
         <div style="display: block;">
             <h2 class="text-indigo-800 py-2 ml-4">Question <%= index + 1 %></h2>
-            <p class="text-orange-800 p-4"> <%= response[index].questionCategory %> </p>
+            <p class="text-orange-800 p-4"> <%= ejsResponse[index].questionCategory %> </p>
 
             <!-- if else EJS syntax courtesy of Stack Overflow. Trivia Logic is mine. -->
-            <% if (response[index].questionType === 'boolean') { %>
+            <% if (ejsResponse[index].questionType === 'boolean') { %>
                 <p class="text-teal-500 p-4"> True or False? </p>
             <% } else { %>
                 <p class="text-blue-500 p-4"> Multiple Choice </p>
             <% } %>
 
 
-            <p class="text-yellow-700 p-4"> <%= response[index].questionDifficulty %> </p>
-            <p class="text-gray-800 p-4"> <%= response[index].question %> </p>
+            <p class="text-yellow-700 p-4"> <%= ejsResponse[index].questionDifficulty %> </p>
+            <p class="text-gray-800 p-4"> <%= ejsResponse[index].question %> </p>
             
 
             <!-- Use order alongside EJS partials to change the order of flexbox. -->
@@ -35,20 +41,20 @@
             
             
             
-            <% if (response[index].questionType === 'boolean') { %>
+            <% if (ejsResponse[index].questionType === 'boolean') { %>
 
             <div class="flex">
                 <div class="order-2">
-                    <label class="ml-2 text-green-500" for="<%= response[index].correctAnswer %>"><%= response[index].correctAnswer %></label>
-                    <input class="p-1" type="radio" value="<%= response[index].correctAnswer %>" name= <%= index %> ></input>
+                    <label class="ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
+                    <input class="p-1" type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
                 </div>
-                <div class="<% if (response[index].incorrectAnswers[0] === 'False') { %>
+                <div class="<% if (ejsResponse[index].incorrectAnswers[0] === 'False') { %>
                     order-last text-red-500
                     <% } else { %>
                     order-first text-red-500
                     <% } %>">
-                    <label class="ml-2 p-1"  for="<%= response[index].incorrectAnswers[0] %>"><%= response[index].incorrectAnswers[0] %></label>
-                    <input class="p-1" type="radio" value="<%= response[index].incorrectAnswers[0] %>" name="<%= index %>"></input>
+                    <label class="ml-2 p-1"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
+                    <input class="p-1" type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name="<%= index %>"></input>
                 </div>
             </div>
 
@@ -57,16 +63,16 @@
 
             <div class="flex">
                 <div class="text-green-500 order-<%= Math.floor(Math.random()*5) + 1; %>">
-                    <input type="radio" value="<%= response[index].correctAnswer %>" name= <%= index %> > <%= response[index].correctAnswer %> </input>
+                    <input type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> > <%= ejsResponse[index].correctAnswer %> </input>
                 </div> 
                 <div class="text-red-500 order-<%= Math.floor(Math.random()*5) + 1; %>">         
-                    <input type="radio" value="<%= response[index].incorrectAnswers[0] %>" name= "<%= index %>"> <%= response[index].incorrectAnswers[0] %> </input>
+                    <input type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name= "<%= index %>"> <%= ejsResponse[index].incorrectAnswers[0] %> </input>
                 </div> 
                 <div class="text-red-500 order-<%= Math.floor(Math.random()*5) + 1; %>">
-                    <input type="radio" value="<%= response[index].incorrectAnswers[1] %>" name= "<%= index %>"> <%= response[index].incorrectAnswers[1] %> </input>
+                    <input type="radio" value="<%= ejsResponse[index].incorrectAnswers[1] %>" name= "<%= index %>"> <%= ejsResponse[index].incorrectAnswers[1] %> </input>
                 </div> 
                 <div class="text-red-500 order-<%= Math.floor(Math.random()*5) + 1; %>">
-                    <input type="radio" value="<%= response[index].incorrectAnswers[2] %>" name= "<%= index %>"> <%= response[index].incorrectAnswers[2] %> </input>
+                    <input type="radio" value="<%= ejsResponse[index].incorrectAnswers[2] %>" name= "<%= index %>"> <%= ejsResponse[index].incorrectAnswers[2] %> </input>
                 </div> 
             </div>
 
