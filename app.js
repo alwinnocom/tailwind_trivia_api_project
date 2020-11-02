@@ -190,7 +190,6 @@ app.route('/results')
 
           res.render("results", {
             response: response,
-            totalPointsEarned: totalPointsEarned
           });
 
       }
@@ -212,16 +211,40 @@ app.route('/results')
         realAnswers = response[0].correctAnswers;
         questionTypeVerifier = response[0].questionTypes;
         
+        let totalPointsPossible = 0;
+        let j = 0;
+
+            while (questionTypeVerifier[j] !== undefined) {
+                if (questionTypeVerifier[j] === "boolean") {
+                    totalPointsPossible += 1;
+                    j++;
+                }
+
+                else {
+                    totalPointsPossible += 3;
+                    j++;
+                }
+            }
+
+            let countTotalPoints = new Compare_Answer({
+              totalPointsPossible: totalPointsPossible
+            })
+
+            countTotalPoints.save();
+
+
         let i = 0;
+        let yourPointsEarned = 0;
 
             while (userAnswers[i] !== undefined) {
 
-                if (realAnswers[i] !== userAnswers[i]) {
+                if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
                   // console.log(`Incorrect Answer. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
                 
                   let compareAnswer = new Compare_Answer({
                     question_number: `${i+1}`,  
                     points_earned: 0,
+                    points_possible: 1,
                     result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
                   })
 
@@ -229,14 +252,30 @@ app.route('/results')
 
                 }
 
-                else {
-                  
+                else if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "multiple") {
+                    let compareAnswer = new Compare_Answer({
+                      question_number: `${i+1}`,  
+                      points_earned: 0,
+                      points_possible: 3,
+                      result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                    })
+
+                    compareAnswer.save()
+                }
+
+
+                else {        
+
                     if (questionTypeVerifier[i] === "boolean") {
                       let compareAnswer = new Compare_Answer({
                         question_number: `${i+1}`,  
                         points_earned: 1,
+                        points_possible: 1,
+                        
                         result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
                       })
+
+                      yourPointsEarned += 1;
 
                       compareAnswer.save();
                     }
@@ -245,8 +284,11 @@ app.route('/results')
                       let compareAnswer = new Compare_Answer({
                         question_number: `${i+1}`,  
                         points_earned: 3,
+                        points_possible: 3,
                         result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
                       })
+
+                      yourPointsEarned += 3;
 
                       compareAnswer.save();
                     }
@@ -255,6 +297,12 @@ app.route('/results')
 
               i++;
             }
+
+            let userScore = new Compare_Answer({
+              yourPointsEarned: yourPointsEarned
+            })
+
+            userScore.save();
 
           res.redirect("/results");
       }

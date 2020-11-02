@@ -5,18 +5,12 @@ mongoose.connect('mongodb://localhost/question');
 
 
 const compare_answerSchema = new Schema({
-    question_number: {
-        type: String,
-        required: true
-    },
-    points_earned: {
-        type: Number,
-        required: true
-    },
-    result: {
-        type: String,
-        required: true
-    }
+    question_number: String,
+    points_earned: Number,
+    points_possible: Number,
+    totalPointsPossible: Number,
+    yourPointsEarned: Number,
+    result: String
 });
 
 const Compare_Answer = mongoose.model("Compare_Answer", compare_answerSchema);
