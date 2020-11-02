@@ -1,5 +1,6 @@
 const { Question } = require("./models/questionModel");
 const { Answer } = require("./models/answerModel");
+const triviaRegex = require("./triviaRegex");
 
 const saveData = (questionData) => {
     
@@ -7,7 +8,15 @@ const saveData = (questionData) => {
 
         for (i = 0; i < questionData.length; i++) {
 
-            correctAnswers[i] = questionData[i].correct_answer;
+            let question;
+
+            question = questionData[i].question;
+            correctAnswer = questionData[i].correct_answer;
+            // incorrectAnswers = questionData[i].incorrect_answers;
+ 
+            triviaRegex(question, correctAnswer);
+
+            correctAnswers[i] = correctAnswer;
 
             let questionOne = new Question({
                 _id: i,
@@ -15,8 +24,8 @@ const saveData = (questionData) => {
                 questionCategory: questionData[i].category,
                 questionType: questionData[i].type,
                 questionDifficulty: questionData[i].difficulty, 
-                question: questionData[i].question,
-                correctAnswer: questionData[i].correct_answer,
+                question: question,
+                correctAnswer: correctAnswer,
                 incorrectAnswers: questionData[i].incorrect_answers
             })
 

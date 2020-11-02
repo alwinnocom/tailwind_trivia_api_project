@@ -37,6 +37,7 @@ let numberOfQuestions, category, difficulty, type;
 
 let url = ``;
 let infoForUser = ``;
+// let totalPointsGained = 0;
 
 
 // Get questions from Mongoose "questions" collection.
@@ -84,11 +85,11 @@ app.route('/questions')
      .post((req, res) => {
                       
         // HTTPS Module to parse JSON.      
-        [numberOfQuestions, category, difficulty, type] = [req.body.numberOfQuestions, req.body.category, req.body.difficulty, req.body.type];
+        [numberOfQuestions, category, difficulty, type] = [Math.floor(req.body.numberOfQuestions), req.body.category, req.body.difficulty, req.body.type];
         
 
         // Correct Number of Questions
-        if (typeof(numberOfQuestions) === "string" || numberOfQuestions < 1 || numberOfQuestions > 30) {
+        if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 30) {
           infoForUser = "Please type a valid number of questions between 1 and 30.";
 
           res.redirect("/");
@@ -206,12 +207,13 @@ app.route('/results')
       else {
         realAnswers = response[0].correctAnswers;
 
+        
         let i = 0;
 
             while (userAnswers[i] !== undefined) {
 
                 if (realAnswers[i] !== userAnswers[i]) {
-                  console.log(`Incorrect Answer. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+                  // console.log(`Incorrect Answer. User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
                 
                   let compareAnswer = new Compare_Answer({
                     question_number: `${i+1}`,  
@@ -224,8 +226,10 @@ app.route('/results')
                 }
 
                 else {
-                  console.log(`Correct! User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
+                  // console.log(`Correct! User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
                 
+                  totalPointsGained += 1;
+
                   let compareAnswer = new Compare_Answer({
                     question_number: `${i+1}`,  
                     points_earned: 1,
