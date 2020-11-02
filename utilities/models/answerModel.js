@@ -4,16 +4,8 @@ const { Schema } = require('mongoose');
 mongoose.connect('mongodb://localhost/question');
 
 const answerSchema = new Schema({
-    correctAnswers: {
-            // _id: {
-            //         type: Number,
-            //         required: true
-            //      },
-            // correctAnswer: {
-            //      type: String,
-            //      required: true
-            //     }
-    }
+    correctAnswers: {},
+    questionTypes: {}
 });
 
 const Answer = mongoose.model("Answer", answerSchema);

@@ -174,6 +174,8 @@ app.route('/')
 
 app.route('/results')
   .get((req, res) => {
+    let totalPointsEarned;
+
     Compare_Answer.find(function (err, response) {
                                 
       if (err) {
@@ -187,7 +189,8 @@ app.route('/results')
       else {
 
           res.render("results", {
-            response: response
+            response: response,
+            totalPointsEarned: totalPointsEarned
           });
 
       }
@@ -197,6 +200,7 @@ app.route('/results')
   .post((req, res) => {
     let userAnswers = req.body;
     let realAnswers;
+    let questionTypeVerifier;
 
     Answer.find(function (err, response) {
                                 
@@ -206,7 +210,7 @@ app.route('/results')
 
       else {
         realAnswers = response[0].correctAnswers;
-
+        questionTypeVerifier = response[0].questionTypes;
         
         let i = 0;
 
@@ -226,17 +230,26 @@ app.route('/results')
                 }
 
                 else {
-                  // console.log(`Correct! User Answer was id_ = ${i}, answer = ${userAnswers[i]}. Real Answer was id_ = ${i}, answer = ${realAnswers[i]}`);
-                
-                  totalPointsGained += 1;
+                  
+                    if (questionTypeVerifier[i] === "boolean") {
+                      let compareAnswer = new Compare_Answer({
+                        question_number: `${i+1}`,  
+                        points_earned: 1,
+                        result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                      })
 
-                  let compareAnswer = new Compare_Answer({
-                    question_number: `${i+1}`,  
-                    points_earned: 1,
-                    result: `Correct!. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
-                  })
+                      compareAnswer.save();
+                    }
+                  
+                    else {
+                      let compareAnswer = new Compare_Answer({
+                        question_number: `${i+1}`,  
+                        points_earned: 3,
+                        result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                      })
 
-                  compareAnswer.save()
+                      compareAnswer.save();
+                    }
                 
                 }
 

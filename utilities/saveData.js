@@ -5,6 +5,7 @@ const triviaRegex = require("./triviaRegex");
 const saveData = (questionData) => {
     
         let correctAnswers = {};
+        let questionTypes = {};
 
         for (i = 0; i < questionData.length; i++) {
 
@@ -17,6 +18,7 @@ const saveData = (questionData) => {
             triviaRegex(question, correctAnswer);
 
             correctAnswers[i] = correctAnswer;
+            questionTypes[i] = questionData[i].type;
 
             let questionOne = new Question({
                 _id: i,
@@ -34,7 +36,8 @@ const saveData = (questionData) => {
         }
 
         let answerOne = new Answer({
-            correctAnswers: correctAnswers
+            correctAnswers: correctAnswers,
+            questionTypes: questionTypes
         })
         
         answerOne.save();
