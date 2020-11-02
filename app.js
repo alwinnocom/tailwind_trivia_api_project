@@ -12,12 +12,12 @@ mongoose.connect('mongodb://localhost/question', {useNewUrlParser: true, useUnif
 // Module Imports
 const https = require('https');
 
-const customAPI = require('./utilities/customAPI.js');
-const httpsResponse = require('./utilities/httpsData.js');
+const customAPI = require('./requests/customAPI.js');
+const httpsResponse = require('./requests/httpsData.js');
 
-const { Question } = require('./utilities/models/questionModel.js');
-const { Answer } = require('./utilities/models/answerModel.js');
-const { Compare_Answer } = require('./utilities/models/compareAnswerModel.js');
+const { Question } = require('./models/questionModel.js');
+const { Answer } = require('./models/answerModel.js');
+const { Compare_Answer } = require('./models/compareAnswerModel.js');
 
 // Express App
 app.set('view engine', 'ejs');
