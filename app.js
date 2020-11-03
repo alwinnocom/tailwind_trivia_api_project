@@ -19,6 +19,7 @@ const { Question } = require('./models/questionModel.js');
 const { Answer } = require('./models/answerModel.js');
 const { Compare_Answer } = require('./models/compareAnswerModel.js');
 
+
 // Express App
 app.set('view engine', 'ejs');
 
@@ -71,7 +72,7 @@ app.route('/questions')
                 
               }
 
-              });
+            });
 
 
           Compare_Answer.deleteMany((err) => {
@@ -172,6 +173,7 @@ app.route('/')
 });
 
 
+
   // Goal of results.ejs page
   // 1. Grab user inputs from questions.ejs page
   // 2. Compare req.body with "answers" collection in Mongoose.
@@ -179,7 +181,6 @@ app.route('/')
 
 app.route('/results')
   .get((req, res) => {
-    let totalPointsEarned;
 
     Compare_Answer.find(function (err, response) {
                                 
@@ -187,9 +188,9 @@ app.route('/results')
         console.log("Error is ", err);
       }
 
-      // else if (response.length === 0) {
-      //   console.log("Why is there no response?");
-      // }
+      else if (!response.length) {
+        setTimeout(() => {res.redirect("/results")}, 1000);
+      }
 
       else {
 
@@ -204,8 +205,6 @@ app.route('/results')
 
   .post((req, res) => {
     let userAnswers = req.body;
-
-    console.log(`User Answers from EJS Form = ${userAnswers}`);
 
     let realAnswers;
     let questionTypeVerifier;

@@ -9,29 +9,13 @@ const saveData = (questionData) => {
 
         for (i = 0; i < questionData.length; i++) {
 
-            let question;
-            let correctAnswer;
+            let question = questionData[i].question;
+            let correctAnswer = questionData[i].correct_answer;
 
-            question = questionData[i].question;
-            correctAnswer = questionData[i].correct_answer;
-            // incorrectAnswers = questionData[i].incorrect_answers;
 
-            // triviaRegex(question, correctAnswer);
-
+            // Trivia Regex
             question = question.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
             correctAnswer = correctAnswer.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
-
-            // question = question.replace(/&#039;/g, "\'");
-            // question = question.replace(/&quot;/g, "\"");
-            // question = question.replace(/&deg;/g, "°");
-            // question = question.replace(/&ouml;/g, "ö");
-            // question = question.replace(/&amp;/g, "and");
-            
-            // correctAnswer = correctAnswer.replace(/&#039;/g, "\'");
-            // correctAnswer = correctAnswer.replace(/&quot;/g, "\"");
-            // correctAnswer = correctAnswer.replace(/&deg;/g, "°");
-            // correctAnswer = correctAnswer.replace(/&ouml;/g, "ö");
-            // correctAnswer = correctAnswer.replace(/&amp;/g, "and");
 
             correctAnswers[i] = correctAnswer;
             questionTypes[i] = questionData[i].type;
