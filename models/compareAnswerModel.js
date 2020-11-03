@@ -6,10 +6,16 @@ mongoose.connect('mongodb://localhost/question');
 
 const compare_answerSchema = new Schema({
     question_number: String,
+
     points_earned: Number,
     points_possible: Number,
+
     totalPointsPossible: Number,
+
     yourPointsEarned: Number,
+
+    yourCorrectQuestions: Number,
+
     result: String
 });
 

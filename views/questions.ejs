@@ -1,5 +1,17 @@
 <%- include('partials/header'); -%>
 
+<nav class="sticky inset-0 h-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+    <ul class="flex flex-row">
+        <% for (let i = 1; i < ejsResponse.length + 1; i++) { %>
+
+            
+            <li class="p-2"><a href=#<%=i%>>Question <%=i%></a></li>
+
+        <% } %>
+    </ul>
+</nav>
+
+
 <h1 class="font-sans text-center py-8 text-green-700 text-2xl">Welcome to the Questions page!</h1>
 
 
@@ -14,13 +26,14 @@
 
 <p>Number of Questions: <%= numberOfQuestions %></p>
 
+
 <form action='/results' method='post' id='form'>
 
 
     <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
         <div style="display: block;">
-            <h2 class="text-indigo-800 py-2 ml-4">Question <%= index + 1 %></h2>
+            <h2 id="<%= index + 1 %>" class="text-indigo-800 py-2 ml-4">Question <%= index + 1 %></h2>
             <p class="text-orange-800 p-4"> <%= ejsResponse[index].questionCategory %> </p>
 
             <!-- if else EJS syntax courtesy of Stack Overflow. Trivia Logic is mine. -->

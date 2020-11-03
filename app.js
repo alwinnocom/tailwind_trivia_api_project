@@ -195,6 +195,7 @@ app.route('/results')
 
           res.render("results", {
             response: response,
+            numberOfQuestions: numberOfQuestions
           });
 
       }
@@ -203,6 +204,9 @@ app.route('/results')
 
   .post((req, res) => {
     let userAnswers = req.body;
+
+    console.log(`User Answers from EJS Form = ${userAnswers}`);
+
     let realAnswers;
     let questionTypeVerifier;
 
@@ -214,6 +218,9 @@ app.route('/results')
 
       else {
         realAnswers = response[0].correctAnswers;
+
+        console.log(`Real Answers from Mongoose = ${realAnswers}`);
+
         questionTypeVerifier = response[0].questionTypes;
         
         let totalPointsPossible = 0;
@@ -240,6 +247,7 @@ app.route('/results')
 
         let i = 0;
         let yourPointsEarned = 0;
+        let yourCorrectQuestions = 0;
 
             while (userAnswers[i] !== undefined) {
 
@@ -281,6 +289,7 @@ app.route('/results')
                       })
 
                       yourPointsEarned += 1;
+                      yourCorrectQuestions += 1;
 
                       compareAnswer.save();
                     }
@@ -294,6 +303,7 @@ app.route('/results')
                       })
 
                       yourPointsEarned += 3;
+                      yourCorrectQuestions += 1;
 
                       compareAnswer.save();
                     }
@@ -304,7 +314,8 @@ app.route('/results')
             }
 
             let userScore = new Compare_Answer({
-              yourPointsEarned: yourPointsEarned
+              yourPointsEarned: yourPointsEarned,
+              yourCorrectQuestions: yourCorrectQuestions
             })
 
             userScore.save();

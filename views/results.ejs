@@ -19,7 +19,16 @@
 
     <!-- <p> `Question ${i+1}</p> -->
 
+<form action="/questions/delete" method='get'>
+    <button class="font-sans text-center p-8 text-red-400"type="submit">Delete All Questions</button>
+</form>
 
+<form action="/questions" method='get'>
+    <button class="font-sans text-center p-8 text-red-400"type="submit">Retry Trivia Round</button>
+</form>
+
+<p>Your Correct Number of Questions: <%= response[response.length - 1].yourCorrectQuestions %></p>
+<p>Number of Questions: <%= numberOfQuestions %></p>
 <p class="ml-2 py-2"> Your Score = <%= response[response.length - 1].yourPointsEarned %></p>
 <p class="ml-2 py-2"> Total Points Possible = <%= response[0].totalPointsPossible %> </p>
 
