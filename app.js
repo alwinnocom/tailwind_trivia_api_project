@@ -33,12 +33,17 @@ app.listen(3000, () => {
 });
 
 
+// Routers
+const homeRouter = require('./routers/getHomeRouter');
+
+app.use('/', homeRouter);
+
+
 // API Data Segmented Into Variables
 let numberOfQuestions, category, difficulty, type;
 
 let url = ``;
 let infoForUser = ``;
-// let totalPointsGained = 0;
 
 
 // Get questions from Mongoose "questions" collection.
@@ -167,10 +172,12 @@ app.get("/questions/delete", (req, res) => {
 // for User to see because of ejs.
 
 
-app.route('/')
-  .get((req, res) => {
-    res.render("index", {infoForUser: infoForUser});
-});
+
+
+// app.route('/')
+//   .get((req, res) => {
+//     res.render("index", {infoForUser: infoForUser});
+// });
 
 
 

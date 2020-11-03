@@ -1,6 +1,5 @@
 const { Question } = require("../models/questionModel.js");
 const { Answer } = require("../models/answerModel.js");
-const triviaRegex = require("./triviaRegex");
 
 const saveData = (questionData) => {
     
@@ -17,8 +16,10 @@ const saveData = (questionData) => {
             question = question.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
             correctAnswer = correctAnswer.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
 
+
             correctAnswers[i] = correctAnswer;
             questionTypes[i] = questionData[i].type;
+
 
             let questionOne = new Question({
                 _id: i,
