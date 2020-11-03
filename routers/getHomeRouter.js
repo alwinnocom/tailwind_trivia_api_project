@@ -5,8 +5,10 @@ const express = require('express'),
 
 router.get('/', (req, res) => {
 
-  res.render("index", {infoForUser: "The router module is working."});
+  res.render("index", {infoForUser: "Error: There are not enough questions in the category, difficulty, and type that you specified."});
     
 });
+
+res.redirect("/");
  
 module.exports = router;

@@ -1,14 +1,8 @@
 const https = require("https");
 const saveData = require("../requests/saveData");
 
-const express = require('express'); 
-const app = express();
 
-// const homeRouter = require('./routers/getHomeRouter');
-
-// app.use('/', homeRouter);
-
-
+// HTTPS Module to parse JSON.  
 const httpsResponse = () => {
         
     return new Promise ((resolve, reject) => {
@@ -28,9 +22,8 @@ const httpsResponse = () => {
 
                 // if (responseCode === 1) {
 
-                //     app.get('/', function(req, res) {
-                //         res.render("index", {infoForUser: "Sorry, there are not enough questions in the Open Trivia API to satisfy your request. Try lowering the number of questions."});
-                //     })
+                //     reject("There are not enough questions to satisfy the request.")
+
                 // }
 
                 saveData(questionData);
