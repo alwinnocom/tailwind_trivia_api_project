@@ -10,22 +10,28 @@ const saveData = (questionData) => {
         for (i = 0; i < questionData.length; i++) {
 
             let question;
+            let correctAnswer;
 
-            question = questionData[i].question.toString();
-            correctAnswer = questionData[i].correct_answer.toString();
+            question = questionData[i].question;
+            correctAnswer = questionData[i].correct_answer;
             // incorrectAnswers = questionData[i].incorrect_answers;
 
-            question = question.split('&#039;').join("’");
-            question = question.split('&quot;').join('’');
-            question = question.split('&deg;').join('°');
-            question = question.split('&ouml;').join('ö');
-            question = question.split('&amp;').join('and');
+            // triviaRegex(question, correctAnswer);
+
+            question = question.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+            correctAnswer = correctAnswer.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+
+            // question = question.replace(/&#039;/g, "\'");
+            // question = question.replace(/&quot;/g, "\"");
+            // question = question.replace(/&deg;/g, "°");
+            // question = question.replace(/&ouml;/g, "ö");
+            // question = question.replace(/&amp;/g, "and");
             
-            correctAnswer = correctAnswer.split('&#039;').join("’");
-            correctAnswer = correctAnswer.split('&quot;').join('’');
-            correctAnswer = correctAnswer.split('&deg;').join('°');
-            correctAnswer = correctAnswer.split('&ouml;').join('ö');
-            correctAnswer = correctAnswer.split('&amp;').join('and');
+            // correctAnswer = correctAnswer.replace(/&#039;/g, "\'");
+            // correctAnswer = correctAnswer.replace(/&quot;/g, "\"");
+            // correctAnswer = correctAnswer.replace(/&deg;/g, "°");
+            // correctAnswer = correctAnswer.replace(/&ouml;/g, "ö");
+            // correctAnswer = correctAnswer.replace(/&amp;/g, "and");
 
             correctAnswers[i] = correctAnswer;
             questionTypes[i] = questionData[i].type;

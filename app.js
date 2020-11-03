@@ -89,7 +89,7 @@ app.route('/questions')
         
 
         // Correct Number of Questions
-        if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 30) {
+        if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 50) {
           infoForUser = "Please type a valid number of questions between 1 and 30.";
 
           res.redirect("/");
@@ -114,6 +114,11 @@ app.route('/questions')
         }
 
         redirectToQuestions().then(res.redirect("/questions"));
+
+        // customAPI(numberOfQuestions, category, difficulty, type);
+        // httpsResponse();
+        // res.redirect("/questions");
+
 
      });
 
