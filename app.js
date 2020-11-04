@@ -18,6 +18,7 @@ const httpsResponse = require('./requests/httpsData.js');
 const { Question } = require('./models/questionModel.js');
 const { Answer } = require('./models/answerModel.js');
 const { Compare_Answer } = require('./models/compareAnswerModel.js');
+const { resolve } = require('path');
 
 
 // Express App
@@ -38,6 +39,7 @@ let infoForUser = ``;
 let tryDifferentCategory = ``;
 let tryDifferentDifficulty = ``;
 let tryDifferentType = ``;
+let pleaseAnswerEveryQuestion = ``;
 
 
 // API Data Segmented Into Variables
@@ -67,7 +69,8 @@ app.route('/questions')
           
             res.render("questions", {
               numberOfQuestions: numberOfQuestions,
-              ejsResponse: response
+              ejsResponse: response,
+              pleaseAnswerEveryQuestion: pleaseAnswerEveryQuestion
             }) 
           
         }
@@ -127,7 +130,7 @@ app.route('/questions')
         })
         .catch((e) => {
             // console.log(`Error is: ${e}`);
-            
+
             if (typeof(e) === "string") {
               infoForUser = e;
             }
@@ -234,121 +237,163 @@ app.route('/results')
   .post((req, res) => {
     let userAnswers = req.body;
 
+    console.log(`User Answers = ${JSON.stringify(userAnswers)}`);
+    console.log(`User Answer length = ${Object.keys(userAnswers).length}`)
+    console.log(`Total number of questions = ${numberOfQuestions}`);
+
     let realAnswers;
     let questionTypeVerifier;
 
-    Answer.find(function (err, response) {
-                                
-      if (err) {
-        console.log("Error is ", err);
+
+    // Did the User Answer Every Question?
+
+    const formVerifier = () => {
+      return new Promise ((resolve, reject) => {
+      if (Object.keys(userAnswers).length < numberOfQuestions) {
+        reject("Please answer every question");
       }
 
       else {
-        realAnswers = response[0].correctAnswers;
-
-        console.log(`Real Answers from Mongoose = ${realAnswers}`);
-
-        questionTypeVerifier = response[0].questionTypes;
-        
-        let totalPointsPossible = 0;
-        let j = 0;
-
-            while (questionTypeVerifier[j] !== undefined) {
-                if (questionTypeVerifier[j] === "boolean") {
-                    totalPointsPossible += 1;
-                    j++;
-                }
-
-                else {
-                    totalPointsPossible += 3;
-                    j++;
-                }
-            }
-
-            let countTotalPoints = new Compare_Answer({
-              totalPointsPossible: totalPointsPossible
-            })
-
-            countTotalPoints.save();
-
-
-        let i = 0;
-        let yourPointsEarned = 0;
-        let yourCorrectQuestions = 0;
-
-            while (userAnswers[i] !== undefined) {
-
-                if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
-                
-                  let compareAnswer = new Compare_Answer({
-                    question_number: `${i+1}`,  
-                    points_earned: 0,
-                    points_possible: 1,
-                    result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
-                  })
-
-                  compareAnswer.save()
-
-                }
-
-                else if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "multiple") {
-                    let compareAnswer = new Compare_Answer({
-                      question_number: `${i+1}`,  
-                      points_earned: 0,
-                      points_possible: 3,
-                      result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
-                    })
-
-                    compareAnswer.save()
-                }
-
-
-                else {        
-
-                    if (questionTypeVerifier[i] === "boolean") {
-                      let compareAnswer = new Compare_Answer({
-                        question_number: `${i+1}`,  
-                        points_earned: 1,
-                        points_possible: 1,
-                        
-                        result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
-                      })
-
-                      yourPointsEarned += 1;
-                      yourCorrectQuestions += 1;
-
-                      compareAnswer.save();
-                    }
-                  
-                    else {
-                      let compareAnswer = new Compare_Answer({
-                        question_number: `${i+1}`,  
-                        points_earned: 3,
-                        points_possible: 3,
-                        result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
-                      })
-
-                      yourPointsEarned += 3;
-                      yourCorrectQuestions += 1;
-
-                      compareAnswer.save();
-                    }
-                
-                }
-
-              i++;
-            }
-
-            let userScore = new Compare_Answer({
-              yourPointsEarned: yourPointsEarned,
-              yourCorrectQuestions: yourCorrectQuestions
-            })
-
-            userScore.save();
-
-          res.redirect("/results");
+        resolve("The user has answered all the questions.")
       }
-
     });
+    }
+  
+
+    const findAnswers = () => {
+
+      return new Promise ((resolve, reject) => {
+        Answer.find(function (err, response) {
+                                    
+          if (err) {
+            console.log("Error is ", err);
+          }
+
+          else {
+            realAnswers = response[0].correctAnswers;
+
+            console.log(`Real Answers from Mongoose = ${realAnswers}`);
+
+            questionTypeVerifier = response[0].questionTypes;
+            
+            let totalPointsPossible = 0;
+            let j = 0;
+
+                while (questionTypeVerifier[j] !== undefined) {
+                    if (questionTypeVerifier[j] === "boolean") {
+                        totalPointsPossible += 1;
+                        j++;
+                    }
+
+                    else {
+                        totalPointsPossible += 3;
+                        j++;
+                    }
+                }
+
+                let countTotalPoints = new Compare_Answer({
+                  totalPointsPossible: totalPointsPossible
+                })
+
+                countTotalPoints.save();
+
+
+            let i = 0;
+            let yourPointsEarned = 0;
+            let yourCorrectQuestions = 0;
+
+                while (userAnswers[i] !== undefined) {
+
+                    if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
+                    
+                      let compareAnswer = new Compare_Answer({
+                        question_number: `${i+1}`,  
+                        points_earned: 0,
+                        points_possible: 1,
+                        result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                      })
+
+                      compareAnswer.save()
+
+                    }
+
+                    else if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "multiple") {
+                        let compareAnswer = new Compare_Answer({
+                          question_number: `${i+1}`,  
+                          points_earned: 0,
+                          points_possible: 3,
+                          result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                        })
+
+                        compareAnswer.save()
+                    }
+
+
+                    else {        
+
+                        if (questionTypeVerifier[i] === "boolean") {
+                          let compareAnswer = new Compare_Answer({
+                            question_number: `${i+1}`,  
+                            points_earned: 1,
+                            points_possible: 1,
+                            
+                            result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                          })
+
+                          yourPointsEarned += 1;
+                          yourCorrectQuestions += 1;
+
+                          compareAnswer.save();
+                        }
+                      
+                        else {
+                          let compareAnswer = new Compare_Answer({
+                            question_number: `${i+1}`,  
+                            points_earned: 3,
+                            points_possible: 3,
+                            result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                          })
+
+                          yourPointsEarned += 3;
+                          yourCorrectQuestions += 1;
+
+                          compareAnswer.save();
+                        }
+                    
+                    }
+
+                  i++;
+                }
+
+                let userScore = new Compare_Answer({
+                  yourPointsEarned: yourPointsEarned,
+                  yourCorrectQuestions: yourCorrectQuestions
+                })
+
+                userScore.save();
+
+              resolve("Compare Answer is complete. You can go to results.ejs now.")
+          }
+
+
+        });
+      });
+
+  }
+
+    async function waitForFormVerifier() {
+      let waitForForm = await formVerifier();
+      let formVerifierComplete = await findAnswers();
+      res.redirect("/results");
+    }
+
+    waitForFormVerifier()
+      .then(() => {
+        pleaseAnswerEveryQuestion = ``;
+      })
+      .catch((e) => {
+        pleaseAnswerEveryQuestion = e;
+        res.redirect("/questions");
+      });
 
 });

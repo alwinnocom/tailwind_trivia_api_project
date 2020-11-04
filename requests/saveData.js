@@ -10,13 +10,31 @@ const saveData = (questionData) => {
 
             let question = questionData[i].question;
             let correctAnswer = questionData[i].correct_answer;
+            let incorrectAnswers = questionData[i].incorrect_answers;
+            
 
+            
 
             // Trivia Regex
             question = question.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
             correctAnswer = correctAnswer.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
 
+            if (incorrectAnswers.length > 1) {
+                let incorrectAnswersArray = [];
 
+                console.log(`Length of incorrectAnswers = ${incorrectAnswers}`);
+
+                for (j = 0; j < incorrectAnswers.length; j++) {
+                    incorrectAnswers[j] = incorrectAnswers[j].replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+                    incorrectAnswersArray.push(incorrectAnswers[j]);
+                }
+
+                console.log(`incorrectAnswersArray after for loop push = ${incorrectAnswersArray}`);
+                incorrectAnswers = incorrectAnswersArray;
+                
+            }
+
+            console.log(`incorrectAnswers after regex = ${incorrectAnswers}`);
             correctAnswers[i] = correctAnswer;
             questionTypes[i] = questionData[i].type;
 
@@ -29,7 +47,7 @@ const saveData = (questionData) => {
                 questionDifficulty: questionData[i].difficulty, 
                 question: question,
                 correctAnswer: correctAnswer,
-                incorrectAnswers: questionData[i].incorrect_answers
+                incorrectAnswers: incorrectAnswers
             })
 
             questionOne.save();
