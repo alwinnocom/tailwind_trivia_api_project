@@ -102,7 +102,7 @@ app.route('/questions')
 
                 console.log(`Step Two is ${stepTwo}`);
 
-              return "Complete";
+              res.redirect("/questions");
 
             }
 
