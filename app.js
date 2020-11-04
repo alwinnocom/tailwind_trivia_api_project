@@ -86,31 +86,46 @@ app.route('/questions')
       
 
       // Correct Number of Questions
-      if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 30) {
-        infoForUser = "Please type a valid number of questions between 1 and 30.";
+      const numberVerifier = () => {
 
-        res.redirect("/");
+        return new Promise ((resolve, reject) => {
+        if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 30) {
+            reject("Please type a valid number of questions between 1 and 30.");
+            // reject({0: "This is a very long message.", 1: "But wait, there is a 2nd part to it."})
+        }
+    
+        else {
+            resolve("Number is verified.");
+        }
+        });
       }
 
       async function redirectToQuestions() {
 
-              let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
+              let stepOne = await numberVerifier();
+              // console.log(`Step One is ${stepOne}`);
 
-                console.log(`Step One is ${stepOne}`);
+              let stepTwo = await customAPI(numberOfQuestions, category, difficulty, type);
+               // console.log(`Step Two is ${stepTwo}`);
 
-              let stepTwo = await httpsResponse();
-
-                console.log(`Step Two is ${stepTwo}`);
+              let stepThree = await httpsResponse();
+              // console.log(`Step Three is ${stepThree}`);
 
               res.redirect("/questions");
-
-            }
+      }
 
       redirectToQuestions()
         .then()
         .catch((e) => {
           console.log(`Error is: ${e}`);
-          infoForUser = e;
+          if (typeof(e) === "string") {
+            infoForUser = e;
+          }
+
+          else {
+            infoForUser = e[0];
+          }
+          
           res.redirect("/");
         });
       
@@ -155,6 +170,25 @@ app.get("/questions/delete", (req, res) => {
 // index.ejs
 app.route('/')
   .get((req, res) => {
+    
+    Compare_Answer.deleteMany((err) => {
+      if (err) {
+        console.log(err);
+      }
+    })
+
+    Answer.deleteMany((err) => {
+      if (err) {
+        console.log(err);
+      }
+    })
+  
+    Question.deleteMany((err) => {
+       if (err) {
+         console.log(err);
+       }
+    })
+    
     res.render("index", {infoForUser: infoForUser});
 });
 

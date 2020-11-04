@@ -20,9 +20,9 @@ const httpsResponse = () => {
                 console.log(`Response Code is ${responseCode}.`);
 
 
-                if (questionData.length === 0) {
+                if (responseCode === 1) {
                     console.log(`Question Data is currently ${questionData}`);
-                    reject("You asked for too many questions.");
+                    reject("I'm sorry, but there are not enough questions for your particular request.");
                 }
 
                 else {

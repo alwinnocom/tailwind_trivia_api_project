@@ -54,8 +54,8 @@ const customAPI = (num, cat, dif, typ) => {
     }
 
     else {
-       url = `https://opentdb.com/api.php?amount=${num}`
-       reject(`Error. If statement is not working. Number of Questions = ${num}, Category=${cat}, Difficulty=${dif}, Type=${typ}`);
+       // url = `https://opentdb.com/api.php?amount=${num}`
+       reject(`Error. The API URL is currently not working. Please try again.`);
     }
 
 });

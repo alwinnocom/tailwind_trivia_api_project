@@ -121,3 +121,11 @@ module.exports = router;
 
       //   res.redirect("/")
       // });
+
+
+      // Correct Number of Questions
+      // if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 30) {
+      //   infoForUser = "Please type a valid number of questions between 1 and 30.";
+
+      //   res.redirect("/");
+      // }
