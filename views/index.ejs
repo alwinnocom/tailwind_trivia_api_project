@@ -19,6 +19,8 @@
 
     <div class="">
         <label class="m-2" for="category">Category</label>
+        <p class=""> <%= tryDifferentCategory %> </p>
+
         <select class="border-black block py-2 m-6" type="text" placeholder="Category" name="category">
 
 
@@ -80,20 +82,26 @@
 
     <div class="">
         <label class="m-2" for="difficulty">Difficulty</label>
+        <p class=""> <%= tryDifferentDifficulty %> </p>
+
         <select class="border-black block py-2 m-6" type="text" placeholder="Difficulty" name="difficulty">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
+        
     </div>
 
     <div class="">
         <label class="m-2" for="type">Type</label>
+        <p class=""> <%= tryDifferentType %> </p>
+
         <select class="border-black block py-2 m-6" type="text" placeholder="Type" name="type">
             <option value="any">Any</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True or False</option>
         </select>
+        
     </div>
     
     <button class="border-black block py-2 m-6" type="submit">Submit</button>

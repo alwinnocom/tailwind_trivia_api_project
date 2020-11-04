@@ -33,13 +33,16 @@ app.listen(3000, () => {
 });
 
 
-let url = ``
+// Info for User Requests
 let infoForUser = ``;
+let tryDifferentCategory = ``;
+let tryDifferentDifficulty = ``;
+let tryDifferentType = ``;
 
 
 // API Data Segmented Into Variables
 let numberOfQuestions, category, difficulty, type;
-
+let url = ``
 
 // Get questions from Mongoose "questions" collection.
 app.route('/questions')
@@ -115,21 +118,29 @@ app.route('/questions')
       }
 
       redirectToQuestions()
-        .then()
+        .then(() => {
+          // Reset variables after a successful user request.
+          infoForUser = ``;
+          tryDifferentCategory = ``;
+          tryDifferentDifficulty = ``;
+          tryDifferentType = ``;
+        })
         .catch((e) => {
-          console.log(`Error is: ${e}`);
-          if (typeof(e) === "string") {
-            infoForUser = e;
-          }
+            // console.log(`Error is: ${e}`);
+            
+            if (typeof(e) === "string") {
+              infoForUser = e;
+            }
 
-          else {
-            infoForUser = e[0];
-          }
-          
-          res.redirect("/");
+            else {
+              infoForUser = e[0];
+              tryDifferentCategory = e[1];
+              tryDifferentDifficulty = e[2];
+              tryDifferentType = e[3];
+            }
+            
+            res.redirect("/");
         });
-      
-      // res.redirect("/questions");
 
     });
 
@@ -151,14 +162,11 @@ app.get("/questions/delete", (req, res) => {
   
     Question.deleteMany((err) => {
         if (!err) {
-
           infoForUser = "All questions deleted.";
-
         }
 
         else {
           infoForUser = "Sorry, the questions were not deleted.";
-
           console.log(err);
         }
 
@@ -189,7 +197,12 @@ app.route('/')
        }
     })
     
-    res.render("index", {infoForUser: infoForUser});
+    res.render("index", {
+      infoForUser: infoForUser,
+      tryDifferentCategory, tryDifferentCategory,
+      tryDifferentDifficulty: tryDifferentDifficulty,
+      tryDifferentType: tryDifferentType
+    });
 });
 
 
@@ -203,20 +216,20 @@ app.route('/results')
         console.log("Error is ", err);
       }
 
+      // Just in case.
       else if (!response.length) {
         setTimeout(() => {res.redirect("/results")}, 1000);
       }
 
       else {
-
           res.render("results", {
             response: response,
             numberOfQuestions: numberOfQuestions
           });
-
       }
     });
   })
+
 
   .post((req, res) => {
     let userAnswers = req.body;
