@@ -92,80 +92,30 @@ app.route('/questions')
         res.redirect("/");
       }
 
-
-  // Synchronous Code: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
-  // the questions.ejs page until the customAPI function finds the JSON data required to output to questions.ejs.
-
-  // async function redirectToQuestions() {
-
-  //   let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
-
-  //     console.log(`Step One is ${stepOne}`);
-
-  //     if (stepOne === "url concatenation successful") {
-  //       res.redirect("/results");
-  //     }
-
-  //   let stepTwo = await httpsResponse();
-
-  //     console.log(`Step Two is ${stepTwo}`);
-
-  //   return "Complete";
-
-  // }
-
       async function redirectToQuestions() {
 
-        let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
+              let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
 
-          console.log(`Step One is ${stepOne}`);
+                console.log(`Step One is ${stepOne}`);
 
-          if (stepOne === "url concatenation successful") {
-            // res.redirect("/results");
-            console.log(`Step One verification complete.`); 
-          }
+              let stepTwo = await httpsResponse();
 
-        let stepTwo = await httpsResponse();
+                console.log(`Step Two is ${stepTwo}`);
 
-          console.log(`Step Two is ${stepTwo}`);
+              return "Complete";
 
-          if (stepTwo === "Successful httpsResponse") {
-            // res.redirect("/results");
-            console.log(`Step 2 verification complete.`); 
-          }
+            }
 
-        return "Complete";
-
-      }
-
-      redirectToQuestions().then(res.redirect("/questions"));
-
-      // redirectToQuestions().then(res.redirect("/questions")).catch(() => {
-      //   infoForUser = "Sorry, there are not enough questions in your specified category, difficulty, and type.",
-
-      //   res.redirect("/")
-      // });
-
-      // customAPI(numberOfQuestions, category, difficulty, type)
-      //     .then((success) => {console.log(success)})
-      //     .catch((err) => {
-      //       console.log(`Custom API Reject message is here: ${err}`);
-      //       // infoForUser = "The rejection of customAPI has succeeded.";
-
-      //       res.redirect("/results");
-      //     })
+      redirectToQuestions()
+        .then()
+        .catch((e) => {
+          console.log(`Error is: ${e}`);
+          infoForUser = e;
+          res.redirect("/");
+        });
       
-
-      // httpsResponse()
-      //     .then((success) => {console.log(success)})
-      //     .catch((err) => {console.log(`HTTPS Response Reject Message is here: ${err}`);
-      //       // infoForUser = "Sorry, there are not enough questions in your specified category, difficulty, and type.";
-
-      //       res.redirect("/results");
-      // });
-
       // res.redirect("/questions");
-      
+
     });
 
 

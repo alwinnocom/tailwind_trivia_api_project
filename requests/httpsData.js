@@ -15,22 +15,24 @@ const httpsResponse = () => {
 
                 let questionData = newData.results;
 
-                let responseCode = newData.response_code;
-
                 // Debug bad HTTP Requests with response codes.
+                let responseCode = newData.response_code;
                 console.log(`Response Code is ${responseCode}.`);
 
-                // if (responseCode === 1) {
 
-                //     reject("There are not enough questions to satisfy the request.")
+                if (questionData.length === 0) {
+                    console.log(`Question Data is currently ${questionData}`);
+                    reject("You asked for too many questions.");
+                }
 
-                // }
-
-                saveData(questionData);
+                else {
+                    saveData(questionData);
+                    resolve("HTTPS Response successful.");
+                }
             });
         });
 
-        resolve("Successful httpsResponse");
+        
     })
 
 }

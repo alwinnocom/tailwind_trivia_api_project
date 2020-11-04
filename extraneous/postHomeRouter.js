@@ -34,3 +34,90 @@ module.exports = router;
 // To be safe: 32/50 Max. Alternate: 33/50 Questions Maximum. Too many questions? Try this.
 // https://stackoverflow.com/questions/3594923/chrome-uncaught-syntaxerror-unexpected-end-of-input
 // https://stackoverflow.com/questions/20827372/json-parsing-error-syntax-error-unexpected-end-of-input
+
+// Async Code
+
+// Synchronous Code: Make sure customAPI function goes first. res.redirect() needs to wait because you don't want to render
+  // the questions.ejs page until the customAPI function finds the JSON data required to output to questions.ejs.
+
+  // async function redirectToQuestions() {
+
+  //   let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
+
+  //     console.log(`Step One is ${stepOne}`);
+
+  //     if (stepOne === "url concatenation successful") {
+  //       res.redirect("/results");
+  //     }
+
+  //   let stepTwo = await httpsResponse();
+
+  //     console.log(`Step Two is ${stepTwo}`);
+
+  //   return "Complete";
+
+  // }
+
+      // customAPI(numberOfQuestions, category, difficulty, type)
+      //     .then(httpsResponse())
+      //     .catch((err) => {
+      //       console.log(`Custom API Reject message is here: ${err}`);
+      //         infoForUser = "The rejection of customAPI has succeeded.";
+
+      //         res.redirect("/");
+      //     })
+      //     .then(res.redirect("/questions"))
+      //     .catch((err) => {
+      //       console.log(`HTTPS Response Reject message is here: ${err}`);
+      //         infoForUser = "The rejection of customAPI has succeeded.";
+
+      //         res.redirect("/");
+      //     })
+          
+      
+
+      // httpsResponse()
+      //     .then()
+      //     .catch((err) => {console.log(err);
+      //       infoForUser = err;
+
+      //       res.redirect("/");
+      // });
+
+      // res.redirect("/questions");
+
+
+      // redirectToQuestions().then(res.redirect("/questions"));
+      // res.redirect("/questions");
+
+      // async function redirectToQuestions() {
+
+      //   let stepOne = await customAPI(numberOfQuestions, category, difficulty, type);
+
+      //     console.log(`Step One is ${stepOne}`);
+
+      //     if (stepOne === "url concatenation successful") {
+      //       // res.redirect("/results");
+      //       console.log(`Step One verification complete.`); 
+      //     }
+
+      //   let stepTwo = await httpsResponse();
+
+      //     console.log(`Step Two is ${stepTwo}`);
+
+      //     if (stepTwo === "Successful httpsResponse") {
+      //       // res.redirect("/results");
+      //       console.log(`Step 2 verification complete.`); 
+      //     }
+
+      //   return "Complete";
+
+      // }
+
+      // redirectToQuestions().then(res.redirect("/questions"));
+
+      // redirectToQuestions().then(res.redirect("/questions")).catch(() => {
+      //   infoForUser = "Sorry, there are not enough questions in your specified category, difficulty, and type.",
+
+      //   res.redirect("/")
+      // });
