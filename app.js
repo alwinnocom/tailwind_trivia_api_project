@@ -39,7 +39,9 @@ let infoForUser = ``;
 let tryDifferentCategory = ``;
 let tryDifferentDifficulty = ``;
 let tryDifferentType = ``;
+
 let pleaseAnswerEveryQuestion = ``;
+let savedUserResponse = ``;
 
 
 // API Data Segmented Into Variables
@@ -70,7 +72,8 @@ app.route('/questions')
             res.render("questions", {
               numberOfQuestions: numberOfQuestions,
               ejsResponse: response,
-              pleaseAnswerEveryQuestion: pleaseAnswerEveryQuestion
+              pleaseAnswerEveryQuestion: pleaseAnswerEveryQuestion,
+              savedUserResponse: savedUserResponse
             }) 
           
         }
@@ -272,7 +275,7 @@ app.route('/results')
           else {
             realAnswers = response[0].correctAnswers;
 
-            console.log(`Real Answers from Mongoose = ${realAnswers}`);
+            // console.log(`Real Answers from Mongoose = ${realAnswers}`);
 
             questionTypeVerifier = response[0].questionTypes;
             
@@ -393,6 +396,7 @@ app.route('/results')
       })
       .catch((e) => {
         pleaseAnswerEveryQuestion = e;
+        savedUserResponse = userAnswers;
         res.redirect("/questions");
       });
 
