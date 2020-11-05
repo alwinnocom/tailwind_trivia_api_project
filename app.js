@@ -385,12 +385,14 @@ app.route('/results')
 
     waitForFormVerifier()
       .then(() => {
+        savedUserResponse = ``;
         pleaseAnswerEveryQuestion = ``;
       })
       .catch((e) => {
-        pleaseAnswerEveryQuestion = e;
         // User's Saved Answers will be used to add "checked" attribute to any answers that the user already checked before.
         savedUserResponse = userAnswers;
+
+        pleaseAnswerEveryQuestion = e;
         res.redirect("/questions");
       });
 

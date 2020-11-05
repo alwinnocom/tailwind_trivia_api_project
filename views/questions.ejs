@@ -2,10 +2,18 @@
 
 <nav class="sticky inset-0 h-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
     <ul class="flex flex-row">
-        <% for (let i = 1; i < ejsResponse.length + 1; i++) { %>
+        <% for (let i = 0; i < ejsResponse.length; i++) { %>
 
             
-            <li class="raleway bg-indigo-<%=((Math.floor((i % 5)) + 1) * 100)%> p-2"><a href=#<%=i%>Question <%=i%></a></li>
+            <li class="raleway bg-indigo-<%=((Math.floor(((i + 1) % 5)) + 1) * 100)%> p-2 
+                <% if (savedUserResponse[i] && savedUserResponse) { %>
+                    text-green-700
+                <% } else if (!savedUserResponse[i] && savedUserResponse) { %>
+                    text-red-700
+                <% } else { %>
+                    text-black
+                <% } %>">
+            <a href=#<%=(i+1)%>>Question <%=(i+1)%></a></li>
 
         <% } %>
     </ul>
