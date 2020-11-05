@@ -2,26 +2,25 @@
 
 <!-- HTML Pseudocode -->
 
-<h1 class="font-sans text-center py-8 text-green-700 text-2xl">Tailwind Trivia</h1>
+<h1 class="montserrat text-center py-8 text-green-700 text-2xl">Tailwind Trivia</h1>
 
-<h3> Combining Tailwind with the Open Trivia API. </h3>
+<h3 class="roboto-condensed pt-3 m-6 text-xl"> Combining Tailwind with the Open Trivia API. </h3>
 
-<h3 class=""> <%= infoForUser %> </h3>
+<h3 class="libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h3>
 
 <form class="bg-green-100 flex-column" action='/questions' method='post' id='form'>
 
     
-    <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> text-red-500 <% } %> " >
-        <label class="m-2" for="numberOfQuestions">Number of Questions</label>
-        <input class="border-black block py-2 m-6" type="text" value="5" min="1" max="20" placeholder="Number of questions" name="numberOfQuestions">
+    <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> text-red-500 pt-3 <% } else { %> pt-3 <% } %>" >
+        <label class="roboto-condensed m-6" for="numberOfQuestions">Number of Questions</label>
+        <input class="raleway border-black block m-6 appearance-none" type="text" value="5" min="1" max="20" placeholder="Number of questions" name="numberOfQuestions" required>
     </div>
     
 
-    <div class="">
-        <label class="m-2" for="category">Category</label>
-        <p class=""> <%= tryDifferentCategory %> </p>
+    <div class="pt-5">
+        <label class="roboto-condensed m-6" for="category">Category</label>
 
-        <select class="border-black block py-2 m-6" type="text" placeholder="Category" name="category">
+        <select class="raleway border-black block m-6" type="text" placeholder="Category" name="category">
 
 
             <optgroup label="Free-for-all">
@@ -78,33 +77,37 @@
             
         </select>
         
+        <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentCategory %> </p>
+
     </div>
 
-    <div class="">
-        <label class="m-2" for="difficulty">Difficulty</label>
-        <p class=""> <%= tryDifferentDifficulty %> </p>
+    <div class="pt-5">
+        <label class="roboto-condensed m-6" for="difficulty">Difficulty</label>
 
-        <select class="border-black block py-2 m-6" type="text" placeholder="Difficulty" name="difficulty">
+        <select class="raleway border-black block m-6" type="text" placeholder="Difficulty" name="difficulty">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
+
+        <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentDifficulty %> </p>
         
     </div>
 
-    <div class="">
-        <label class="m-2" for="type">Type</label>
-        <p class=""> <%= tryDifferentType %> </p>
+    <div class="pt-5">
+        <label class="roboto-condensed m-6" for="type">Type</label>
 
-        <select class="border-black block py-2 m-6" type="text" placeholder="Type" name="type">
+        <select class="raleway border-black block m-6" type="text" placeholder="Type" name="type">
             <option value="any">Any</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True or False</option>
         </select>
+
+        <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentType %> </p>
         
     </div>
     
-    <button class="border-black block py-2 m-6" type="submit">Submit</button>
+    <button class="libre-baskerville border-black block pt-3 m-6 text-blue-600" type="submit">Submit</button>
 
 </form>
 

@@ -237,9 +237,9 @@ app.route('/results')
   .post((req, res) => {
     let userAnswers = req.body;
 
-    console.log(`User Answers = ${JSON.stringify(userAnswers)}`);
-    console.log(`User Answer length = ${Object.keys(userAnswers).length}`)
-    console.log(`Total number of questions = ${numberOfQuestions}`);
+    // console.log(`User Answers = ${JSON.stringify(userAnswers)}`);
+    // console.log(`User Answer length = ${Object.keys(userAnswers).length}`)
+    // console.log(`Total number of questions = ${numberOfQuestions}`);
 
     let realAnswers;
     let questionTypeVerifier;
