@@ -22,19 +22,15 @@ const saveData = (questionData) => {
             if (incorrectAnswers.length > 1) {
                 let incorrectAnswersArray = [];
 
-                console.log(`Length of incorrectAnswers = ${incorrectAnswers}`);
-
                 for (j = 0; j < incorrectAnswers.length; j++) {
                     incorrectAnswers[j] = incorrectAnswers[j].replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
                     incorrectAnswersArray.push(incorrectAnswers[j]);
                 }
 
-                console.log(`incorrectAnswersArray after for loop push = ${incorrectAnswersArray}`);
                 incorrectAnswers = incorrectAnswersArray;
                 
             }
 
-            console.log(`incorrectAnswers after regex = ${incorrectAnswers}`);
             correctAnswers[i] = correctAnswer;
             questionTypes[i] = questionData[i].type;
 

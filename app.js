@@ -132,7 +132,6 @@ app.route('/questions')
           tryDifferentType = ``;
         })
         .catch((e) => {
-            // console.log(`Error is: ${e}`);
 
             if (typeof(e) === "string") {
               infoForUser = e;
@@ -240,10 +239,6 @@ app.route('/results')
   .post((req, res) => {
     let userAnswers = req.body;
 
-    // console.log(`User Answers = ${JSON.stringify(userAnswers)}`);
-    // console.log(`User Answer length = ${Object.keys(userAnswers).length}`)
-    // console.log(`Total number of questions = ${numberOfQuestions}`);
-
     let realAnswers;
     let questionTypeVerifier;
 
@@ -274,8 +269,6 @@ app.route('/results')
 
           else {
             realAnswers = response[0].correctAnswers;
-
-            // console.log(`Real Answers from Mongoose = ${realAnswers}`);
 
             questionTypeVerifier = response[0].questionTypes;
             
@@ -396,6 +389,7 @@ app.route('/results')
       })
       .catch((e) => {
         pleaseAnswerEveryQuestion = e;
+        // User's Saved Answers will be used to add "checked" attribute to any answers that the user already checked before.
         savedUserResponse = userAnswers;
         res.redirect("/questions");
       });
