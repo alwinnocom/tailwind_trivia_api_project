@@ -8,17 +8,17 @@
 
 <h3 class="libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h3>
 
-<form class="bg-green-100 flex-column" action='/questions' method='post' id='form'>
+<form class="flex-column" action='/questions' method='post' id='form'>
 
     
-    <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> text-red-500 pt-3 <% } else { %> pt-3 <% } %>" >
+    <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> bg-red-100 pt-3 <% } else { %> bg-green-100 pt-3 <% } %>" >
         <label class="roboto-condensed m-6" for="numberOfQuestions">Number of Questions</label>
         <input class="raleway rounded border-t border-r border-b border-l border-black block m-6 appearance-none" type="text" value="5" min="1" max="20" placeholder="Number of questions" name="numberOfQuestions" required>
     </div>
     <hr>
     
 
-    <div class="pt-5">
+    <div class="bg-blue-100 pt-5">
         <label class="roboto-condensed m-6" for="category">Category</label>
 
         <select class="raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Category" name="category">
@@ -83,7 +83,7 @@
     </div>
     <hr>
 
-    <div class="pt-5">
+    <div class="bg-green-100 pt-5">
         <label class="roboto-condensed m-6" for="difficulty">Difficulty</label>
 
         <select class="raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Difficulty" name="difficulty">
@@ -97,7 +97,7 @@
     </div>
     <hr>
 
-    <div class="pt-5">
+    <div class="bg-blue-100 pt-5">
         <label class="roboto-condensed m-6" for="type">Type</label>
 
         <select class="raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Type" name="type">

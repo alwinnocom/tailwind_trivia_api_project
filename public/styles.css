@@ -32,4 +32,14 @@ input:required {
     font-size: 200px;
 }
 
+.anchor-1, .anchor-2 {
+    min-height: 10px;
+}
 
+.anchor-1 {
+    min-width: 100px;
+}
+
+.anchor-2 {
+    min-width: 105px;
+}
