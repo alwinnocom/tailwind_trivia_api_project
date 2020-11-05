@@ -4,7 +4,7 @@
 
 <h1 class="montserrat text-center py-8 text-green-700 text-2xl">Tailwind Trivia</h1>
 
-<h3 class="roboto-condensed pt-3 m-6 text-xl"> Combining Tailwind with the Open Trivia API. </h3>
+<h3 class="roboto-condensed pt-3 m-6 text-lg"> Combining Tailwind with the Open Trivia API. </h3>
 
 <h3 class="libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h3>
 
@@ -15,6 +15,7 @@
         <label class="roboto-condensed m-6" for="numberOfQuestions">Number of Questions</label>
         <input class="raleway border-black block m-6 appearance-none" type="text" value="5" min="1" max="20" placeholder="Number of questions" name="numberOfQuestions" required>
     </div>
+    <hr>
     
 
     <div class="pt-5">
@@ -80,6 +81,7 @@
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentCategory %> </p>
 
     </div>
+    <hr>
 
     <div class="pt-5">
         <label class="roboto-condensed m-6" for="difficulty">Difficulty</label>
@@ -93,6 +95,7 @@
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentDifficulty %> </p>
         
     </div>
+    <hr>
 
     <div class="pt-5">
         <label class="roboto-condensed m-6" for="type">Type</label>
@@ -106,6 +109,7 @@
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentType %> </p>
         
     </div>
+    <hr>
     
     <button class="libre-baskerville border-black block pt-3 m-6 text-blue-600" type="submit">Submit</button>
 

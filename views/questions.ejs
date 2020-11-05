@@ -12,20 +12,22 @@
 </nav>
 
 
-<h1 class="font-sans text-center py-8 text-green-700 text-2xl">Welcome to the Questions page!</h1>
+<h1 class="montserrat text-center py-8 text-green-700 text-2xl">Welcome to the Questions page!</h1>
+
+<div class="flex">
+    <form action="/questions/delete" method='get'>
+        <button class="font-sans text-center p-8 text-red-400"type="submit">Delete All Questions</button>
+    </form>
 
 
-<form action="/questions/delete" method='get'>
-    <button class="font-sans text-center p-8 text-red-400"type="submit">Delete All Questions</button>
-</form>
+    <form action="/questions" method='get'>
+        <button class="font-sans text-center p-8 text-red-400"type="submit">No Questions? Refresh Here</button>
+    </form>
+</div>
 
 
-<form action="/questions" method='get'>
-    <button class="font-sans text-center p-8 text-red-400"type="submit">No Questions? Refresh Here</button>
-</form>
-
-<p><%= pleaseAnswerEveryQuestion %></p>
-<p>Number of Questions: <%= numberOfQuestions %></p>
+<p class="libre-baskerville py-2 m-6 text-red-700 text-2xl"><%= pleaseAnswerEveryQuestion %></p>
+<p class="libre-baskerville py-2 m-6 text-green-800">Number of Questions: <%= numberOfQuestions %></p>
 
 
 <form action='/results' method='post' id='form'>
@@ -34,7 +36,7 @@
     <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
         <div style="display: block;">
-            <h2 id="<%= index + 1 %>" class="text-indigo-800 py-2 ml-4">Question <%= index + 1 %></h2>
+            <h2 id="<%= index + 1 %>" class="roboto-condensed text-indigo-800 py-2 ml-4">Question <%= index + 1 %></h2>
             <p class="text-orange-800 p-4"> <%= ejsResponse[index].questionCategory %> </p>
 
             <!-- if else EJS syntax courtesy of Stack Overflow. Trivia Logic is mine. -->
@@ -46,7 +48,7 @@
 
 
             <p class="text-yellow-700 p-4"> <%= ejsResponse[index].questionDifficulty %> </p>
-            <p class="text-gray-800 p-4"> <%= ejsResponse[index].question %> </p>
+            <p class="raleway text-lg text-gray-800 p-4"> <%= ejsResponse[index].question %> </p>
             
 
             <!-- Use order alongside EJS partials to change the order of flexbox. -->
@@ -60,15 +62,15 @@
             <div class="flex">
                 <div class="order-2">
                     <label class="ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
-                    <input class="p-1" type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
+                    <input class="p-2" type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
                 </div>
                 <div class="<% if (ejsResponse[index].incorrectAnswers[0] === 'False') { %>
                     order-last text-red-500
                     <% } else { %>
                     order-first text-red-500
                     <% } %>">
-                    <label class="ml-2 p-1"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
-                    <input class="p-1" type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name="<%= index %>"></input>
+                    <label class="ml-2 p-2"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
+                    <input class="p-2" type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name="<%= index %>"></input>
                 </div>
             </div>
 
