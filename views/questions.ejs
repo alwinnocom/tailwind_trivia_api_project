@@ -51,7 +51,15 @@
     <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
         <div style="display: block;">
-            <h2 id="<%= index + 1 %>" class="raleway bg-teal-100 text-indigo-800 py-2 pl-4">Question <%= index + 1 %></h2>
+            <h2 id="<%= index + 1 %>" class="raleway py-2 pl-4
+                <% if (savedUserResponse[index] && savedUserResponse) { %>
+                    bg-green-100 text-green-700
+                <% } else if (!savedUserResponse[index] && savedUserResponse) { %>
+                    bg-red-100 text-red-700
+                <% } else { %>
+                    bg-teal-100 text-indigo-800
+                <% } %>
+                ">Question <%= index + 1 %></h2>
             <div class="flex">
                 <p class="bg-green-100 text-orange-800 p-4"> <%= ejsResponse[index].questionCategory %> </p>
 
@@ -62,6 +70,7 @@
                 <% } %>
 
                 <p class="roboto-condensed bg-green-100 text-yellow-700 p-4"> <%= ejsResponse[index].questionDifficulty %> </p>
+                <img src="" alt="Icon/SVG related to topic here.">
             </div>
                 <p class="raleway text-lg text-gray-800 p-4"> <%= ejsResponse[index].question %> </p>
         

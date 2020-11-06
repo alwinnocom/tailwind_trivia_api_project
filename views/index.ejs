@@ -2,7 +2,7 @@
 
 <!-- HTML Pseudocode -->
 
-<!-- <h1 class="montserrat text-center py-8 text-green-700 text-4xl">Quiz Pro Quo</h1> -->
+<h1 class="lobster-2 text-center py-8 text-blue-700 text-4xl">Quiz Pro Quo</h1>
 
 <!-- https://www.shapedivider.app/ -->
 
@@ -15,6 +15,7 @@
     <!-- <div class=""><h3 class="roboto-condensed pt-3 m-6 text-lg"> Tailwindcss + Open Trivia API. </h3></div> -->
 </section>
 
+
 <div class="<% if (!infoForUser) { %> hidden <% } %>"><h2 class="bg-none libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h2></div>
 <div class="<% if (infoForUser) { %> hidden <% } %>"><h2 class="bg-none libre-baskerville pt-3 m-6 text-red-700"> This is where you should put Trivia Icons when there is no infoForUser. </h2></div>
 
@@ -23,7 +24,7 @@
 
     <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> bg-red-200 pt-3 <% } else { %> bg-green-200 pt-3 <% } %>" >
         <label class="roboto-condensed m-6" for="numberOfQuestions">Number of Questions</label>
-        <input class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6 appearance-none px-2" type="text" value="" placeholder="1-30" name="numberOfQuestions" required>
+        <input class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6 appearance-none px-2" type="text" value="" placeholder="1-30" name="numberOfQuestions" required><img src="" alt="Icon/SVG related to topic here.">
         <p class="<% if (infoForUser !== "I'm sorry, but there are not enough questions for your particular request.") { %> hidden <% } %> bg-none libre-baskerville pt-3 m-6 text-red-700">Try less questions here.</p>
     </div>
     
@@ -89,6 +90,8 @@
             
         </select>
         
+        <img src="" alt="Icon/SVG related to topic here.">
+
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentCategory %> </p>
 
     </div>
@@ -104,6 +107,8 @@
             <option value="hard">Hard</option>
         </select>
 
+        <img src="" alt="Icon/SVG related to topic here.">
+
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentDifficulty %> </p>
 
     </div>
@@ -117,6 +122,8 @@
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True or False</option>
         </select>
+
+        <img src="" alt="Icon/SVG related to topic here.">
 
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentType %> </p>
 
