@@ -309,7 +309,8 @@ app.route('/results')
                         question_number: `${i+1}`,  
                         points_earned: 0,
                         points_possible: 1,
-                        result: `Incorrect Answer. Your Answer: ${userAnswers[i]}.`,
+                        accuracy: `Incorrect Answer.`,
+                        result: `Your Answer: ${userAnswers[i]}.`,
                         correct_result: `Correct Answer: ${realAnswers[i]}`
                       })
 
@@ -322,7 +323,8 @@ app.route('/results')
                           question_number: `${i+1}`,  
                           points_earned: 0,
                           points_possible: 3,
-                          result: `Incorrect Answer. Your Answer: ${userAnswers[i]}.`,
+                          accuracy: `Incorrect Answer.`,
+                          result: `Your Answer: ${userAnswers[i]}.`,
                           correct_result: `Correct Answer: ${realAnswers[i]}`
                         })
 
@@ -337,8 +339,8 @@ app.route('/results')
                             question_number: `${i+1}`,  
                             points_earned: 1,
                             points_possible: 1,
-                            
-                            result: `Correct! Your Answer: ${userAnswers[i]}.`,
+                            accuracy: `Correct!`,
+                            result: `Your Answer: ${userAnswers[i]}.`,
                             correct_result: `Correct Answer: ${realAnswers[i]}`
                           })
 
@@ -353,7 +355,8 @@ app.route('/results')
                             question_number: `${i+1}`,  
                             points_earned: 3,
                             points_possible: 3,
-                            result: `Correct! Your Answer: ${userAnswers[i]}.`,
+                            accuracy: `Correct!`,
+                            result: `Your Answer: ${userAnswers[i]}.`,
                             correct_result: `Correct Answer: ${realAnswers[i]}`
                           })
 

@@ -35,11 +35,13 @@
 
 <% for (let index = 1; index < response.length - 1; index++) { %>
 
-<div class="" style="display: block;">
+<div class="">
     <p class="libre-baskerville text-green-800 ml-6 py-2"> Question <%= response[index].question_number %> </p>
     <p class="roboto-condensed text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %> </p>
     <p class="roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </p>
-    <p class="libre-baskerville text-orange-900 ml-6 py-2"> <%= response[index].result %> <span class="<% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></span></p>
+    <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].accuracy %></p>
+    <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].result %> </p>
+    <p class="libre-baskerville text-orange-900 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></p>
     <hr class="mt-2 mb-10">
 </div>
 

@@ -16,6 +16,7 @@ const compare_answerSchema = new Schema({
 
     yourCorrectQuestions: Number,
 
+    accuracy: String,
     result: String,
     correct_result: String
 });
