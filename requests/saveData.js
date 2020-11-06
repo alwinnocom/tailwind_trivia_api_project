@@ -34,13 +34,14 @@ const saveData = (questionData) => {
             correctAnswers[i] = correctAnswer;
             questionTypes[i] = questionData[i].type;
 
+            // https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
 
             let questionOne = new Question({
                 _id: i,
                 totalQuestions: questionData.length,
                 questionCategory: questionData[i].category,
                 questionType: questionData[i].type,
-                questionDifficulty: questionData[i].difficulty, 
+                questionDifficulty: questionData[i].difficulty.charAt(0).toUpperCase() + questionData[i].difficulty.slice(1), 
                 question: question,
                 correctAnswer: correctAnswer,
                 incorrectAnswers: incorrectAnswers

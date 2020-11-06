@@ -49,6 +49,7 @@ let percent_correct = ``;
 // API Data Segmented Into Variables
 let numberOfQuestions, category, difficulty, type;
 let url = ``
+let category_list = {0: "Free-For-All", 9: "General Knowledge", 10: "Books", 11: "Film", 12: "Music", 13: "Theaters & Musicals", 14: "Television", 15: "Video Games", 16: "Board Games", 17: "Science & Nature", 18: "Computers", 19: "Math", 20: "Mythology", 21: "Sports", 22: "Geography", 23: "History", 24: "Politics", 25: "Art", 26: "Celebrities", 27: "Animals", 28: "Vehicles", 29: "Comics", 30: "Gadgets", 31: "Japanese Anime & Manga", 32: "Cartoon & Animations"}
 
 // Get questions from Mongoose "questions" collection.
 app.route('/questions')
@@ -75,7 +76,8 @@ app.route('/questions')
               numberOfQuestions: numberOfQuestions,
               ejsResponse: response,
               pleaseAnswerEveryQuestion: pleaseAnswerEveryQuestion,
-              savedUserResponse: savedUserResponse
+              savedUserResponse: savedUserResponse,
+              category: category_list[category]
             }) 
           
             hideAllCorrectAnswers = "";

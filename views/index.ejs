@@ -15,8 +15,8 @@
     <!-- <div class=""><h3 class="roboto-condensed pt-3 m-6 text-lg"> Tailwindcss + Open Trivia API. </h3></div> -->
 </section>
 
-<div class=""><h3 class="bg-none libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h3></div>
-
+<div class="<% if (!infoForUser) { %> hidden <% } %>"><h2 class="bg-none libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h2></div>
+<div class="<% if (infoForUser) { %> hidden <% } %>"><h2 class="bg-none libre-baskerville pt-3 m-6 text-red-700"> This is where you should put Trivia Icons when there is no infoForUser. </h2></div>
 
 
 <form class="grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2" action='/questions' method='post' id='form'>
@@ -24,7 +24,7 @@
     <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> bg-red-200 pt-3 <% } else { %> bg-green-200 pt-3 <% } %>" >
         <label class="roboto-condensed m-6" for="numberOfQuestions">Number of Questions</label>
         <input class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6 appearance-none px-2" type="text" value="" placeholder="1-30" name="numberOfQuestions" required>
-        <hr>
+        <p class="<% if (infoForUser !== "Please type a valid number of questions between 1 and 30.") { %> hidden <% } %> bg-none libre-baskerville pt-3 m-6 text-red-700">Too many questions here.</p>
     </div>
     
     
@@ -36,7 +36,7 @@
 
 
             <optgroup label="Free-for-all">
-                <option value="0">Any</option>
+                <option value="0">Free-For-All</option>
                 <option value="9">General Knowledge</option>
             </optgroup>
 
@@ -90,25 +90,26 @@
         </select>
         
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentCategory %> </p>
-        <hr>
+
     </div>
     
 
-    <div class="bg-green-200 pt-5">
+    <div class="bg-green-200 pt-5 md:bg-blue-200">
         <label class="roboto-condensed m-6" for="difficulty">Difficulty</label>
 
         <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Difficulty" name="difficulty">
+            <option value="any">Any</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
 
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentDifficulty %> </p>
-        <hr>
+
     </div>
     
 
-    <div class="bg-blue-200 pt-5">
+    <div class="bg-blue-200 pt-5 md:bg-green-200">
         <label class="roboto-condensed m-6" for="type">Type</label>
 
         <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Type" name="type">
@@ -118,7 +119,7 @@
         </select>
 
         <p class="libre-baskerville py-2 m-6 text-sm text-red-700"> <%= tryDifferentType %> </p>
-        <hr>
+
     </div>
     
     

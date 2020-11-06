@@ -5,13 +5,13 @@
         <% for (let i = 0; i < ejsResponse.length; i++) { %>
 
             
-            <li class="p-2 raleway bg-indigo-<%=(((i % 4) + 1) * 100)%>
+            <li class="p-2 raleway 
                 <% if (savedUserResponse[i] && savedUserResponse) { %>
-                    text-green-700
+                    bg-green-100 text-green-700
                 <% } else if (!savedUserResponse[i] && savedUserResponse) { %>
-                    text-red-700
+                    bg-red-100 text-red-700
                 <% } else { %>
-                    text-black
+                    bg-indigo-<%=(((i % 4) + 1) * 100)%> text-black
                 <% } %>
                 
                 <% if ((i+1) < 10) { %>
@@ -26,17 +26,17 @@
 </nav>
 
 
-<h1 class="montserrat text-center py-8 text-green-700 text-2xl">Welcome to the Questions page!</h1>
+<h1 class="montserrat text-center py-8 text-green-700 text-2xl"> <%= category %> </h1>
 
 
 <div class="flex">
     <form action="/questions/delete" method='get'>
-        <button class="raleway text-center p-8 text-red-400"type="submit">Delete All Questions</button>
+        <button class="raleway text-center p-8 text-red-400 bg-green-100"type="submit">Delete All Questions</button>
     </form>
 
 
     <form action="/questions" method='get'>
-        <button class="raleway text-center p-8 text-red-400"type="submit">No Questions? Refresh Here</button>
+        <button class="raleway text-center p-8 text-red-400 bg-blue-100" type="submit">No Questions? Refresh Here</button>
     </form>
 </div>
 
