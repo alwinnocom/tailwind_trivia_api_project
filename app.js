@@ -134,7 +134,7 @@ app.route('/questions')
           tryDifferentType = ``;
         })
         .catch((e) => {
-
+            // Display Error Message to User
             if (typeof(e) === "string") {
               infoForUser = e;
             }
@@ -311,7 +311,7 @@ app.route('/results')
                         points_earned: 0,
                         points_possible: 1,
                         accuracy: `Incorrect Answer.`,
-                        result: `Your Answer: ${userAnswers[i]}.`,
+                        result: `Your Answer: ${userAnswers[i]}`,
                         correct_result: `Correct Answer: ${realAnswers[i]}`
                       })
 
@@ -325,7 +325,7 @@ app.route('/results')
                           points_earned: 0,
                           points_possible: 3,
                           accuracy: `Incorrect Answer.`,
-                          result: `Your Answer: ${userAnswers[i]}.`,
+                          result: `Your Answer: ${userAnswers[i]}`,
                           correct_result: `Correct Answer: ${realAnswers[i]}`
                         })
 
@@ -341,7 +341,7 @@ app.route('/results')
                             points_earned: 1,
                             points_possible: 1,
                             accuracy: `Correct!`,
-                            result: `Your Answer: ${userAnswers[i]}.`,
+                            result: `Your Answer: ${userAnswers[i]}`,
                             correct_result: `Correct Answer: ${realAnswers[i]}`
                           })
 
@@ -357,7 +357,7 @@ app.route('/results')
                             points_earned: 3,
                             points_possible: 3,
                             accuracy: `Correct!`,
-                            result: `Your Answer: ${userAnswers[i]}.`,
+                            result: `Your Answer: ${userAnswers[i]}`,
                             correct_result: `Correct Answer: ${realAnswers[i]}`
                           })
 

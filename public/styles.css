@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Libre+Baskerville&family=Montserrat:ital,wght@1,300&family=Raleway:wght@500&family=Roboto+Condensed&display=swap');
 
+
+/* Small (sm) */
+@media (min-width: 640px) { /* ... */ }
+
+/* Medium (md) */
+@media (min-width: 768px) { /* ... */ }
+
+/* Large (lg) */
+@media (min-width: 1024px) { /* ... */ }
+
+/* Extra Large (xl) */
+@media (min-width: 1280px) { /* ... */ }
+
+
+
 .libre-baskerville {
     font-family: 'Libre Baskerville', serif;
 }
@@ -44,30 +59,52 @@ input:required {
     min-width: 105px;
 }   
 
+
+
 .logo-image {
-    width: 35%;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.custom-shape-divider-bottom-1604642451 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
+
+
+.logo-image {
+    width: 60%;
 }
 
-.custom-shape-divider-bottom-1604642451 svg {
-    position: relative;
-    display: block;
-    width: calc(120% + 1.3px);
-    height: 138px;
+/* Small (sm) */
+@media (min-width: 640px) { 
+    
+    .logo-image {
+        width: 60%;
+    }
+
 }
 
-.custom-shape-divider-bottom-1604642451 .shape-fill {
-    fill: #FFFFFF;
+/* Medium (md) */
+@media (min-width: 768px) { 
+    .logo-image {
+        width: 50%;
+    }
+
+
 }
+
+/* Large (lg) */
+@media (min-width: 1024px) { 
+    .logo-image {
+        width: 35%;
+    }
+
+    
+}
+
+/* Extra Large (xl) */
+@media (min-width: 1280px) {
+    .logo-image {
+        width: 35%;
+    }
+
+    
+ }

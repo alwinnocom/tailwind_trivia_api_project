@@ -4,37 +4,35 @@
 
 <!-- <h1 class="montserrat text-center py-8 text-green-700 text-4xl">Quiz Pro Quo</h1> -->
 
-<section class="bg-blue-800">
+<!-- https://www.shapedivider.app/ -->
+
+
+<section class="bg-blue-200">
     <div class="flex content-center bg-top">
         <img class="logo-image py-4" src="images/quiz!-via-logohub.png" alt="Quiz Pro Quo">
     </div>
 
-    <h3 class="roboto-condensed pt-3 m-6 text-lg"> Combining Tailwind with the Open Trivia API. </h3>
-
-    <h3 class="libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h3>
+    <!-- <div class=""><h3 class="roboto-condensed pt-3 m-6 text-lg"> Tailwindcss + Open Trivia API. </h3></div> -->
 </section>
 
-<!-- https://www.shapedivider.app/ -->
-<!-- <div class="custom-shape-divider-bottom-1604642451">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-    </svg>
-</div> -->
+<div class=""><h3 class="bg-none libre-baskerville pt-3 m-6 text-red-700"> <%= infoForUser %> </h3></div>
+
+
 
 <form class="grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2" action='/questions' method='post' id='form'>
 
-    <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> bg-red-100 pt-3 <% } else { %> bg-green-100 pt-3 <% } %>" >
+    <div class="<% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> bg-red-200 pt-3 <% } else { %> bg-green-200 pt-3 <% } %>" >
         <label class="roboto-condensed m-6" for="numberOfQuestions">Number of Questions</label>
-        <input class="raleway rounded border-t border-r border-b border-l border-black block m-6 appearance-none px-2" type="text" value="" placeholder="1-30" name="numberOfQuestions" required>
+        <input class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6 appearance-none px-2" type="text" value="" placeholder="1-30" name="numberOfQuestions" required>
         <hr>
     </div>
     
     
 
-    <div class="bg-blue-100 pt-5">
+    <div class="bg-blue-200 pt-5">
         <label class="roboto-condensed m-6" for="category">Category</label>
 
-        <select class="raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Category" name="category">
+        <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Category" name="category">
 
 
             <optgroup label="Free-for-all">
@@ -96,10 +94,10 @@
     </div>
     
 
-    <div class="bg-green-100 pt-5">
+    <div class="bg-green-200 pt-5">
         <label class="roboto-condensed m-6" for="difficulty">Difficulty</label>
 
-        <select class="raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Difficulty" name="difficulty">
+        <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Difficulty" name="difficulty">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
@@ -110,10 +108,10 @@
     </div>
     
 
-    <div class="bg-blue-100 pt-5">
+    <div class="bg-blue-200 pt-5">
         <label class="roboto-condensed m-6" for="type">Type</label>
 
-        <select class="raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Type" name="type">
+        <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block m-6" type="text" placeholder="Type" name="type">
             <option value="any">Any</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True or False</option>
