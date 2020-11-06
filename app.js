@@ -409,12 +409,18 @@ app.route('/results')
 
 });
 
+// Hide or Reveal Correct Answers on results.ejs
 app.get("/results/hidden", (req, res) => {
   hideAllCorrectAnswers = "hide";
   res.redirect("/results");
-})
+});
 
 app.get("/results/reveal", (req, res) => {
   hideAllCorrectAnswers = "";
   res.redirect("/results");
-})
+});
+
+// 500-560 lines of JS. (567 not removing spaces)
+// Almost 300 lines of EJS (294 not removing spaces)
+// 73 lines of Mongoose code (not removing spaces)
+// Total: Around 900-934 lines of code total

@@ -43,3 +43,31 @@ input:required {
 .anchor-2 {
     min-width: 105px;
 }   
+
+.logo-image {
+    width: 35%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.custom-shape-divider-bottom-1604642451 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1604642451 svg {
+    position: relative;
+    display: block;
+    width: calc(120% + 1.3px);
+    height: 138px;
+}
+
+.custom-shape-divider-bottom-1604642451 .shape-fill {
+    fill: #FFFFFF;
+}
