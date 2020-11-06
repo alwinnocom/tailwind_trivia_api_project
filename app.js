@@ -232,7 +232,8 @@ app.route('/results')
           res.render("results", {
             response: response,
             numberOfQuestions: numberOfQuestions,
-            hideAllCorrectAnswers: hideAllCorrectAnswers
+            hideAllCorrectAnswers: hideAllCorrectAnswers,
+            percent_correct: (parseInt(response[response.length - 1].yourCorrectQuestions) / parseInt(numberOfQuestions)) * 100
           });
       }
     });

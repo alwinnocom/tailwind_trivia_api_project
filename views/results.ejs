@@ -2,26 +2,26 @@
 
 <h1 class="montserrat text-center text-blue-800 text-6xl">Welcome to the Results page!</h1>
 
-<div class="flex">
+<div class="flex sticky top-0">
 
-    <form action="/results" method='get'>
+    <form class="bg-green-100" action="/results" method='get'>
         <button class="raleway text-center p-8 text-red-400"type="submit">No Results?</button>
     </form>
 
-    <form action="/results/hidden" method='get'>
+    <form class="bg-blue-100" action="/results/hidden" method='get'>
         <button class="raleway text-center m-6 p-2 <% if (hideAllCorrectAnswers === "hide") { %> disabled hidden<% } else { %> text-green-500 <% } %>" type="submit">Hide Answers</button>
     </form>
 
-    <form action="/results/reveal" method='get'>
+    <form class="bg-blue-100" action="/results/reveal" method='get'>
         <button class="raleway text-center m-6 p-2 <% if (hideAllCorrectAnswers !== "hide") { %> disabled hidden<% } else { %> text-green-500 <% } %>"type="submit">Reveal Answers</button>
     </form>
 
-    <form action="/questions/delete" method='get'>
-        <button class="font-sans text-center p-8 text-red-400"type="submit">New Round</button>
+    <form class="bg-green-100" action="/questions" method='get'>
+        <button class="font-sans text-center p-8 text-red-400"type="submit">Retry This Round</button>
     </form>
 
-    <form action="/questions" method='get'>
-        <button class="font-sans text-center p-8 text-red-400"type="submit">Retry This Round</button>
+    <form class="bg-blue-100" action="/questions/delete" method='get'>
+        <button class="font-sans text-center p-8 text-red-400"type="submit">New Round</button>
     </form>
 
 </div>
@@ -32,6 +32,7 @@
 
 <p class="roboto-condensed ml-6 py-2"> Your Score = <%= response[response.length - 1].yourPointsEarned %></p>
 <p class="roboto-condensed ml-6 py-2"> Total Points Possible = <%= response[0].totalPointsPossible %> </p>
+<p class="roboto-condensed ml-6 py-2 <% if (typeof(percent_correct) !== "number") { %> hidden<% } %>"><%= percent_correct %>%</p>
 
 <% for (let index = 1; index < response.length - 1; index++) { %>
 
@@ -46,14 +47,5 @@
 </div>
 
 <% } %>
-
-<!-- } -->
-
-
-<!-- for (i = 0; i++; i < questions_length) { -->
-    
-<!-- <div>`You wrote ${user_answer}</div> <div>The correct answer was ${correct_answer}`</div> -->
-
-<!-- } -->
 
 <%- include('partials/footer'); -%>
