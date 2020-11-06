@@ -43,6 +43,7 @@ let tryDifferentType = ``;
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
 let hideAllCorrectAnswers = ``;
+let percent_correct = ``;
 
 
 // API Data Segmented Into Variables

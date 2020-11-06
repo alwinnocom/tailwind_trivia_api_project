@@ -9,11 +9,11 @@
     </form>
 
     <form action="/results/hidden" method='get'>
-        <button class="raleway text-center p-8 text-red-400 <% if (hideAllCorrectAnswers === "hide") { %> disabled <% } %>" type="submit">Hide Answers</button>
+        <button class="raleway text-center m-6 p-2 <% if (hideAllCorrectAnswers === "hide") { %> disabled hidden<% } else { %> text-green-500 <% } %>" type="submit">Hide Answers</button>
     </form>
 
     <form action="/results/reveal" method='get'>
-        <button class="raleway text-center p-8 text-red-400 <% if (hideAllCorrectAnswers !== "hide") { %> disabled <% } %>"type="submit">Reveal Answers</button>
+        <button class="raleway text-center m-6 p-2 <% if (hideAllCorrectAnswers !== "hide") { %> disabled hidden<% } else { %> text-green-500 <% } %>"type="submit">Reveal Answers</button>
     </form>
 
     <form action="/questions/delete" method='get'>
@@ -26,26 +26,10 @@
 
 </div>
  
-<h1 class="roboto-condensed m-6"> You got <%= response[response.length - 1].yourCorrectQuestions %> correct out of <%= numberOfQuestions %>. </h1>
+<h1 class="roboto-condensed m-6 <% if (typeof(response[response.length - 1].yourCorrectQuestions) !== "number" || typeof(numberOfQuestions) !== "number") { %> disabled hidden<% } %>"> 
+    You answered <span class="roboto-condensed text-green-500"><%= response[response.length - 1].yourCorrectQuestions %>
+    </span> / <span class="roboto-condensed text-blue-500"><%= numberOfQuestions %></span> correctly. </h1>
 
-<!-- switch (percent_correct) -->
-<!-- case (percent_correct <= 50%) {res.render("Try again next time!")} -->
-<!-- case (50% < percent_correct <= 70%) {res.render("Nice! Try to beat your score next time!")} -->
-
-<!-- case (70% < percent_correct <= 80%) {res.render("Good job!")} -->
-
-<!-- case (80% < percent_correct <= 90%) {res.render("Very great job!")} -->
-<!-- case (90% < percent_correct < 100%) {res.render("Wow! Close to perfect!")} -->
-<!-- case (percent_correct === 100%) {res.render("Wow! 100%!")} -->
-<!-- default res.render("Would you like to try again?") -->
-
-<!-- for (i = 0; i++; i < questions_length) { -->
-
-    <!-- <p> `Question ${i+1}</p> -->
-
-
-<!-- <p>Your Correct Number of Questions: <%= response[response.length - 1].yourCorrectQuestions %></p>
-<p>Number of Questions: <%= numberOfQuestions %></p> -->
 <p class="roboto-condensed ml-6 py-2"> Your Score = <%= response[response.length - 1].yourPointsEarned %></p>
 <p class="roboto-condensed ml-6 py-2"> Total Points Possible = <%= response[0].totalPointsPossible %> </p>
 
@@ -55,7 +39,7 @@
     <p class="libre-baskerville text-green-800 ml-6 py-2"> Question <%= response[index].question_number %> </p>
     <p class="roboto-condensed text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %> </p>
     <p class="roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </p>
-    <p class="libre-baskerville text-orange-900 ml-6 py-2"> <%= response[index].result %> <span class="<% if (hideAllCorrectAnswers === "hide") { %> hidden <% } %>"><%= response[index].correct_result %></span></p>
+    <p class="libre-baskerville text-orange-900 ml-6 py-2"> <%= response[index].result %> <span class="<% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></span></p>
     <hr class="mt-2 mb-10">
 </div>
 
