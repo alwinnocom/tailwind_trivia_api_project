@@ -58,7 +58,7 @@ app.route('/questions')
       Question.find((err, response) => {
 
         if (err) {
-            console.log("Error is ", err);
+            console.log("Question.find Error is ", err);
         }
 
         // Response returns [] if nothing is found. - https://stackoverflow.com/questions/9660587/do-something-if-nothing-found-with-find-mongoose 
@@ -88,7 +88,7 @@ app.route('/questions')
 
       Compare_Answer.deleteMany((err) => {
         if (err) {
-          console.log(err);
+          console.log("Compare_Answer Delete Many Error is ", err);
         }
       });
 
@@ -107,6 +107,10 @@ app.route('/questions')
             reject("Please type a valid number of questions between 1 and 30.");
         }
     
+        else if (!numberOfQuestions) {
+            reject("Please type a number.")
+        }
+
         else {
             resolve("Number is verified.");
         }
@@ -159,13 +163,13 @@ app.get("/questions/delete", (req, res) => {
     
     Compare_Answer.deleteMany((err) => {
       if (err) {
-        console.log(err);
+        console.log("Deleting Compare answer is " + err);
       }
     })
 
     Answer.deleteMany((err) => {
       if (err) {
-        console.log(err);
+        console.log("Answer Delete Many Error is ", err);
       }
     })
   
@@ -176,7 +180,7 @@ app.get("/questions/delete", (req, res) => {
 
         else {
           infoForUser = "Sorry, the questions were not deleted.";
-          console.log(err);
+          console.log("Question Delete Many Error is ", err);
         }
 
         res.redirect("/");
@@ -190,19 +194,19 @@ app.route('/')
     
     Compare_Answer.deleteMany((err) => {
       if (err) {
-        console.log(err);
+        console.log("Compare Answer Error is ", err);
       }
     })
 
     Answer.deleteMany((err) => {
       if (err) {
-        console.log(err);
+        console.log("Answer Delete Many Error is ", err);
       }
     })
   
     Question.deleteMany((err) => {
        if (err) {
-         console.log(err);
+         console.log("Question Delete Many Error is ", err);
        }
     })
     
@@ -222,7 +226,7 @@ app.route('/results')
     Compare_Answer.find(function (err, response) {
                                 
       if (err) {
-        console.log("Error is ", err);
+        console.log("Compare Answer Find Error is ", err);
       }
 
       // Just in case.
@@ -270,7 +274,7 @@ app.route('/results')
         Answer.find(function (err, response) {
                                     
           if (err) {
-            console.log("Error is ", err);
+            console.log("Answer Find Error is ", err);
           }
 
           else {
