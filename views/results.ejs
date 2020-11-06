@@ -1,9 +1,32 @@
 <%- include('partials/header'); -%>
 
-<h1 class="cookie text-center text-blue-800 text-6xl">Welcome to the Results page!</h1>
+<h1 class="montserrat text-center text-blue-800 text-6xl">Welcome to the Results page!</h1>
 
+<div class="flex">
+
+    <form action="/results" method='get'>
+        <button class="raleway text-center p-8 text-red-400"type="submit">No Results?</button>
+    </form>
+
+    <form action="/results/hidden" method='get'>
+        <button class="raleway text-center p-8 text-red-400 <% if (hideAllCorrectAnswers === "hide") { %> disabled <% } %>" type="submit">Hide Answers</button>
+    </form>
+
+    <form action="/results/reveal" method='get'>
+        <button class="raleway text-center p-8 text-red-400 <% if (hideAllCorrectAnswers !== "hide") { %> disabled <% } %>"type="submit">Reveal Answers</button>
+    </form>
+
+    <form action="/questions/delete" method='get'>
+        <button class="font-sans text-center p-8 text-red-400"type="submit">New Round</button>
+    </form>
+
+    <form action="/questions" method='get'>
+        <button class="font-sans text-center p-8 text-red-400"type="submit">Retry This Round</button>
+    </form>
+
+</div>
  
-<h1> You got <%= response[response.length - 1].yourCorrectQuestions %> correct out of <%= numberOfQuestions %> </h1>
+<h1 class="roboto-condensed m-6"> You got <%= response[response.length - 1].yourCorrectQuestions %> correct out of <%= numberOfQuestions %>. </h1>
 
 <!-- switch (percent_correct) -->
 <!-- case (percent_correct <= 50%) {res.render("Try again next time!")} -->
@@ -20,26 +43,19 @@
 
     <!-- <p> `Question ${i+1}</p> -->
 
-<form action="/questions/delete" method='get'>
-    <button class="font-sans text-center p-8 text-red-400"type="submit">Delete All Questions</button>
-</form>
-
-<form action="/questions" method='get'>
-    <button class="font-sans text-center p-8 text-red-400"type="submit">Retry Trivia Round</button>
-</form>
 
 <!-- <p>Your Correct Number of Questions: <%= response[response.length - 1].yourCorrectQuestions %></p>
 <p>Number of Questions: <%= numberOfQuestions %></p> -->
-<p class="ml-2 py-2"> Your Score = <%= response[response.length - 1].yourPointsEarned %></p>
-<p class="ml-2 py-2"> Total Points Possible = <%= response[0].totalPointsPossible %> </p>
+<p class="roboto-condensed ml-6 py-2"> Your Score = <%= response[response.length - 1].yourPointsEarned %></p>
+<p class="roboto-condensed ml-6 py-2"> Total Points Possible = <%= response[0].totalPointsPossible %> </p>
 
 <% for (let index = 1; index < response.length - 1; index++) { %>
 
 <div class="" style="display: block;">
-    <p class="text-green-800 ml-2 py-2"> Question <%= response[index].question_number %> </p>
-    <p class="text-blue-700 ml-2 py-2"> Points Earned: <%= response[index].points_earned %> </p>
-    <p class="text-purple-700 ml-2 py-2"> Points Possible: <%= response[index].points_possible %> </p>
-    <p class="text-orange-900 ml-2 py-2"> <%= response[index].result %> </p>
+    <p class="libre-baskerville text-green-800 ml-6 py-2"> Question <%= response[index].question_number %> </p>
+    <p class="roboto-condensed text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %> </p>
+    <p class="roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </p>
+    <p class="libre-baskerville text-orange-900 ml-6 py-2"> <%= response[index].result %> <span class="<% if (hideAllCorrectAnswers === "hide") { %> hidden <% } %>"><%= response[index].correct_result %></span></p>
     <hr class="mt-2 mb-10">
 </div>
 

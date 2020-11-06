@@ -55,27 +55,21 @@
             <div class="flex">
                 <p class="bg-green-100 text-orange-800 p-4"> <%= ejsResponse[index].questionCategory %> </p>
 
-                <!-- if else EJS syntax courtesy of Stack Overflow. Trivia Logic is mine. -->
                 <% if (ejsResponse[index].questionType === 'boolean') { %>
                     <p class="roboto-condensed bg-blue-100 text-teal-500 p-4"> True or False? </p>
                 <% } else { %>
                     <p class="roboto-condensed bg-blue-100 text-blue-500 p-4"> Multiple Choice </p>
                 <% } %>
 
-
                 <p class="roboto-condensed bg-green-100 text-yellow-700 p-4"> <%= ejsResponse[index].questionDifficulty %> </p>
             </div>
                 <p class="raleway text-lg text-gray-800 p-4"> <%= ejsResponse[index].question %> </p>
-            
-
-            <!-- Use order alongside EJS partials to change the order of flexbox. -->
+        
 
             <!-- Allow only 1 Radio Button to be Checked = https://stackoverflow.com/questions/5419459/how-to-allow-only-one-radio-button-to-be-checked#:~:text=Only%201%20radio%20button%20of,same%20name%20can%20be%20checked.&text=Give%20them%20the%20same%20name%2C%20and%20it%20will%20work.,check%20boxes%20can%20have%20many.&text=Just%20give%20them%20the%20same%20name%20throughout%20the%20form%20you%20are%20using. -->
-            
-            
-            
             <% if (ejsResponse[index].questionType === 'boolean') { %>
 
+            <!-- Use order alongside EJS partials to change the order of flexbox. Maximum Tailwind Order classes are 12. -->
             <div class="flex">
                 <div class="p-2 order-2">
                     <label class="roboto-condensed ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
@@ -94,24 +88,24 @@
             <% } else { %>
 
 
-            <div class="flex">
-                <div class="p-2 text-green-500 order-<%= Math.floor(Math.random()*5) + 1; %>">
+            <section class="flex">
+                <div class="p-2 text-green-500 border-r-2 border-opacity-75 border-green-200 order-<%= Math.floor(Math.random()*12) + 1; %>">
                     <label class="roboto-condensed ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
                     <input <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
                 </div> 
-                <div class="p-2 text-red-500 order-<%= Math.floor(Math.random()*5) + 1; %>">         
+                <div class="p-2 text-red-500 order-<%= Math.floor(Math.random()*12) + 1; %>">         
                     <label class="roboto-condensed ml-2 p-2"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
                     <input <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name= "<%= index %>"></input>
                 </div> 
-                <div class="p-2 text-red-500 order-<%= Math.floor(Math.random()*5) + 1; %>">
+                <div class="p-2 text-red-500 order-<%= Math.floor(Math.random()*12) + 1; %>">
                     <label class="roboto-condensed ml-2 p-2"  for="<%= ejsResponse[index].incorrectAnswers[1] %>"><%= ejsResponse[index].incorrectAnswers[1] %></label>
                     <input <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[1]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[1] %>" name= "<%= index %>"></input>
                 </div> 
-                <div class="p-2 text-red-500 order-<%= Math.floor(Math.random()*5) + 1; %>">
+                <div class="p-2 text-red-500 order-<%= Math.floor(Math.random()*12) + 1; %>">
                     <label class="roboto-condensed ml-2 p-2"  for="<%= ejsResponse[index].incorrectAnswers[2] %>"><%= ejsResponse[index].incorrectAnswers[2] %></label>
                     <input <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[2]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[2] %>" name= "<%= index %>"></input>
                 </div> 
-            </div>
+            </section>
 
             <% } %>
 

@@ -16,7 +16,8 @@ const compare_answerSchema = new Schema({
 
     yourCorrectQuestions: Number,
 
-    result: String
+    result: String,
+    correct_result: String
 });
 
 const Compare_Answer = mongoose.model("Compare_Answer", compare_answerSchema);

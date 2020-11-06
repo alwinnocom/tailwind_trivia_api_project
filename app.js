@@ -42,6 +42,7 @@ let tryDifferentType = ``;
 
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
+let hideAllCorrectAnswers = ``;
 
 
 // API Data Segmented Into Variables
@@ -76,6 +77,7 @@ app.route('/questions')
               savedUserResponse: savedUserResponse
             }) 
           
+            hideAllCorrectAnswers = "";
         }
 
       });
@@ -100,7 +102,6 @@ app.route('/questions')
         return new Promise ((resolve, reject) => {
         if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 30) {
             reject("Please type a valid number of questions between 1 and 30.");
-            // reject({0: "This is a very long message.", 1: "But wait, there is a 2nd part to it."})
         }
     
         else {
@@ -229,7 +230,8 @@ app.route('/results')
       else {
           res.render("results", {
             response: response,
-            numberOfQuestions: numberOfQuestions
+            numberOfQuestions: numberOfQuestions,
+            hideAllCorrectAnswers: hideAllCorrectAnswers
           });
       }
     });
@@ -306,7 +308,8 @@ app.route('/results')
                         question_number: `${i+1}`,  
                         points_earned: 0,
                         points_possible: 1,
-                        result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                        result: `Incorrect Answer. Your Answer: ${userAnswers[i]}.`,
+                        correct_result: `Correct Answer: ${realAnswers[i]}`
                       })
 
                       compareAnswer.save()
@@ -318,7 +321,8 @@ app.route('/results')
                           question_number: `${i+1}`,  
                           points_earned: 0,
                           points_possible: 3,
-                          result: `Incorrect Answer. Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                          result: `Incorrect Answer. Your Answer: ${userAnswers[i]}.`,
+                          correct_result: `Correct Answer: ${realAnswers[i]}`
                         })
 
                         compareAnswer.save()
@@ -333,7 +337,8 @@ app.route('/results')
                             points_earned: 1,
                             points_possible: 1,
                             
-                            result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                            result: `Correct! Your Answer: ${userAnswers[i]}.`,
+                            correct_result: `Correct Answer: ${realAnswers[i]}`
                           })
 
                           yourPointsEarned += 1;
@@ -347,7 +352,8 @@ app.route('/results')
                             question_number: `${i+1}`,  
                             points_earned: 3,
                             points_possible: 3,
-                            result: `Correct! Your Answer was ${userAnswers[i]}. The real answer was ${realAnswers[i]}`
+                            result: `Correct! Your Answer: ${userAnswers[i]}.`,
+                            correct_result: `Correct Answer: ${realAnswers[i]}`
                           })
 
                           yourPointsEarned += 3;
@@ -397,3 +403,13 @@ app.route('/results')
       });
 
 });
+
+app.get("/results/hidden", (req, res) => {
+  hideAllCorrectAnswers = "hide";
+  res.redirect("/results");
+})
+
+app.get("/results/reveal", (req, res) => {
+  hideAllCorrectAnswers = "";
+  res.redirect("/results");
+})
