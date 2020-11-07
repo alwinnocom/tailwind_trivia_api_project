@@ -1,6 +1,8 @@
 <%- include('partials/header'); -%>
 
-<h1 class="sans text-center text-blue-800 text-6xl">Results</h1>
+<h1 class="comfortaa text-center text-blue-800 text-6xl">Results</h1>
+
+<!-- SVGs/Icons turn green if correct, else red incorrect. -->
 
 <div class="flex sticky top-0">
 
@@ -43,9 +45,9 @@
 
     <p class="roboto-condensed text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %> </p>
     <p class="roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </p>
-    <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].accuracy %></p>
-    <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].result %> </p>
-    <p class="libre-baskerville text-orange-900 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></p>
+    <!-- <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].accuracy %></p> -->
+    <p class="libre-baskerville text-blue-600 ml-6 py-2 block"> <%= response[index].result %> </p>
+    <p class="libre-baskerville text-green-600 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></p>
     <hr class="mt-2 mb-10">
 </div>
 
