@@ -1,7 +1,5 @@
 <%- include('partials/header'); -%>
 
-<main class="">
-
 <!-- <div class="bg-indigo-500">
     <nav class="sticky inset-0 h-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
         <ul class="flex flex-row">
@@ -28,11 +26,20 @@
     </nav>
 </div> -->
 
-<!-- <h1 class="lobster-2 text-center bg-blue-700 text-white text-6xl py-2 top-0"> <%= category %> </h1> -->
-<h1 class="lobster-2 text-center bg-indigo-500 text-white text-6xl py-2 top-0"><%= category %><span class="w-1 h-1 px-3 m-4 bg-teal-500 rounded">!</span></h1>
+<h1 class="merienda text-center bg-blue-700 text-white text-6xl py-2 top-0"> <%= category %> </h1>
+<!-- <h1 class="merienda text-center bg-indigo-500 text-white text-6xl py-2 top-0"><%= category %><span class="w-1 h-1 px-3 m-4 bg-teal-500 rounded">!</span></h1> -->
 
 
-<div class="flex">
+<div class="flex flex-row sticky top-0 bg-white">
+
+    <p class="libre-baskerville p-2 m-2 text-red-700 text-4xl <% if (!pleaseAnswerEveryQuestion) { %>
+        hidden
+    <% } %>"><%= pleaseAnswerEveryQuestion %></p>
+
+    <p class="border-b-2 border-green-800 dotted libre-baskerville m-4 text-green-800 <% if (pleaseAnswerEveryQuestion) { %>
+        hidden
+    <% } %>">Number of Questions: <%= numberOfQuestions %></p>
+
     <form action="/questions/delete" method='get'>
         <button class="raleway text-center p-2 m-2 border-2 border-red-400 rounded text-red-400"type="submit">Delete Quiz</button>
     </form>
@@ -42,14 +49,14 @@
         <button class="raleway text-center p-2 m-2 border-2 rounded border-blue-400 text-blue-400" type="submit">Refresh Page</button>
     </form>
 
+    
+
 </div>
 
 
-<p class="libre-baskerville py-2 m-6 text-red-700 text-2xl <% if (!pleaseAnswerEveryQuestion) { %>
-    hidden
-<% } %>"><%= pleaseAnswerEveryQuestion %></p>
 
-<p class="libre-baskerville p-2 m-6 text-green-800">Number of Questions: <%= numberOfQuestions %></p>
+
+
 
 
 <!-- Save SVGs/Images for each possible topic. Use EJS to determine the URL. -->
@@ -58,10 +65,8 @@
 
     <%- include('partials/trivia_round'); -%>
 
-    <button type="submit" class="libre-baskerville border-black block pt-3 m-6 text-blue-600">Submit All Answers</button>
+    <button type="submit" class="libre-baskerville border-2 border-blue-600 rounded p-3 m-6 text-blue-600">Submit All Answers</button>
 
 </form>
-
-</main>
 
 <%- include('partials/footer'); -%>

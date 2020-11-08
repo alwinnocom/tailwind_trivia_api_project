@@ -1,6 +1,8 @@
+<main class="ml-2 md:grid grid-cols-2">
+
 <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
-    <div style="display: block;">
+    <div class="border-2 border-gray-500 rounded" style="display: block;">
         <h2 id="<%= index + 1 %>" class="raleway py-2 pl-4 text-3xl
             <% if (savedUserResponse[index] && savedUserResponse) { %>
                 text-green-500
@@ -72,6 +74,6 @@
 
     </div>
 
-    <hr class="mt-2 mb-10">
-
 <% } %>
+
+</main>
