@@ -40,6 +40,7 @@ let tryDifferentCategory = ``;
 let tryDifferentDifficulty = ``;
 let tryDifferentType = ``;
 
+let ejsResponse = ``;
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
 let hideAllCorrectAnswers = ``;
@@ -72,9 +73,11 @@ app.route('/questions')
         
         else {
           
+            ejsResponse = response;
+
             res.render("questions", {
               numberOfQuestions: numberOfQuestions,
-              ejsResponse: response,
+              ejsResponse: ejsResponse,
               pleaseAnswerEveryQuestion: pleaseAnswerEveryQuestion,
               savedUserResponse: savedUserResponse,
               category: category_list[category]
@@ -237,6 +240,8 @@ app.route('/results')
       else {
           res.render("results", {
             response: response,
+            ejsResponse: ejsResponse,
+            savedUserResponse: savedUserResponse,
             numberOfQuestions: numberOfQuestions,
             hideAllCorrectAnswers: hideAllCorrectAnswers,
             percent_correct: (parseInt(response[response.length - 1].yourCorrectQuestions) / parseInt(numberOfQuestions)) * 100
@@ -317,8 +322,8 @@ app.route('/results')
                         points_earned: 0,
                         points_possible: 1,
                         accuracy: `Incorrect Answer.`,
-                        result: `Your Answer: ${userAnswers[i]}`,
-                        correct_result: `Correct Answer: ${realAnswers[i]}`
+                        result: userAnswers[i],
+                        correct_result: realAnswers[i]
                       })
 
                       compareAnswer.save()
@@ -331,8 +336,8 @@ app.route('/results')
                           points_earned: 0,
                           points_possible: 3,
                           accuracy: `Incorrect Answer.`,
-                          result: `Your Answer: ${userAnswers[i]}`,
-                          correct_result: `Correct Answer: ${realAnswers[i]}`
+                          result: userAnswers[i],
+                          correct_result: realAnswers[i]
                         })
 
                         compareAnswer.save()
@@ -347,8 +352,8 @@ app.route('/results')
                             points_earned: 1,
                             points_possible: 1,
                             accuracy: `Correct!`,
-                            result: `Your Answer: ${userAnswers[i]}`,
-                            correct_result: `Correct Answer: ${realAnswers[i]}`
+                            result: userAnswers[i],
+                            correct_result: realAnswers[i]
                           })
 
                           yourPointsEarned += 1;
@@ -363,8 +368,8 @@ app.route('/results')
                             points_earned: 3,
                             points_possible: 3,
                             accuracy: `Correct!`,
-                            result: `Your Answer: ${userAnswers[i]}`,
-                            correct_result: `Correct Answer: ${realAnswers[i]}`
+                            result: userAnswers[i],
+                            correct_result: realAnswers[i]
                           })
 
                           yourPointsEarned += 3;

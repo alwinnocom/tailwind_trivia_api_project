@@ -44,13 +44,13 @@
         <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 outline-none focus:border-teal-700 <% if (!tryDifferentCategory) { %> mb-8 <% } %>" type="text" placeholder="Category" name="category">
 
 
-            <optgroup label="Free-for-all">
+            <optgroup class="text-xl md:text-lg" label="Free-for-all">
                 <option value="0">Free-For-All</option>
                 <option value="9">General Knowledge</option>
             </optgroup>
 
 
-            <optgroup label="Entertainment">
+            <optgroup class="text-xl md:text-lg" label="Entertainment">
             
                 <option value="10">Books</option>
                 <option value="14">Television</option>
@@ -64,7 +64,7 @@
             </optgroup>
 
 
-            <optgroup label="Arts">
+            <optgroup class="text-xl md:text-lg" label="Arts">
                 <option value="11">Film</option>
                 <option value="12">Music</option>
                 <option value="13">Theaters & Musicals</option>
@@ -72,7 +72,7 @@
             </optgroup>
 
 
-            <optgroup label="Science">
+            <optgroup class="text-xl md:text-lg" label="Science">
                 
                 <option value="17">Science & Nature</option>
                 <option value="27">Animals</option>
@@ -83,7 +83,7 @@
             </optgroup>
             
 
-            <optgroup label="Liberal Arts">
+            <optgroup class="text-xl md:text-lg" label="Liberal Arts">
                 <option value="20">Mythology</option>
                 <option value="22">Geography</option>
                 <option value="23">History</option>
@@ -91,7 +91,7 @@
             </optgroup>
 
 
-            <optgroup label="Extra">
+            <optgroup class="text-xl md:text-lg" label="Extra">
                 <option value="21">Sports</option>
                 <option value="28">Vehicles</option>
             </optgroup>
@@ -109,10 +109,10 @@
         <label class=" libre-baskerville m-16 text-xl" for="difficulty">Difficulty</label>
 
         <select class=" max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 <% if (!tryDifferentDifficulty) { %> mb-8 <% } %>" type="text" placeholder="Difficulty" name="difficulty">
-            <option value="any">Any</option>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
+            <option class="text-xl md:text-lg" value="any">Any</option>
+            <option class="text-xl md:text-lg" value="easy">Easy</option>
+            <option class="text-xl md:text-lg" value="medium">Medium</option>
+            <option class="text-xl md:text-lg" value="hard">Hard</option>
         </select>
 
         <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentDifficulty %> </p>
@@ -126,9 +126,9 @@
         <label class="libre-baskerville m-16 text-xl" for="type">Type</label>
 
         <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 <% if (!tryDifferentType) { %> mb-8 <% } %>" type="text" placeholder="Type" name="type">
-            <option value="any">Any</option>
-            <option value="multiple">Multiple Choice</option>
-            <option value="boolean">True or False</option>
+            <option class="text-xl md:text-lg" value="any">Any</option>
+            <option class="text-xl md:text-lg" value="multiple">Multiple Choice</option>
+            <option class="text-xl md:text-lg" value="boolean">True or False</option>
         </select>
 
         <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentType %> </p>
