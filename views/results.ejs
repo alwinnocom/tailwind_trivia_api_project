@@ -42,36 +42,38 @@
 
 </div>
 
-<% for (let index = 1; index < ejsResponse.length + 1; index++) { %>
 
-<div class="">
-    <p class="libre-baskerville text-xl ml-6 py-2 underline text-gray-800"> Question <%= response[index].question_number %> </p>
+<section class="ml-6 mr-6 md:grid grid-cols-2 gap-8">
 
-    <!-- <img src="" alt="Icon/SVG related to topic here."> -->
+    <% for (let index = 1; index < ejsResponse.length + 1; index++) { %>
 
-    <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %>
-    <span class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </span></p>
-    <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].accuracy %></p>
-    <!-- <table>
-        <tr>
-            <th>Your Answer</th>
-            <th>Correct Answer</th>
-        </tr>
-        <tr>
-            <td class="roboto-condensed text-gray-800 ml-6 py-2 block"><%= response[index].result %></td>
-            <td class="roboto-condensed text-gray-800 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></td>
-        </tr>
-    </table> -->
-    
-    <p class="roboto-condensed text-gray-800 ml-6 py-2 block"> <span class="text-gray-800">Your Answer = </span><%= response[index].result %> </p>
-    <p class="roboto-condensed text-gray-800 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><span class="text-gray-800">Correct Answer = </span><%= response[index].correct_result %></p>
-    
-    <hr class="mt-2 mb-8">
-</div>
+    <div class="border-2 border-gray-800 rounded">
+        <p class="libre-baskerville text-xl ml-6 py-2 underline text-gray-800"> Question <%= response[index].question_number %> </p>
 
-<% } %>
+        <!-- <img src="" alt="Icon/SVG related to topic here."> -->
 
+        <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %>
+        <span class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </span></p>
+        <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].accuracy %></p>
+        <!-- <table>
+            <tr>
+                <th>Your Answer</th>
+                <th>Correct Answer</th>
+            </tr>
+            <tr>
+                <td class="roboto-condensed text-gray-800 ml-6 py-2 block"><%= response[index].result %></td>
+                <td class="roboto-condensed text-gray-800 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></td>
+            </tr>
+        </table> -->
+        
+        <p class="roboto-condensed text-gray-800 ml-6 py-2 block"> <span class="text-gray-800">Your Answer = </span><%= response[index].result %> </p>
+        <p class="roboto-condensed text-gray-800 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><span class="text-gray-800">Correct Answer = </span><%= response[index].correct_result %></p>
+        
+    </div>
 
+    <% } %>
+
+</section>
 
 
 </main>

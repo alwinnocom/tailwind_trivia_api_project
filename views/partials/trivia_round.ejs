@@ -1,4 +1,4 @@
-<main class="ml-2 md:grid grid-cols-2">
+<main class="ml-6 mr-6 md:grid grid-cols-2 gap-8">
 
 <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
@@ -47,7 +47,7 @@
         <% } else { %>
 
 
-        <section class="grid grid-rows-4 bg-white">
+        <section class="relative bottom-0 grid grid-rows-4 bg-white">
             <div class="m-2 border-opacity-75 border-green-200 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
                 <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
