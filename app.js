@@ -106,7 +106,7 @@ app.route('/questions')
       const numberVerifier = () => {
 
         return new Promise ((resolve, reject) => {
-        if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 30) {
+        if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 25) {
             reject("Please type a valid number of questions between 1 and 30.");
         }
     

@@ -3,15 +3,22 @@
     <div style="display: block;">
         <h2 id="<%= index + 1 %>" class="raleway py-2 pl-4 text-3xl
             <% if (savedUserResponse[index] && savedUserResponse) { %>
-                bg-green-400 text-green-900
+                text-green-500
             <% } else if (!savedUserResponse[index] && savedUserResponse) { %>
-                bg-red-400 text-red-900
+                text-red-500
             <% } else { %>
-                border-blue-<%=(((i % 4) + 4) * 100)%> text-blue-<%=(((i % 4) + 4) * 100)%>
+                border-blue-<%=(((index % 2) + 1) * 300) + 200%> text-teal-<%=(((index % 2) + 1) * 300) + 200%>
             <% } %>
             ">Question <%= index + 1 %></h2>
 
-            <p class="w-auto text-xl raleway text-lg text-gray-800 p-4 bg-blue-<%=(((i % 4) + 1) * 100)%>"> <%= ejsResponse[index].question %> </p>
+            <p class="w-auto text-xl raleway text-lg text-gray-800 p-4 >
+                <% if (savedUserResponse[index] && savedUserResponse) { %>
+                    bg-green-400
+                <% } else if (!savedUserResponse[index] && savedUserResponse) { %>
+                    bg-red-400
+                <% } else { %>
+                    border-blue-<%=(((index % 2) + 1) * 300) + 200%> bg-blue-<%=(((index % 2) + 1) * 200) + 100%>
+                <% } %>"> <%= ejsResponse[index].question %> </p>
         
 
         <!-- Allow only 1 Radio Button to be Checked = https://stackoverflow.com/questions/5419459/how-to-allow-only-one-radio-button-to-be-checked#:~:text=Only%201%20radio%20button%20of,same%20name%20can%20be%20checked.&text=Give%20them%20the%20same%20name%2C%20and%20it%20will%20work.,check%20boxes%20can%20have%20many.&text=Just%20give%20them%20the%20same%20name%20throughout%20the%20form%20you%20are%20using. -->

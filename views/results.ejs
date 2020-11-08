@@ -2,18 +2,20 @@
 
 <main class="">
 
-<h1 class="libre-baskerville text-center underline text-blue-800 text-6xl">Results</h1>
+<h1 class="roboto-condensed text-center underline text-blue-800 text-6xl">Results</h1>
 
 <!-- SVGs/Icons turn green if correct, else red incorrect. -->
 
-
-<div class="flex">
-    <h1 class="roboto-condensed text-gray-700 ml-6 py-2 text-4xl"> Final Score = <%= response[response.length - 1].yourPointsEarned %> / <%= response[0].totalPointsPossible %> </h1>
-    <h2 class="roboto-condensed m-6 text-6xl <% if (typeof(response[response.length - 1].yourCorrectQuestions) !== "number" || typeof(numberOfQuestions) !== "number") { %> disabled hidden<% } %>"> 
-        Final Score: <span class="roboto-condensed text-green-500"><%= response[response.length - 1].yourCorrectQuestions %>
-        </span> / <span class="roboto-condensed text-blue-500"><%= numberOfQuestions %></span></h2>
-    <p class="text-6xl roboto-condensed p-2 m-6 text-green-500 border-2 border-green-500 rounded <% if (isNaN(percent_correct)) { %> hidden<% } %>"><%= percent_correct %>%</p>
-</div>
+<!-- <div class="flex flex-col text-left">
+    <div class="">
+        <h2 class="roboto-condensed m-6 text-6xl <% if (typeof(response[response.length - 1].yourPointsEarned) !== "number" || typeof(response[0].totalPointsPossible) !== "number") { %> disabled hidden<% } %>"> 
+                Final Score: <span class="roboto-condensed text-green-500"><%= response[response.length - 1].yourPointsEarned %>
+                </span> / <span class="roboto-condensed text-blue-500"><%= response[0].totalPointsPossible %></span></h2>
+    </div>
+    <div>
+        <p class="text-6xl roboto-condensed p-2 text-green-500 border-2 border-green-500 rounded <% if (isNaN(percent_correct)) { %> hidden<% } %>"><%= percent_correct %>%</p>
+    </div>
+</div> -->
 
 
 <div class="flex sticky bottom-0 bg-white ml-4">
@@ -40,17 +42,17 @@
 
 </div>
 
-<!-- <% for (let index = 0; index < ejsResponse.length; index++) { %>
+<% for (let index = 0; index < ejsResponse.length; index++) { %>
 
 <div class="">
     <p class="libre-baskerville text-xl ml-6 py-2 underline <% if (response[index+1].accuracy === "Correct!") { %> text-gray-800 <% } else { %> text-gray-800 <% } %>"> Question <%= response[index+1].question_number %> </p>
 
-    <img src="" alt="Icon/SVG related to topic here.">
+    <!-- <img src="" alt="Icon/SVG related to topic here."> -->
 
     <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index+1].points_earned %>
     <span class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index+1].points_possible %> </span></p>
     <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index+1].accuracy %></p>
-    <table>
+    <!-- <table>
         <tr>
             <th>Your Answer</th>
             <th>Correct Answer</th>
@@ -59,7 +61,7 @@
             <td class="roboto-condensed text-gray-800 ml-6 py-2 block"><%= response[index+1].result %></td>
             <td class="roboto-condensed text-gray-800 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index+1].correct_result %></td>
         </tr>
-    </table>
+    </table> -->
     
     <p class="roboto-condensed text-gray-800 ml-6 py-2 block"> <span class="text-gray-800">Your Answer = </span><%= response[index+1].result %> </p>
     <p class="roboto-condensed text-gray-800 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><span class="text-gray-800">Correct Answer = </span><%= response[index+1].correct_result %></p>
@@ -67,9 +69,8 @@
     <hr class="mt-2 mb-8">
 </div>
 
-<% } %> -->
+<% } %>
 
-<%- include('partials/trivia_results'); -%>
 
 
 
