@@ -1,31 +1,31 @@
 <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
     <div style="display: block;">
-        
-        <div class="">
-            <p class="libre-baskerville text-green-800 ml-6 py-2"> Question <%= response[index+1].question_number %> </p>
-        
-            <!-- <img src="" alt="Icon/SVG related to topic here."> -->
-        
-            <p class="roboto-condensed text-blue-700 ml-6 py-2"> Points Earned: <%= response[index+1].points_earned %> </p>
-            <p class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index+1].points_possible %> </p>
-            <!-- <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index+1].accuracy %></p> -->
-            <p class="libre-baskerville text-blue-600 ml-6 py-2 block"> <%= response[index+1].result %> </p>
-            <p class="libre-baskerville text-green-600 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index+1].correct_result %></p>
-            <hr class="mt-2 mb-10">
-        </div>
 
-            <p class="text-xl raleway text-lg text-gray-800 p-4"> <%= ejsResponse[index].question %> </p>
+        <h2 id="<%= index + 1 %>" class="raleway py-2 pl-4 text-3xl
+            <% if (savedUserResponse[index] && savedUserResponse) { %>
+                bg-green-400 text-green-900
+            <% } else if (!savedUserResponse[index] && savedUserResponse) { %>
+                bg-red-400 text-red-900
+            <% } else { %>
+                bg-teal-100 text-indigo-800
+            <% } %>
+            ">Question <%= index + 1 %></h2>
         
+        <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index+1].points_earned %>
+        <span class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index+1].points_possible %> </span></p>
+
+        <p class="text-xl raleway text-lg text-gray-800 p-4"> <%= ejsResponse[index].question %> </p>
+    </div>
 
         <!-- Allow only 1 Radio Button to be Checked = https://stackoverflow.com/questions/5419459/how-to-allow-only-one-radio-button-to-be-checked#:~:text=Only%201%20radio%20button%20of,same%20name%20can%20be%20checked.&text=Give%20them%20the%20same%20name%2C%20and%20it%20will%20work.,check%20boxes%20can%20have%20many.&text=Just%20give%20them%20the%20same%20name%20throughout%20the%20form%20you%20are%20using. -->
         <% if (ejsResponse[index].questionType === 'boolean') { %>
 
         <!-- Use order alongside EJS partials to change the order of flexbox. Maximum Tailwind Order classes are 12. -->
-        <div class="flex flex-column bg-white">
+        <div class="flex flex-column bg-white <% if (hideAllCorrectAnswers === "hide") { %> hidden <% } %>">
             <div class="m-2 order-2">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
+                <input class="ml-2 disabled" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
                 <label class="text-lg roboto-condensed ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
             </div>
             <div class="m-2 <% if (ejsResponse[index].incorrectAnswers[0] === 'False') { %>
@@ -34,7 +34,7 @@
                 order-first text-red-500
                 <% } %>">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name="<%= index %>"></input>
+                <input class="ml-2" checked disabled <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name="<%= index %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
             </div>
         </div>
@@ -42,25 +42,25 @@
         <% } else { %>
 
 
-        <section class="grid grid-rows-4 bg-white">
+        <section class="grid grid-rows-4 bg-white <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>">
             <div class="m-2 text-green-500 border-opacity-75 border-green-200 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
+                <input class="ml-2" checked disabled <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
                 <label class="text-lg roboto-condensed ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %>  </label>
             </div> 
             <div class="m-2 text-red-500 order-<%= Math.floor(Math.random()*12) + 1; %>">         
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name= "<%= index %>"></input>
+                <input class="ml-2" disabled <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name= "<%= index %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
             </div> 
             <div class="m-2 text-red-500 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[1]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[1] %>" name= "<%= index %>"></input>
+                <input class="ml-2" disabled <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[1]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[1] %>" name= "<%= index %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[1] %>"><%= ejsResponse[index].incorrectAnswers[1] %></label>
             </div> 
             <div class="m-2 text-red-500 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
-                <input class="ml-2"<% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[2]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[2] %>" name= "<%= index %>"></input>
+                <input class="ml-2" disabled<% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[2]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[2] %>" name= "<%= index %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[2] %>"><%= ejsResponse[index].incorrectAnswers[2] %></label>
             </div> 
         </section>

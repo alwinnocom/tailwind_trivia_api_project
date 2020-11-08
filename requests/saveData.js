@@ -16,14 +16,14 @@ const saveData = (questionData) => {
             
 
             // Trivia Regex
-            question = question.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
-            correctAnswer = correctAnswer.replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+            question = question.replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+            correctAnswer = correctAnswer.replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
 
             if (incorrectAnswers.length > 1) {
                 let incorrectAnswersArray = [];
 
                 for (j = 0; j < incorrectAnswers.length; j++) {
-                    incorrectAnswers[j] = incorrectAnswers[j].replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+                    incorrectAnswers[j] = incorrectAnswers[j].replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
                     incorrectAnswersArray.push(incorrectAnswers[j]);
                 }
 
