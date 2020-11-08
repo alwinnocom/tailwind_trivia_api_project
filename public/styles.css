@@ -83,9 +83,15 @@ input, select {
     max-width: 70px;
 }
 
-.transition-disappear {
-    animation-delay: 2s;
-    animation: disappear 4s linear forwards;
+
+.trivia-appear {
+    animation-delay: 6s;
+    animation: appear 1s linear forwards;
+}
+
+.info-disappear {
+    animation-delay: 4s;
+    animation: disappear 3s linear forwards;
 }
 
 @keyframes disappear {
@@ -95,6 +101,17 @@ input, select {
     }
     100% {
         opacity: 0;
+    }
+
+}
+
+@keyframes appear {
+
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 
 }

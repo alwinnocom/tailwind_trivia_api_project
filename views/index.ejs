@@ -15,32 +15,33 @@
         <img class="logo-image py-4" src="images/quiz!-via-logohub.png" alt="Quiz Pro Quo">
     </div>
 
-    <!-- <div class=""><h3 class="libre-baskerville pt-3 m-6 text-lg"> Tailwindcss + Open Trivia API. </h3></div> -->
+    <div class=""><h3 class="libre-baskerville pt-3 m-16 text-xl text-lg"> Tailwindcss + Open Trivia API. </h3></div> -->
 <!-- </section> -->
 
 
-<div class="transition-disappear <% if (!infoForUser) { %> hidden <% } %>"><h2 class="transition-disappear bg-white libre-baskerville p-6 text-xl text-red-600"> <%= infoForUser %> </h2></div>
+<div class="info-disappear <% if (!infoForUser) { %> hidden <% } %>"><h2 class="info-disappear bg-white libre-baskerville px-16 py-6 text-xl text-red-600"> <%= infoForUser %> </h2></div>
 <div class="<% if (infoForUser) { %> hidden <% } %>"><h2 class="bg-white libre-baskerville p-6 text-xl text-red-600"> This is where you should put Trivia Icons when there is no infoForUser. </h2></div>
 
 
-<form class="grid grid-cols-1 grid-rows-4 md:center-form" action='/questions' method='post' id='form'>
+<form class="grid grid-cols-1 grid-rows-4" action='/questions' method='post' id='form'>
 
     <div class="bg-green-200 <% if (infoForUser === "Please type a valid number of questions between 1 and 30.") { %> bg-red-200 pt-3 <% } else { %> bg-white pt-3 <% } %>" >
         
-        <label class="libre-baskerville m-6" for="numberOfQuestions">Number of Questions</label>
-        <input class="max-w-none w-56 raleway rounded border-2 border-solid <% if ((!infoForUser) || infoForUser === "All questions deleted.") { %> border-blue-800 mb-8 <% } else { %> border-red-500 <% } %> block mx-6 mt-6 appearance-none px-2" type="number" min="1" max="30" step="1" value="10" placeholder="1-30" name="numberOfQuestions" required>
+        <label class="libre-baskerville m-16 text-xl" for="numberOfQuestions">Number of Questions</label>
+        <input class="max-w-none w-56 raleway rounded border-2 border-solid <% if ((!infoForUser) || infoForUser === "All questions deleted.") { %> border-blue-800 mb-8 <% } else { %> border-red-500 <% } %> block mx-16 mt-6 appearance-none px-2" type="number" min="1" max="30" step="1" value="10" placeholder="1-30" name="numberOfQuestions" required>
         
 
-        <p class="<% if (infoForUser !== "I'm sorry, but there are not enough questions for your particular request.") { %> hidden <% } %> bg-white libre-baskerville ml-6 mt-2 text-red-700">Try less questions here.</p>
+        <p class="<% if (infoForUser !== "I'm sorry, but there are not enough questions for your particular request.") { %> hidden <% } %> bg-white libre-baskerville ml-16 mt-2 text-red-700">Try less questions here.</p>
         <!-- <img src="" alt="Icon/SVG related to topic here."> -->
     </div>
     
-    
+<!-- If screen size is mobile or small, use Select + 3 different divs. Else (medium and >), use radio buttons for Category (w/icons), Difficulty, Type. 1 div for Number, Difficulty, Type. 1 div for Category radio buttons -->
 
-    <div class="bg-blue-200  bg-white pt-5">
-        <label class="libre-baskerville m-6" for="category">Category</label>
+    <div class="bg-blue-200 pt-5">
+        <label class="libre-baskerville m-16 text-xl" for="category">Category</label>
 
-    <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-6 mt-6 outline-none focus:border-teal-700 <% if (!tryDifferentCategory) { %> mb-8 <% } %>" type="text" placeholder="Category" name="category">
+
+        <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 outline-none focus:border-teal-700 <% if (!tryDifferentCategory) { %> mb-8 <% } %>" type="text" placeholder="Category" name="category">
 
 
             <optgroup label="Free-for-all">
@@ -97,7 +98,7 @@
             
         </select>
 
-        <p class="libre-baskerville text-sm ml-6 mt-2 text-red-700"> <%= tryDifferentCategory %> </p>
+        <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentCategory %> </p>
 
         <!-- <img src="" alt="Icon/SVG related to topic here."> -->
 
@@ -105,16 +106,16 @@
     
 
     <div class="pt-5 bg-green-200">
-        <label class=" libre-baskerville m-6" for="difficulty">Difficulty</label>
+        <label class=" libre-baskerville m-16 text-xl" for="difficulty">Difficulty</label>
 
-        <select class=" max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-6 mt-6 <% if (!tryDifferentDifficulty) { %> mb-8 <% } %>" type="text" placeholder="Difficulty" name="difficulty">
+        <select class=" max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 <% if (!tryDifferentDifficulty) { %> mb-8 <% } %>" type="text" placeholder="Difficulty" name="difficulty">
             <option value="any">Any</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
 
-        <p class="libre-baskerville text-sm ml-6 mt-2 text-red-700"> <%= tryDifferentDifficulty %> </p>
+        <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentDifficulty %> </p>
 
         <!-- <img src="" alt="Icon/SVG related to topic here."> -->
 
@@ -122,24 +123,26 @@
     
 
     <div class="pt-5 bg-blue-200">
-        <label class="libre-baskerville m-6" for="type">Type</label>
+        <label class="libre-baskerville m-16 text-xl" for="type">Type</label>
 
-        <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-6 mt-6 <% if (!tryDifferentType) { %> mb-8 <% } %>" type="text" placeholder="Type" name="type">
+        <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 <% if (!tryDifferentType) { %> mb-8 <% } %>" type="text" placeholder="Type" name="type">
             <option value="any">Any</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True or False</option>
         </select>
 
-        <p class="libre-baskerville text-sm ml-6 mt-2 text-red-700"> <%= tryDifferentType %> </p>
+        <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentType %> </p>
 
         <!-- <img src="" alt="Icon/SVG related to topic here."> -->
 
     </div>
-    
-    
-    <button class="button-expand absolute logo-image libre-baskerville rounded border-t border-r border-b border-l border-blue-900 block p-1 m-6 text-blue-600" type="submit">Submit</button>
+
+    <button class="button-expand absolute logo-image libre-baskerville rounded border-t border-r border-b border-l border-blue-900 block p-1 m-16 text-xl text-blue-600" type="submit">Submit</button>
 
 </form>
+
+
+
 </main>
 
 <%- include('partials/footer'); -%>
