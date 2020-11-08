@@ -1,12 +1,14 @@
 <%- include('partials/header'); -%>
 
+<main class="">
+
 <h1 class="merienda text-center text-blue-800 text-6xl">Results</h1>
 
 <!-- SVGs/Icons turn green if correct, else red incorrect. -->
 
 <div class="flex sticky top-0">
 
-    <form class="" action="/results" method='get'>
+    <form class="border-2 border-black" action="/results" method='get'>
         <button class="raleway text-center p-2 m-2 border border-gray-700 rounded bg-green-100 text-red-400"type="submit">No Results?</button>
     </form>
 
@@ -28,11 +30,11 @@
 
 </div>
 
-<div class="flex">
+<div class="border-2 border-black flex">
     <h1 class="roboto-condensed m-6 <% if (typeof(response[response.length - 1].yourCorrectQuestions) !== "number" || typeof(numberOfQuestions) !== "number") { %> disabled hidden<% } %>"> 
         You answered <span class="roboto-condensed text-green-500"><%= response[response.length - 1].yourCorrectQuestions %>
         </span> / <span class="roboto-condensed text-blue-500"><%= numberOfQuestions %></span> correctly. </h1>
-    <p class="roboto-condensed m-6 <% if (isNaN(percent_correct)) { %> hidden<% } %>"><%= percent_correct %>%</p>
+    <p class="border-2 border-black roboto-condensed m-6 <% if (isNaN(percent_correct)) { %> hidden<% } %>"><%= percent_correct %>%</p>
 </div>
 
 <div class="flex">
@@ -43,13 +45,13 @@
 
 <% for (let index = 1; index < response.length - 1; index++) { %>
 
-<div class="">
+<div class="border-2 border-black">
     <p class="libre-baskerville text-green-800 ml-6 py-2"> Question <%= response[index].question_number %> </p>
 
     <img src="" alt="Icon/SVG related to topic here.">
 
     <p class="roboto-condensed text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %> </p>
-    <p class="roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </p>
+    <p class="border-2 border-black roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </p>
     <!-- <p class="libre-baskerville text-orange-900 ml-6 py-2 block"> <%= response[index].accuracy %></p> -->
     <p class="libre-baskerville text-blue-600 ml-6 py-2 block"> <%= response[index].result %> </p>
     <p class="libre-baskerville text-green-600 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></p>
@@ -57,5 +59,7 @@
 </div>
 
 <% } %>
+
+</main>
 
 <%- include('partials/footer'); -%>

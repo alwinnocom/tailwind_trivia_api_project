@@ -1,5 +1,8 @@
 <%- include('partials/header'); -%>
 
+<main class="">
+
+    <div class="bg-blue-900">
 <nav class="sticky inset-0 h-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
     <ul class="flex flex-row">
         <% for (let i = 0; i < ejsResponse.length; i++) { %>
@@ -24,9 +27,9 @@
         <% } %>
     </ul>
 </nav>
+</div>
 
-
-<h1 class="lobster-2 text-center py-8 text-green-700 text-6xl"> <%= category %> </h1>
+<h1 class="lobster-2 text-center bg-blue-200 text-green-700 text-6xl top-0"> <%= category %> </h1>
 
 
 <div class="flex">
@@ -80,7 +83,7 @@
             <% if (ejsResponse[index].questionType === 'boolean') { %>
 
             <!-- Use order alongside EJS partials to change the order of flexbox. Maximum Tailwind Order classes are 12. -->
-            <div class="flex">
+            <div class="flex flex-column bg-white">
                 <div class="p-2 order-2">
                     <label class="roboto-condensed ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
                     <input <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
@@ -98,7 +101,7 @@
             <% } else { %>
 
 
-            <section class="flex">
+            <section class="flex flex-column bg-white">
                 <div class="p-2 text-green-500 border-r-2 border-opacity-75 border-green-200 order-<%= Math.floor(Math.random()*12) + 1; %>">
                     <label class="roboto-condensed ml-2 text-green-500" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
                     <input <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
@@ -128,5 +131,7 @@
     <button type="submit" class="libre-baskerville border-black block pt-3 m-6 text-blue-600">Submit All Answers</button>
 
 </form>
+
+</main>
 
 <%- include('partials/footer'); -%>
