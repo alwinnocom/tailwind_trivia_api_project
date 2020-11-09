@@ -91,8 +91,11 @@ input, select {
     animation: appear 1s linear forwards;
 }
 
+.results-button {
+    min-width: 140px;
+}
+
 .button-emphasize {
-    animation-delay: 3s;
     animation: emphasize 4s linear infinite;
 }
 
