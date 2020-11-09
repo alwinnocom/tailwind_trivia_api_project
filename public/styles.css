@@ -90,17 +90,27 @@ input, select {
 }
 
 .info-disappear {
-    animation-delay: 4s;
-    animation: disappear 3s linear forwards;
+    animation: disappear 10s linear forwards;
 }
 
 @keyframes disappear {
 
     0% {
         opacity: 1;
+        display: block;
+        height: 100%;
     }
+
+    50% {
+        opacity: 0.8;
+        display: block;
+        height: 50%;
+    }
+
     100% {
         opacity: 0;
+        display: none;
+        height: 0;
     }
 
 }
@@ -117,14 +127,17 @@ input, select {
 }
 
 .button-expand {
-    width: 0%;
-    transition-delay: 2s;
-    transition-property: background-color
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .button-expand:hover {
-    width: 100%;
-    background-color: black;
+    width: 50%;
+    color: blue;
+    font-weight: 500;
+    border-color: blue;
+    border-width: 3px;
 }
 
 .center-form {
@@ -178,6 +191,9 @@ input, select {
         width: 50%;
     }
 
+    .submit-button {
+        left: 50%;
+    }
 
 }
 

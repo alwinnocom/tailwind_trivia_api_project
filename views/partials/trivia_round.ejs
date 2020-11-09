@@ -1,8 +1,8 @@
-<main class="ml-6 mr-6 md:grid grid-cols-2 gap-8">
+<main class="mx-6 grid grid-cols-1 gap-8 md:grid md:grid-cols-2">
 
 <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
-    <div class="border-2 border-gray-500 rounded" style="display: block;">
+    <div class="border-2 border-gray-500 rounded-md" style="display: block;">
         <h2 id="<%= index + 1 %>" class="raleway py-2 pl-4 text-3xl
             <% if (savedUserResponse[index] && savedUserResponse) { %>
                 text-green-500
@@ -13,7 +13,7 @@
             <% } %>
             ">Question <%= index + 1 %></h2>
 
-            <p class="w-auto text-xl raleway text-lg text-gray-800 p-4 >
+            <p class="w-auto h-auto break-words text-xl raleway text-lg text-gray-800 p-4 >
                 <% if (savedUserResponse[index] && savedUserResponse) { %>
                     bg-green-400
                 <% } else if (!savedUserResponse[index] && savedUserResponse) { %>
@@ -47,7 +47,7 @@
         <% } else { %>
 
 
-        <section class="relative bottom-0 grid grid-rows-4 bg-white">
+        <section class="md:relative md:inset-x-0 md:bottom-0 grid grid-rows-4 bg-white">
             <div class="m-2 border-opacity-75 border-green-200 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
                 <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= index %> ></input>
