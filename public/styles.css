@@ -84,14 +84,23 @@ input, select {
 }
 
 
+
+/* Button Styling */
+
 .trivia-appear {
-    animation-delay: 6s;
-    animation: appear 1s linear forwards;
+    animation-delay: 1s;
+    animation: appear 2s linear forwards;
+}
+
+.button-emphasize {
+    animation-delay: 3s;
+    animation: emphasize 4s linear infinite;
 }
 
 .info-disappear {
     animation: disappear 10s linear forwards;
 }
+
 
 @keyframes disappear {
 
@@ -118,10 +127,26 @@ input, select {
 @keyframes appear {
 
     0% {
-        opacity: 0;
+        transform: translateY(-100px);
     }
     100% {
-        opacity: 1;
+        transform: translateY(0px);
+    }
+
+}
+
+@keyframes emphasize {
+
+    0% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(1.2)
+    }
+
+    100% {
+        transform: scale(1)
     }
 
 }
@@ -132,7 +157,13 @@ input, select {
     transform: translateX(-50%);
 }
 
-.button-expand:hover {
+.question-button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.button-expand:hover, .question-button:hover {
     width: 50%;
     color: blue;
     font-weight: 500;
@@ -144,6 +175,12 @@ input, select {
     position: relative;
     transform: translateX(-50%);
     right: 50%;
+}
+
+
+/* Question Navbar Styling */
+.question-navbar {
+    top: 112px;
 }
 
 .test-second-spreadsheet {

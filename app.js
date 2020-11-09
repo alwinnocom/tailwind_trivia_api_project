@@ -195,6 +195,8 @@ app.get("/questions/delete", (req, res) => {
 app.route('/')
   .get((req, res) => {
     
+    pleaseAnswerEveryQuestion = ``;
+
     Compare_Answer.deleteMany((err) => {
       if (err) {
         console.log("Compare Answer Error is ", err);

@@ -11,19 +11,19 @@ const saveData = (questionData) => {
             let question = questionData[i].question;
             let correctAnswer = questionData[i].correct_answer;
             let incorrectAnswers = questionData[i].incorrect_answers;
-            
 
+            
             
 
             // Trivia Regex
-            question = question.replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
-            correctAnswer = correctAnswer.replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+            question = question.replace(/&oacute;/g, "ó").replace(/&ldquo;/g, "\"").replace(/&rdquo;/g, "\"").replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+            correctAnswer = correctAnswer.replace(/&oacute;/g, "ó").replace(/&ldquo;/g, "\"").replace(/&rdquo;/g, "\"").replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
 
             if (incorrectAnswers.length > 1) {
                 let incorrectAnswersArray = [];
 
                 for (j = 0; j < incorrectAnswers.length; j++) {
-                    incorrectAnswers[j] = incorrectAnswers[j].replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
+                    incorrectAnswers[j] = incorrectAnswers[j].replace(/&oacute;/g, "ó").replace(/&ldquo;/g, "\"").replace(/&rdquo;/g, "\"").replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");
                     incorrectAnswersArray.push(incorrectAnswers[j]);
                 }
 
