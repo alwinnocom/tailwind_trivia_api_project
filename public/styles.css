@@ -202,6 +202,7 @@ input, select {
         border-width: 3px;
 }
 
+
 /* Button Below Medium Screen */
 @media (min-width: 640px) { 
     .button-expand:hover, .question-button:hover {
@@ -262,7 +263,6 @@ input, select {
 }
 
 
-
 .logo-image {
     width: 60%;
 }
@@ -273,7 +273,6 @@ input, select {
     .logo-image {
         width: 60%;
     }
-
 }
 
 /* Medium (md) */
@@ -285,7 +284,6 @@ input, select {
     .submit-button {
         left: 50%;
     }
-
 }
 
 /* Large (lg) */
@@ -293,15 +291,18 @@ input, select {
     .logo-image {
         width: 35%;
     }
-
-    
 }
 
 /* Extra Large (xl) */
 @media (min-width: 1280px) {
     .logo-image {
         width: 35%;
-    }
+    }    
+ }
 
-    
+
+ .score {
+     position: relative;
+     left: 50%;
+     transform: translateX(-50%);
  }

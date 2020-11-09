@@ -6,14 +6,14 @@
 
 <!-- SVGs/Icons turn green if correct, else red incorrect. -->
 
-<!-- <div class="flex flex-col text-left">
+<!-- <div class="score flex flex-col justify-center">
     <div class="">
-        <h2 class="roboto-condensed m-6 text-6xl <% if (typeof(response[response.length - 1].yourPointsEarned) !== "number" || typeof(response[0].totalPointsPossible) !== "number") { %> disabled hidden<% } %>"> 
+        <h2 class="roboto-condensed m-6 text-lg <% if (typeof(response[response.length - 1].yourPointsEarned) !== "number" || typeof(response[0].totalPointsPossible) !== "number") { %> disabled hidden<% } %>"> 
                 Final Score: <span class="roboto-condensed text-green-500"><%= response[response.length - 1].yourPointsEarned %>
                 </span> / <span class="roboto-condensed text-blue-500"><%= response[0].totalPointsPossible %></span></h2>
     </div>
     <div>
-        <p class="text-6xl roboto-condensed p-2 text-green-500 border-2 border-green-500 rounded <% if (isNaN(percent_correct)) { %> hidden<% } %>"><%= percent_correct %>%</p>
+        <p class="text-lg roboto-condensed p-2 text-green-500 border-2 border-green-500 rounded <% if (isNaN(percent_correct)) { %> hidden<% } %>"><%= percent_correct %>%</p>
     </div>
 </div> -->
 
@@ -84,11 +84,11 @@
 
 <% if (hideAllCorrectAnswers !== "hide") { %> 
 
-    <h1>Your Answers</h1>
+    <!-- <h1>Your Answers</h1> -->
 
-    <%- include('partials/trivia_results'); -%>
+    <!-- include('partials/trivia_results'); <%- -%> -->
 
-<% } %>
+<% } %> 
 
 </main>
 
