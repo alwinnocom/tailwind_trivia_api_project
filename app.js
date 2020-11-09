@@ -265,7 +265,7 @@ app.route('/results')
     const formVerifier = () => {
       return new Promise ((resolve, reject) => {
       if (Object.keys(userAnswers).length < numberOfQuestions) {
-        reject(`Questions Unanswered: ${numberOfQuestions - Object.keys(userAnswers).length}`);
+        reject(`Number of Questions Unanswered: ${numberOfQuestions - Object.keys(userAnswers).length}`);
       }
 
       else {

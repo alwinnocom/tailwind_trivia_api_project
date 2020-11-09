@@ -2,7 +2,7 @@
 
 <!-- HTML Pseudocode -->
 
-<main class="bg-white">
+<main class="bg-gray-200">
 
 <!-- Lobster 2 LogoHub - https://logohub.io/# -->
 
@@ -27,9 +27,9 @@
 
     <section class="mx-6 grid grid-cols-1 grid-rows-4 gap-4 md:grid-cols-2 md:grid-rows-2 md:gap-8">
 
-        <div class="border-2 border-white rounded-full bg-red-500 <% if (infoForUser === "Please type a valid number of questions between 1 and 25.") { %> bg-red-200 pt-5 <% } else { %> bg-white pt-5 <% } %>" >
+        <div class="border-4 rounded-full <% if (infoForUser === "Please type a valid number of questions between 1 and 25.") { %> bg-red-500 border-red-600 pt-5 <% } else { %> bg-green-300  border-green-600 pt-5 <% } %>" >
             
-            <label class="libre-baskerville m-16 text-xl" for="numberOfQuestions">Number of Questions</label>
+            <label class="libre-baskerville m-16 text-xl text-green-900" for="numberOfQuestions">Number of Questions</label>
             <input class="max-w-none w-56 raleway rounded border-2 border-solid <% if ((!infoForUser) || infoForUser === "All questions deleted.") { %> border-blue-800 mb-8 <% } else { %> border-red-500 <% } %> block mx-16 mt-6 appearance-none px-2" type="number" min="1" max="25" step="1" value="10" placeholder="1-25" name="numberOfQuestions" required>
             
 
@@ -39,11 +39,11 @@
         
     <!-- If screen size is mobile or small, use Select + 3 different divs. Else (medium and >), use radio buttons for Category (w/icons), Difficulty, Type. 1 div for Number, Difficulty, Type. 1 div for Category radio buttons -->
 
-        <div class="border-2 border-white rounded-full bg-blue-300 pt-5">
-            <label class="libre-baskerville m-16 text-xl" for="category">Category</label>
+        <div class="border-4 border-blue-600 rounded-full bg-blue-300 pt-5">
+            <label class="libre-baskerville m-16 text-xl text-blue-900" for="category">Category</label>
 
 
-            <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 outline-none focus:border-teal-700 <% if (!tryDifferentCategory) { %> mb-8 <% } %>" type="text" placeholder="Category" name="category">
+            <select class="max-w-none w-56 raleway rounded border-2 border-gray-700 block mx-16 mt-6 outline-none focus:border-teal-700 <% if (!tryDifferentCategory) { %> mb-8 <% } %>" type="text" placeholder="Category" name="category">
 
 
                 <optgroup class="text-xl md:text-lg" label="Free-for-all">
@@ -107,10 +107,10 @@
         </div>
         
 
-        <div class="border-2 border-white rounded-full pt-5 bg-green-300 md:bg-blue-300">
-            <label class=" libre-baskerville m-16 text-xl" for="difficulty">Difficulty</label>
+        <div class="border-4 border-green-600 rounded-full pt-5 bg-green-300 md:bg-blue-300 md:border-blue-600">
+            <label class=" libre-baskerville m-16 text-xl text-green-900 md:text-blue-900" for="difficulty">Difficulty</label>
 
-            <select class=" max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 <% if (!tryDifferentDifficulty) { %> mb-8 <% } %>" type="text" placeholder="Difficulty" name="difficulty">
+            <select class=" max-w-none w-56 raleway rounded border-2 border-gray-700 block mx-16 mt-6 <% if (!tryDifferentDifficulty) { %> mb-8 <% } %>" type="text" placeholder="Difficulty" name="difficulty">
                 <option class="text-xl md:text-lg" value="any">Any</option>
                 <option class="text-xl md:text-lg" value="easy">Easy</option>
                 <option class="text-xl md:text-lg" value="medium">Medium</option>
@@ -124,10 +124,10 @@
         </div>
         
 
-        <div class="border-2 border-white rounded-full pt-5 bg-blue-300 md:bg-green-300">
-            <label class="libre-baskerville m-16 text-xl" for="type">Type</label>
+        <div class="border-4 border-blue-600 rounded-full pt-5 bg-blue-300 md:bg-green-300 md:border-green-600">
+            <label class="libre-baskerville m-16 text-xl text-blue-900 md:text-green-900" for="type">Type</label>
 
-            <select class="max-w-none w-56 raleway rounded border-t border-r border-b border-l border-black block mx-16 mt-6 <% if (!tryDifferentType) { %> mb-8 <% } %>" type="text" placeholder="Type" name="type">
+            <select class="max-w-none w-56 raleway rounded border-2 border-gray-700 block mx-16 mt-6 <% if (!tryDifferentType) { %> mb-8 <% } %>" type="text" placeholder="Type" name="type">
                 <option class="text-xl md:text-lg" value="any">Any</option>
                 <option class="text-xl md:text-lg" value="multiple">Multiple Choice</option>
                 <option class="text-xl md:text-lg" value="boolean">True or False</option>
@@ -141,7 +141,7 @@
 
     </section>
 
-    <button class="mx-none submit-button button-expand absolute logo-image libre-baskerville rounded border-t border-r border-b border-l border-blue-900 block p-4 my-4 text-xl md:text-2xl text-blue-600" type="submit">Submit</button>
+    <button class="bg-white mx-none submit-button button-expand absolute logo-image libre-baskerville rounded border-2 border-blue-600 block p-4 my-4 text-xl md:text-2xl text-blue-600" type="submit">Submit</button>
 
 </form>
 

@@ -2,7 +2,15 @@
 
 <% for (let index = 0; index < ejsResponse.length; index++) { %>
 
-    <div class="border-2 border-gray-500 rounded-md" style="display: block;">
+    <div class="block border-2 rounded-md
+        <% if (savedUserResponse[index] && savedUserResponse) { %>
+            border-green-500
+        <% } else if (!savedUserResponse[index] && savedUserResponse) { %>
+            border-red-500
+        <% } else { %>
+            border-blue-<%=(((index % 2) + 1) * 300) + 200%>
+        <% } %>
+    ">
         <h2 id="<%= index + 1 %>" class="raleway py-2 pl-4 text-3xl
             <% if (savedUserResponse[index] && savedUserResponse) { %>
                 text-green-500
