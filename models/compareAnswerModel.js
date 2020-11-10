@@ -3,7 +3,6 @@ const { Schema } = require('mongoose');
 
 mongoose.connect("mongodb+srv://admin-alwin:aGq5DdasHMkw5Di@tailwindtrivia.g4cpx.mongodb.net/question?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
-
 const compare_answerSchema = new Schema({
     question_number: String,
 

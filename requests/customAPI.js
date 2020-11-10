@@ -1,7 +1,6 @@
 const customAPI = (num, cat, dif, typ) => {
     
     return new Promise((resolve, reject) => {
-    // API Call gives 1-30 questions.
 
     // Specific Category only
     if (cat > 8 && dif === "any" && typ === "any") {

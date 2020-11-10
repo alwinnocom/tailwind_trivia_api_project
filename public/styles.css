@@ -1,46 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merienda&family=Lobster+Two:ital@1&family=Comfortaa&family=Quicksand:wght@300&family=Cookie&family=Libre+Baskerville&family=Montserrat:ital,wght@1,300&family=Raleway:wght@500&family=Roboto+Condensed&display=swap');
 
 
-/* Small (sm) */
-@media (min-width: 640px) { /* ... */ }
-
-/* Medium (md) */
-@media (min-width: 768px) { /* ... */ }
-
-/* Large (lg) */
-@media (min-width: 1024px) { /* ... */ }
-
-/* Extra Large (xl) */
-@media (min-width: 1280px) { /* ... */ }
-
-
-/* #56 Anton - 100 */
-/* Comfortaa, Quicksand, Raleway */
-
-
-
-/* Colorful and Balanced color palette = https://visme.co/blog/website-color-schemes/ */
-
-:root {
-    --cool-red: #E27D60;
-    --cool-blue: #85BDCB;
-    --tan-brown: #E8A87C;
-    --cool-indigo: #C38D9E;
-    --sea-blue: #41B3A3;
-  }
-
-main {
-    /* background-color: var(--cool-blue); */
-}
-
-
-/* .logo {
-    width: 50px;
-    height: 50px;
-    background-color: red;
-    border-radius: 3px;
-} */
-
 /* Quiz Pro Quo possible fonts: Lobster, Dancing Script, PT Sans, EB Garamond, Henry Penny, Lobster Two, */
 
 .merienda {
@@ -49,14 +9,6 @@ main {
 
 .lobster-2 {
     font-family: 'Lobster Two', cursive;
-}
-
-.comfortaa {
-    font-family: 'Comfortaa', cursive;
-}
-
-.quicksand {
-    font-family: 'Quicksand', sans-serif;
 }
 
 .libre-baskerville {
@@ -75,10 +27,8 @@ main {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-.cookie {
-    font-family: 'Cookie', cursive;
-}
 
+/* Same width for input and select buttons. */
 input, select {
     max-width: 70px;
 }
@@ -241,6 +191,8 @@ input, select {
     font-size: 200px;
 }
 
+
+/* Anchor Tag Styling for future Anchor Tag Update */
 .anchor-1, .anchor-2 {
     min-height: 10px;
 }
@@ -252,7 +204,6 @@ input, select {
 .anchor-2 {
     min-width: 105px;
 }   
-
 
 
 /* Logo Image Styling based on Media Screen Width */

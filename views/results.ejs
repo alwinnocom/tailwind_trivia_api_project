@@ -51,25 +51,22 @@
 
 <section class="ml-6 mr-6 md:grid grid-cols-2 gap-8">
 
-    <% for (let index = 1; index < ejsResponse.length + 1; index++) { %>
+    <% for (let index = 0; index < response.length; index++) { %>
+
+        <!-- If question number is not found, then it isn't a dataset that should be viewed anyway, so skip it. -->
+        <% if (!response[index].question_number) { 
+            continue
+        } %>
+
 
     <div class="border-2 rounded <% if (response[index].accuracy === `Correct!`) { %> border-green-500 text-green-600 <% } else { %> border-red-500 text-red-600 <% } %>">
         <p class="libre-baskerville text-xl ml-6 py-2"> Question <%= response[index].question_number %> </p>
 
         <!-- <img src="" alt="Icon/SVG related to topic here."> -->
-
-        <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %>
-        <span class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </span></p>
-        <!-- <table>
-            <tr>
-                <th>Your Answer</th>
-                <th>Correct Answer</th>
-            </tr>
-            <tr>
-                <td class="roboto-condensed text-gray-800 ml-6 py-2 block"><%= response[index].result %></td>
-                <td class="roboto-condensed text-gray-800 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><%= response[index].correct_result %></td>
-            </tr>
-        </table> -->
+        <div class="block border-2 border-l-0 border-r-0 border-opacity-50 border-dotted <% if (response[index].accuracy === `Correct!`) { %> border-green-500 text-green-600 <% } else { %> border-red-500 text-red-600 <% } %>">
+            <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %>
+            <span class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </span></p>
+        </div>
         
         <p class="roboto-condensed ml-6 py-2 block"> <span class="text-gray-800">Your Answer: </span><%= response[index].result %> </p>
         <p class="roboto-condensed text-green-600 ml-6 py-2 block <% if (hideAllCorrectAnswers === "hide") { %> hidden bg-blue-500 <% } %>"><span class="text-gray-800">Correct Answer: </span><%= response[index].correct_result %></p>
@@ -81,14 +78,6 @@
     <hr class="my-5 min-w-full max-w-full">
 
 </section>
-
-<% if (hideAllCorrectAnswers !== "hide") { %> 
-
-    <!-- <h1>Your Answers</h1> -->
-
-    <!-- include('partials/trivia_results'); <%- -%> -->
-
-<% } %> 
 
 </main>
 

@@ -12,8 +12,6 @@ const saveData = (questionData) => {
             let correctAnswer = questionData[i].correct_answer;
             let incorrectAnswers = questionData[i].incorrect_answers;
 
-            
-            
 
             // Trivia Regex
             question = question.replace(/&oacute;/g, "ó").replace(/&ldquo;/g, "\"").replace(/&rdquo;/g, "\"").replace(/&eacute;/g, "e").replace(/&#039;/g, "\'").replace(/&quot;/g, "\"").replace(/&amp;/g, "and");

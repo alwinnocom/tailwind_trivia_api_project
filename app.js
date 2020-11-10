@@ -39,7 +39,6 @@ let tryDifferentCategory = ``;
 let tryDifferentDifficulty = ``;
 let tryDifferentType = ``;
 
-let ejsResponse = ``;
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
 let hideAllCorrectAnswers = ``;
@@ -71,12 +70,10 @@ app.route('/questions')
 
         
         else {
-          
-            ejsResponse = response;
 
             res.render("questions", {
               numberOfQuestions: numberOfQuestions,
-              ejsResponse: ejsResponse,
+              ejsResponse: response,
               pleaseAnswerEveryQuestion: pleaseAnswerEveryQuestion,
               savedUserResponse: savedUserResponse,
               category: category_list[category]
@@ -241,8 +238,6 @@ app.route('/results')
       else {
           res.render("results", {
             response: response,
-            ejsResponse: ejsResponse,
-            savedUserResponse: savedUserResponse,
             numberOfQuestions: numberOfQuestions,
             hideAllCorrectAnswers: hideAllCorrectAnswers,
             percent_correct: (parseInt(response[response.length - 1].yourCorrectQuestions) / parseInt(numberOfQuestions)) * 100
