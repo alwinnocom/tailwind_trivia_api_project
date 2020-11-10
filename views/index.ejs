@@ -1,14 +1,11 @@
 <%- include('partials/header'); -%>
 
-<!-- HTML Pseudocode -->
 
 <main class="bg-gray-200">
 
 <h1 class="lobster-2 bg-blue-600 text-center py-2 text-white text-6xl"><span class="w-1 h-1 px-3 m-4 bg-teal-500 rounded">?</span>Quiz Pro Quo</h1>
 
 <div class="info-disappear text-xl rounded-full mx-6 my-8 bg-red-300 text-red-600 <% if (!infoForUser) { %> hidden <% } %>"><h2 class="info-disappear libre-baskerville px-16 py-6 text-xl text-red-600"> <%= infoForUser %> </h2></div>
-<!-- <div class="<% if (infoForUser) { %> hidden <% } %>"><h2 class="libre-baskerville p-6 text-xl rounded-full mx-6 my-8 bg-red-300 text-red-600"> This is where you should put Trivia Icons when there is no infoForUser. </h2></div> -->
-
 
 <form class="" action='/questions' method='post' id='form'>
 
@@ -19,13 +16,10 @@
             <label class="libre-baskerville m-16 text-xl text-green-900" for="numberOfQuestions">Number of Questions</label>
             <input class="max-w-none w-56 raleway rounded border-2 border-solid <% if ((!infoForUser) || infoForUser === "All questions deleted.") { %> border-blue-800 mb-8 <% } else { %> border-red-500 <% } %> block mx-16 mt-6 appearance-none px-2" type="number" min="1" max="25" step="1" value="10" placeholder="1-25" name="numberOfQuestions" required>
             
-
             <p class="<% if (infoForUser !== "I'm sorry, but there are not enough questions for your particular request.") { %> hidden <% } %> bg-white libre-baskerville ml-16 mt-2 text-red-700">Try less questions here.</p>
-            <!-- <img src="" alt="Icon/SVG related to topic here." class="float-right"> -->
+            
         </div>
         
-
-    <!-- If screen size is mobile or small, use Select + 3 different divs. Else (medium and >), use radio buttons for Category (w/icons), Difficulty, Type. 1 div for Number, Difficulty, Type. 1 div for Category radio buttons -->
         <div class="border-4 border-blue-600 rounded-full bg-blue-300 pt-5">
             <label class="libre-baskerville m-16 text-xl text-blue-900" for="category">Category</label>
 
@@ -89,7 +83,7 @@
 
             <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentCategory %> </p>
 
-            <!-- <img src="" alt="Icon/SVG related to topic here." class="float-right"> -->
+            
 
         </div>
         
@@ -106,8 +100,6 @@
 
             <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentDifficulty %> </p>
 
-            <!-- <img src="" alt="Icon/SVG related to topic here." class="float-right"> -->
-
         </div>
         
 
@@ -121,8 +113,6 @@
             </select>
 
             <p class="libre-baskerville text-sm ml-16 mt-2 text-red-700"> <%= tryDifferentType %> </p>
-
-            <!-- <img src="" alt="Icon/SVG related to topic here." class="float-right"> -->
 
         </div>
 

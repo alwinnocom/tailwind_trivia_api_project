@@ -4,20 +4,6 @@
 
 <h1 class="roboto-condensed text-center bg-blue-700 text-white text-6xl">Results</h1>
 
-<!-- SVGs/Icons turn green if correct, else red incorrect. -->
-
-<!-- <div class="score flex flex-col justify-center">
-    <div class="">
-        <h2 class="roboto-condensed m-6 text-lg <% if (typeof(response[response.length - 1].yourPointsEarned) !== "number" || typeof(response[0].totalPointsPossible) !== "number") { %> disabled hidden<% } %>"> 
-                Final Score: <span class="roboto-condensed text-green-500"><%= response[response.length - 1].yourPointsEarned %>
-                </span> / <span class="roboto-condensed text-blue-500"><%= response[0].totalPointsPossible %></span></h2>
-    </div>
-    <div>
-        <p class="text-lg roboto-condensed p-2 text-green-500 border-2 border-green-500 rounded <% if (isNaN(percent_correct)) { %> hidden<% } %>"><%= percent_correct %>%</p>
-    </div>
-</div> -->
-
-
 <div class="grid grid-cols-2 md:align-middle md:justify-center md:flex md:flex-row sticky bottom-0 bg-white ml-4 my-8">
 
     <form class="" action="/results" method='get'>
@@ -62,7 +48,6 @@
     <div class="border-2 rounded <% if (response[index].accuracy === `Correct!`) { %> border-green-500 text-green-600 <% } else { %> border-red-500 text-red-600 <% } %>">
         <p class="libre-baskerville text-xl ml-6 py-2"> Question <%= response[index].question_number %> </p>
 
-        <!-- <img src="" alt="Icon/SVG related to topic here."> -->
         <div class="block border-2 border-l-0 border-r-0 border-opacity-50 border-dotted <% if (response[index].accuracy === `Correct!`) { %> border-green-500 text-green-600 <% } else { %> border-red-500 text-red-600 <% } %>">
             <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %>
             <span class=" roboto-condensed text-purple-700 ml-6 py-2"> Points Possible: <%= response[index].points_possible %> </span></p>

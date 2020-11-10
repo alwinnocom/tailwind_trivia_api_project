@@ -1,33 +1,6 @@
 <%- include('partials/header'); -%>
 
-<!-- <div class="bg-indigo-500">
-    <nav class="sticky inset-0 h-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
-        <ul class="flex flex-row">
-            <% for (let i = 0; i < ejsResponse.length; i++) { %>
-
-                <li class="p-2 raleway border-2 rounded w-auto
-                    <% if (savedUserResponse[i] && savedUserResponse) { %>
-                        bg-green-100 text-green-700 border-green-700
-                    <% } else if (!savedUserResponse[i] && savedUserResponse) { %>
-                        bg-red-100 text-red-700 border-red-700
-                    <% } else { %>
-                        border-2 rounded bg-white border-blue-<%=(((i % 4) + 4) * 100)%> text-blue-<%=(((i % 4) + 4) * 100)%>
-                    <% } %>
-                    
-                    <% if ((i+1) < 10) { %>
-                        anchor-1
-                    <% } else { %>
-                        anchor-2
-                    <% } %>">
-                <a href=#<%=(i+1)%>>Question <%=(i+1)%></a></li>
-
-            <% } %>
-        </ul>
-    </nav>
-</div> -->
-
 <div class="roboto-condensed text-center bg-blue-700 text-white text-6xl py-2 sticky top-0 z-50"> <h1 class="type-category"> <%= category %> </h1></div>
-<!-- <h1 class="merienda text-center bg-indigo-500 text-white text-6xl py-2 top-0"><%= category %><span class="w-1 h-1 px-3 m-4 bg-teal-500 rounded">!</span></h1> -->
 
 
 <div class="trivia-appear question-navbar justify-center flex flex-row sticky z-40 mb-4 px-6 bg-blue-100">
@@ -52,7 +25,6 @@
 <% } %>"><%= pleaseAnswerEveryQuestion %></p>
 
 
-<!-- Save SVGs/Images for each possible topic. Use EJS to determine the URL. -->
 <form action='/results' method='post' id='form'>
 
     <%- include('partials/trivia_round'); -%>
