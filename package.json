@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss css/import-tailwind.css -o public/build/tailwind.css"
+    "build": "postcss public/css/tailwind.css -o public/build/tailwind.css"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +23,7 @@
     "autoprefixer": "^9.8.6"
   },
   "engines": {
-    "node": ">=10.0.0",
-    "npm": ">=6.0.0"
+    "node": "12.x",
+    "npm": "6.x"
   }
 }
