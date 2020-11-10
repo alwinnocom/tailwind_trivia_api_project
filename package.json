@@ -15,11 +15,11 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.9",
     "nodemon": "^2.0.6",
-    "postcss": "^8.1.4"
-  },
-  "devDependencies": {
-    "autoprefixer": "^9.8.6",
+    "postcss": "^8.1.4",
     "postcss-cli": "^8.1.0",
     "tailwindcss": "^1.9.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6"
   }
 }
