@@ -6,8 +6,7 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/question', {useNewUrlParser: true, useUnifiedTopology: true});
-
+mongoose.connect("mongodb+srv://admin-alwin:aGq5DdasHMkw5Di@tailwindtrivia.g4cpx.mongodb.net/question?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Module Imports
 const https = require('https');
