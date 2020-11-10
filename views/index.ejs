@@ -5,11 +5,11 @@
 
 <h1 class="lobster-2 bg-blue-600 text-center py-2 text-white text-6xl"><span class="w-1 h-1 px-3 m-4 bg-teal-500 rounded">?</span>Quiz Pro Quo</h1>
 
-<div class="info-disappear text-xl rounded-full mx-6 my-8 bg-red-300 text-red-600 <% if (!infoForUser) { %> hidden <% } %>"><h2 class="info-disappear libre-baskerville px-16 py-6 text-xl text-red-600"> <%= infoForUser %> </h2></div>
+<div class="info-disappear text-xl rounded-full mx-6 my-4 bg-red-300 text-red-600 <% if (!infoForUser) { %> invisible <% } %>"><h2 class="info-disappear libre-baskerville px-16 py-6 text-xl text-red-600"> <%= infoForUser %> </h2></div>
 
 <form class="" action='/questions' method='post' id='form'>
 
-    <section class="mt-6 mx-6 grid grid-cols-1 grid-rows-4 gap-4 md:grid-cols-2 md:grid-rows-2 md:gap-8">
+    <section class="mx-6 grid grid-cols-1 grid-rows-4 gap-4 md:grid-cols-2 md:grid-rows-2 md:gap-8">
 
         <div class="border-4 rounded-full <% if (infoForUser === "Please type a valid number of questions between 1 and 25.") { %> bg-red-500 border-red-600 pt-5 <% } else { %> bg-green-300  border-green-600 pt-5 <% } %>" >
             
