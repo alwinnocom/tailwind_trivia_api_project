@@ -126,7 +126,9 @@ app.route('/questions')
               }
 
 
-      })
+      }
+    })
+  
 
     .post((req, res) => {
                     
@@ -190,7 +192,7 @@ app.route('/questions')
         });
 
     });
-
+  });
 
 // Get Request to act as a Delete Request
 app.get("/questions/delete", (req, res) => {
