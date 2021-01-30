@@ -6,9 +6,7 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
 const mongoose = require('mongoose');
-// MongoDB Atlas Cluster to push code to Heroku. Use the MongoDB Atlas Cluster to view data, as the MongoDB connection is already running. You have to cancel this connection before using localhost:27017, which is not recommended.
 mongoose.connect("mongodb+srv://admin-alwin:aGq5DdasHMkw5Di@tailwindtrivia.g4cpx.mongodb.net/question?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
-
 
 // Module Imports
 const https = require('https');
@@ -41,13 +39,11 @@ let tryDifferentCategory = ``;
 let tryDifferentDifficulty = ``;
 let tryDifferentType = ``;
 
+let ejsResponse = ``;
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
 let hideAllCorrectAnswers = ``;
-let percent_correct = 0;
-let totalPointsPossible = 0;
-let yourCorrectQuestions = 0;
-let yourPointsEarned = 0;
+let percent_correct = ``;
 
 
 // API Data Segmented Into Variables
@@ -75,10 +71,12 @@ app.route('/questions')
 
         
         else {
+          
+            ejsResponse = response;
 
             res.render("questions", {
               numberOfQuestions: numberOfQuestions,
-              ejsResponse: response,
+              ejsResponse: ejsResponse,
               pleaseAnswerEveryQuestion: pleaseAnswerEveryQuestion,
               savedUserResponse: savedUserResponse,
               category: category_list[category]
@@ -94,43 +92,9 @@ app.route('/questions')
         if (err) {
           console.log("Compare_Answer Delete Many Error is ", err);
         }
+      });
+
       })
-
-
-    //   Answer.deleteMany((err) => {
-    //     if (err) {
-    //       console.log("Answer Delete Many Error is ", err);
-    //     }
-    //   })
-
-
-    //   Answer.find(function (err, response) {
-                                    
-    //     if (err) {
-    //       console.log("Answer Find Error is ", err);
-    //     }
-
-    //     else {
-    //       realAnswers = response[0].correctAnswers;
-
-    //       questionTypeVerifier = response[0].questionTypes;
-          
-    //             for (j = 0; j < numberOfQuestions; j++) {
-    //               if (questionTypeVerifier[j] === "boolean") {
-    //                   totalPointsPossible += 1;
-    //                   j++;
-    //               }
-
-    //               else {
-    //                   totalPointsPossible += 3;
-    //                   j++;
-    //               }
-    //           }
-
-
-    //   }
-    // })
-  
 
     .post((req, res) => {
                     
@@ -142,7 +106,7 @@ app.route('/questions')
 
         return new Promise ((resolve, reject) => {
         if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 25) {
-            reject("Please type a valid number of questions between 1 and 25.");
+            reject("Please type a valid number of questions between 1 and 30.");
         }
     
         else if (!numberOfQuestions) {
@@ -194,7 +158,7 @@ app.route('/questions')
         });
 
     });
-  });
+
 
 // Get Request to act as a Delete Request
 app.get("/questions/delete", (req, res) => {
@@ -277,6 +241,8 @@ app.route('/results')
       else {
           res.render("results", {
             response: response,
+            ejsResponse: ejsResponse,
+            savedUserResponse: savedUserResponse,
             numberOfQuestions: numberOfQuestions,
             hideAllCorrectAnswers: hideAllCorrectAnswers,
             percent_correct: (parseInt(response[response.length - 1].yourCorrectQuestions) / parseInt(numberOfQuestions)) * 100
@@ -307,95 +273,6 @@ app.route('/results')
     });
     }
   
-  // const findAnswers = () => {
-
-  //     return new Promise ((resolve, reject) => {
-  //       Question.find(function (err, response) {
-                                    
-  //         if (err) {
-  //           console.log("Answer Find Error is ", err);
-  //         }
-
-  //         else {
-  //           realAnswers = response;
-
-  //               for (i = 0; i < numberOfQuestions; i++) {
-  //                   if (realAnswers[i].correctAnswer !== userAnswers[i] && realAnswers[i].questionType === "boolean") {
-                    
-  //                     let compareAnswer = new Compare_Answer({
-  //                       question_number: `${i+1}`,  
-  //                       points_earned: 0,
-  //                       points_possible: 1,
-  //                       accuracy: `Incorrect Answer.`,
-  //                       result: userAnswers[i],
-  //                       correct_result: realAnswers[i]
-  //                     })
-
-  //                     compareAnswer.save()
-
-  //                   }
-
-  //                   else if (realAnswers[i].correctAnswer !== userAnswers[i] && realAnswers[i].questionType === "multiple") {
-  //                       let compareAnswer = new Compare_Answer({
-  //                         question_number: `${i+1}`,  
-  //                         points_earned: 0,
-  //                         points_possible: 3,
-  //                         accuracy: `Incorrect Answer.`,
-  //                         result: userAnswers[i],
-  //                         correct_result: realAnswers[i]
-  //                       })
-
-  //                       compareAnswer.save()
-  //                   }
-
-
-  //                   else {        
-
-  //                       if (realAnswers[i].questionType === "boolean") {
-  //                         let compareAnswer = new Compare_Answer({
-  //                           question_number: `${i+1}`,  
-  //                           points_earned: 1,
-  //                           points_possible: 1,
-  //                           accuracy: `Correct!`,
-  //                           result: userAnswers[i],
-  //                           correct_result: realAnswers[i]
-  //                         })
-
-  //                         yourPointsEarned += 1;
-  //                         yourCorrectQuestions += 1;
-
-  //                         compareAnswer.save();
-  //                       }
-                      
-  //                       else {
-  //                         let compareAnswer = new Compare_Answer({
-  //                           question_number: `${i+1}`,  
-  //                           points_earned: 3,
-  //                           points_possible: 3,
-  //                           accuracy: `Correct!`,
-  //                           result: userAnswers[i],
-  //                           correct_result: realAnswers[i]
-  //                         })
-
-  //                         yourPointsEarned += 3;
-  //                         yourCorrectQuestions += 1;
-
-  //                         compareAnswer.save();
-  //                       }
-                    
-  //                   }
-
-  //                 i++;
-  //               }
-
-  //             resolve("Compare Answer is complete. You can go to results.ejs now.")
-  //         }
-
-
-  //       });
-  //     });
-
-  // }
 
     const findAnswers = () => {
 
@@ -412,10 +289,9 @@ app.route('/results')
             questionTypeVerifier = response[0].questionTypes;
             
             let totalPointsPossible = 0;
-            // let j = 0;
+            let j = 0;
 
-                // while (questionTypeVerifier[j] !== undefined) {
-                  for (j = 0; i < numberOfQuestions; j++) {
+                while (questionTypeVerifier[j] !== undefined) {
                     if (questionTypeVerifier[j] === "boolean") {
                         totalPointsPossible += 1;
                         j++;
@@ -433,12 +309,13 @@ app.route('/results')
 
                 countTotalPoints.save();
 
-            // let i = 0;
+
+            let i = 0;
             let yourPointsEarned = 0;
             let yourCorrectQuestions = 0;
 
-                // while (userAnswers[i] !== undefined) {
-                for (i = 0; i < numberOfQuestions; i++) {
+                while (userAnswers[i] !== undefined) {
+
                     if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
                     
                       let compareAnswer = new Compare_Answer({
@@ -513,7 +390,6 @@ app.route('/results')
                 })
 
                 userScore.save();
-                
 
               resolve("Compare Answer is complete. You can go to results.ejs now.")
           }
