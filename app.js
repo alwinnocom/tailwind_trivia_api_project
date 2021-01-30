@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
 const mongoose = require('mongoose');
+// MongoDB Atlas Cluster to push code to Heroku. Use the MongoDB Atlas Cluster to view data, as the MongoDB connection is already running. You have to cancel this connection before using localhost:27017, which is not recommended.
 mongoose.connect("mongodb+srv://admin-alwin:aGq5DdasHMkw5Di@tailwindtrivia.g4cpx.mongodb.net/question?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+
 
 // Module Imports
 const https = require('https');
