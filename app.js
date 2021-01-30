@@ -42,7 +42,7 @@ let tryDifferentType = ``;
 let ejsResponse = ``;
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
-let hideAllCorrectAnswers = ``;
+let hideAllCorrectAnswers = `hide`;
 let percent_correct = ``;
 
 

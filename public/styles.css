@@ -46,7 +46,7 @@ input, select {
 }
 
 .button-emphasize {
-    animation: emphasize 4s linear infinite;
+    animation: emphasize 4s linear 1;
 }
 
 .info-disappear {
