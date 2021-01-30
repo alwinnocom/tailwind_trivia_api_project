@@ -42,7 +42,10 @@ let tryDifferentType = ``;
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
 let hideAllCorrectAnswers = ``;
-let percent_correct = ``;
+let percent_correct = 0;
+let totalPointsPossible = 0;
+let yourCorrectQuestions = 0;
+let yourPointsEarned = 0;
 
 
 // API Data Segmented Into Variables
@@ -90,6 +93,38 @@ app.route('/questions')
           console.log("Compare_Answer Delete Many Error is ", err);
         }
       });
+
+
+      Answer.deleteMany((err) => {
+        if (err) {
+          console.log("Answer Delete Many Error is ", err);
+        }
+      })
+
+
+      Answer.find(function (err, response) {
+                                    
+        if (err) {
+          console.log("Answer Find Error is ", err);
+        }
+
+        else {
+          realAnswers = response[0].correctAnswers;
+
+          questionTypeVerifier = response[0].questionTypes;
+          
+                for (j = 0; j < numberOfQuestions; j++) {
+                  if (questionTypeVerifier[j] === "boolean") {
+                      totalPointsPossible += 1;
+                      j++;
+                  }
+
+                  else {
+                      totalPointsPossible += 3;
+                      j++;
+                  }
+              }
+
 
       })
 
@@ -268,49 +303,20 @@ app.route('/results')
     });
     }
   
-
-    const findAnswers = () => {
+  const findAnswers = () => {
 
       return new Promise ((resolve, reject) => {
-        Answer.find(function (err, response) {
+        Question.find(function (err, response) {
                                     
           if (err) {
             console.log("Answer Find Error is ", err);
           }
 
           else {
-            realAnswers = response[0].correctAnswers;
+            realAnswers = response;
 
-            questionTypeVerifier = response[0].questionTypes;
-            
-            let totalPointsPossible = 0;
-            let j = 0;
-
-                while (questionTypeVerifier[j] !== undefined) {
-                    if (questionTypeVerifier[j] === "boolean") {
-                        totalPointsPossible += 1;
-                        j++;
-                    }
-
-                    else {
-                        totalPointsPossible += 3;
-                        j++;
-                    }
-                }
-
-                let countTotalPoints = new Compare_Answer({
-                  totalPointsPossible: totalPointsPossible
-                })
-
-                countTotalPoints.save();
-
-            // let i = 0;
-            let yourPointsEarned = 0;
-            let yourCorrectQuestions = 0;
-
-                // while (userAnswers[i] !== undefined) {
                 for (i = 0; i < numberOfQuestions; i++) {
-                    if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
+                    if (realAnswers[i].correctAnswer !== userAnswers[i] && realAnswers[i].questionType === "boolean") {
                     
                       let compareAnswer = new Compare_Answer({
                         question_number: `${i+1}`,  
@@ -325,7 +331,7 @@ app.route('/results')
 
                     }
 
-                    else if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "multiple") {
+                    else if (realAnswers[i].correctAnswer !== userAnswers[i] && realAnswers[i].questionType === "multiple") {
                         let compareAnswer = new Compare_Answer({
                           question_number: `${i+1}`,  
                           points_earned: 0,
@@ -341,7 +347,7 @@ app.route('/results')
 
                     else {        
 
-                        if (questionTypeVerifier[i] === "boolean") {
+                        if (realAnswers[i].questionType === "boolean") {
                           let compareAnswer = new Compare_Answer({
                             question_number: `${i+1}`,  
                             points_earned: 1,
@@ -378,14 +384,6 @@ app.route('/results')
                   i++;
                 }
 
-                let userScore = new Compare_Answer({
-                  yourPointsEarned: yourPointsEarned,
-                  yourCorrectQuestions: yourCorrectQuestions
-                })
-
-                userScore.save();
-                
-
               resolve("Compare Answer is complete. You can go to results.ejs now.")
           }
 
@@ -394,6 +392,133 @@ app.route('/results')
       });
 
   }
+
+  //   const findAnswers = () => {
+
+  //     return new Promise ((resolve, reject) => {
+  //       Answer.find(function (err, response) {
+                                    
+  //         if (err) {
+  //           console.log("Answer Find Error is ", err);
+  //         }
+
+  //         else {
+  //           realAnswers = response[0].correctAnswers;
+
+  //           questionTypeVerifier = response[0].questionTypes;
+            
+  //           let totalPointsPossible = 0;
+  //           // let j = 0;
+
+  //               // while (questionTypeVerifier[j] !== undefined) {
+  //                 for (j = 0; i < numberOfQuestions; j++) {
+  //                   if (questionTypeVerifier[j] === "boolean") {
+  //                       totalPointsPossible += 1;
+  //                       j++;
+  //                   }
+
+  //                   else {
+  //                       totalPointsPossible += 3;
+  //                       j++;
+  //                   }
+  //               }
+
+  //               let countTotalPoints = new Compare_Answer({
+  //                 totalPointsPossible: totalPointsPossible
+  //               })
+
+  //               countTotalPoints.save();
+
+  //           // let i = 0;
+  //           let yourPointsEarned = 0;
+  //           let yourCorrectQuestions = 0;
+
+  //               // while (userAnswers[i] !== undefined) {
+  //               for (i = 0; i < numberOfQuestions; i++) {
+  //                   if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
+                    
+  //                     let compareAnswer = new Compare_Answer({
+  //                       question_number: `${i+1}`,  
+  //                       points_earned: 0,
+  //                       points_possible: 1,
+  //                       accuracy: `Incorrect Answer.`,
+  //                       result: userAnswers[i],
+  //                       correct_result: realAnswers[i]
+  //                     })
+
+  //                     compareAnswer.save()
+
+  //                   }
+
+  //                   else if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "multiple") {
+  //                       let compareAnswer = new Compare_Answer({
+  //                         question_number: `${i+1}`,  
+  //                         points_earned: 0,
+  //                         points_possible: 3,
+  //                         accuracy: `Incorrect Answer.`,
+  //                         result: userAnswers[i],
+  //                         correct_result: realAnswers[i]
+  //                       })
+
+  //                       compareAnswer.save()
+  //                   }
+
+
+  //                   else {        
+
+  //                       if (questionTypeVerifier[i] === "boolean") {
+  //                         let compareAnswer = new Compare_Answer({
+  //                           question_number: `${i+1}`,  
+  //                           points_earned: 1,
+  //                           points_possible: 1,
+  //                           accuracy: `Correct!`,
+  //                           result: userAnswers[i],
+  //                           correct_result: realAnswers[i]
+  //                         })
+
+  //                         yourPointsEarned += 1;
+  //                         yourCorrectQuestions += 1;
+
+  //                         compareAnswer.save();
+  //                       }
+                      
+  //                       else {
+  //                         let compareAnswer = new Compare_Answer({
+  //                           question_number: `${i+1}`,  
+  //                           points_earned: 3,
+  //                           points_possible: 3,
+  //                           accuracy: `Correct!`,
+  //                           result: userAnswers[i],
+  //                           correct_result: realAnswers[i]
+  //                         })
+
+  //                         yourPointsEarned += 3;
+  //                         yourCorrectQuestions += 1;
+
+  //                         compareAnswer.save();
+  //                       }
+                    
+  //                   }
+
+  //                 i++;
+  //               }
+
+  //               let userScore = new Compare_Answer({
+  //                 yourPointsEarned: yourPointsEarned,
+  //                 yourCorrectQuestions: yourCorrectQuestions
+  //               })
+
+  //               userScore.save();
+                
+
+  //             resolve("Compare Answer is complete. You can go to results.ejs now.")
+  //         }
+
+
+  //       });
+  //     });
+
+  // }
 
     async function waitForFormVerifier() {
       let waitForForm = await formVerifier();
