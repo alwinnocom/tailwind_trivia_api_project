@@ -42,8 +42,9 @@ let tryDifferentType = ``;
 let ejsResponse = ``;
 let pleaseAnswerEveryQuestion = ``;
 let savedUserResponse = ``;
-let hideAllCorrectAnswers = `hide`;
+let hideAllCorrectAnswers = "hide";
 let percent_correct = ``;
+
 
 
 // API Data Segmented Into Variables
@@ -61,11 +62,11 @@ app.route('/questions')
             console.log("Question.find Error is ", err);
         }
 
-        // Response returns [] if nothing is found. - https://stackoverflow.com/questions/9660587/do-something-if-nothing-found-with-find-mongoose 
-        else if (!response.length) {
+        // Response returns [] if nothing is found via (!response.length). - https://stackoverflow.com/questions/9660587/do-something-if-nothing-found-with-find-mongoose 
+        else if (response.length !== numberOfQuestions) {
 
           // Restrict the number of requests so the browser does not say 'Error: Too Many Requests'
-          setTimeout(() => {res.redirect("/questions")}, 1000);
+          setTimeout(() => {res.redirect("/questions")}, 3000);
 
         }
 
@@ -82,7 +83,6 @@ app.route('/questions')
               category: category_list[category]
             }) 
           
-            hideAllCorrectAnswers = "";
         }
 
       });
@@ -235,7 +235,7 @@ app.route('/results')
 
       // Just in case.
       else if (!response.length) {
-        setTimeout(() => {res.redirect("/results")}, 1000);
+        setTimeout(() => {res.redirect("/results")}, 3000);
       }
 
       else {

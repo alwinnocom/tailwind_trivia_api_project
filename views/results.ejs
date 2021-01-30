@@ -7,13 +7,13 @@
 <div class="grid grid-cols-2 md:align-middle md:justify-center md:flex md:flex-row sticky bottom-0 bg-white ml-4 my-8">
 
     <form class="" action="/results" method='get'>
-        <button class="results-button button-emphasize raleway text-center p-2 my-2 mx-8 border-2 border-blue-400 rounded text-blue-400"type="submit">No Results?</button>
+        <button class="results-button button-emphasize raleway text-center p-2 my-2 mx-8 border-2 border-blue-400 rounded text-blue-400"type="submit">Refresh Page?</button>
     </form>
 
     <% if (hideAllCorrectAnswers !== "hide") { %> 
 
         <form class="" action="/results/hidden" method='get'>
-            <button class="results-button button-emphasize raleway text-center p-2 my-2 mx-8 border-2 border-blue-400 rounded text-blue-400" type="submit">Hide Answers</button>
+            <button class="results-button button-emphasize raleway text-center p-2 my-2 mx-8 border-2 border-green-400 rounded text-green-400" type="submit">Hide Answers</button>
         </form>
 
     <% } else { %> 
@@ -29,7 +29,7 @@
     </form>
 
     <form class="" action="/questions/delete" method='get'>
-        <button class="results-button button-emphasize raleway text-center p-2 my-2 mx-8 border-2 rounded border-red-400 text-red-400"type="submit">New Round</button>
+        <button class="results-button button-emphasize raleway text-center p-2 my-2 mx-8 border-2 rounded border-purple-400 text-purple-400"type="submit">New Round</button>
     </form>
 
 </div>

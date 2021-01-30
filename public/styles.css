@@ -69,20 +69,14 @@ input, select {
 
     0% {
         opacity: 1;
-        display: block;
-        height: 100%;
     }
 
     50% {
         opacity: 0.8;
-        display: block;
-        height: 50%;
     }
 
     100% {
         opacity: 0;
-        display: none;
-        height: 0;
     }
 
 }
@@ -257,3 +251,74 @@ input, select {
      left: 50%;
      transform: translateX(-50%);
  }
+
+
+ /* Sass Order code if you do get styles.scss to work well with Tailwind. */
+
+ /* @for $i from 1 through 50 {
+    order-#{$i} {
+        order: $i;
+    }
+ } */
+
+/* Order classes in CSS so that results.ejs displays the questions in the right order. */
+
+ .order-13 {
+     order: 13;
+ }
+
+ .order-14 {
+    order: 14;
+}
+
+
+.order-15 {
+    order: 15;
+}
+
+
+.order-16 {
+    order: 16;
+}
+
+
+.order-17 {
+    order: 17;
+}
+
+
+.order-18 {
+    order: 18;
+}
+
+
+.order-19 {
+    order: 19;
+}
+
+
+.order-20 {
+    order: 20;
+}
+
+
+.order-21 {
+    order: 21;
+}
+
+
+.order-22 {
+    order: 22;
+}
+
+.order-23 {
+    order: 23;
+}
+
+.order-24 {
+    order: 24;
+}
+
+.order-25 {
+    order: 25;
+}

@@ -5,13 +5,13 @@
 
 <h1 class="lobster-2 bg-blue-600 text-center py-2 text-white text-6xl"><span class="w-1 h-1 px-3 m-4 bg-teal-500 rounded">?</span>Quiz Pro Quo</h1>
 
-<div class="info-disappear text-xl rounded-full mx-6 my-4 bg-red-300 text-red-600 <% if (!infoForUser) { %> invisible <% } %>"><h2 class="info-disappear libre-baskerville px-16 py-6 text-xl text-red-600"> <%= infoForUser %> </h2></div>
+<div class="info-disappear text-xl mx-6 text-red-400 border-2 border-red-400 <% if (!infoForUser) { %> my-1 invisible <% } else { %> my-4 <% } %>"><h2 class="info-disappear libre-baskerville px-16 py-6 text-xl text-red-400"> <%= infoForUser %> </h2></div>
 
 <form class="" action='/questions' method='post' id='form'>
 
     <section class="mx-6 grid grid-cols-1 grid-rows-4 gap-4 md:grid-cols-2 md:grid-rows-2 md:gap-8">
 
-        <div class="border-4 rounded-full <% if (infoForUser === "Please type a valid number of questions between 1 and 25.") { %> bg-red-500 border-red-600 pt-5 <% } else { %> bg-green-300  border-green-600 pt-5 <% } %>" >
+        <div class="border-4 <% if (infoForUser === "Please type a valid number of questions between 1 and 25.") { %> bg-red-500 border-red-400 pt-5 <% } else { %>  border-green-400 pt-5 <% } %>" >
             
             <label class="libre-baskerville m-16 text-xl text-green-900" for="numberOfQuestions">Number of Questions</label>
             <input class="max-w-none w-56 raleway rounded border-2 border-solid <% if ((!infoForUser) || infoForUser === "All questions deleted.") { %> border-blue-800 mb-8 <% } else { %> border-red-500 <% } %> block mx-16 mt-6 appearance-none px-2" type="number" min="1" max="25" step="1" value="10" placeholder="1-25" name="numberOfQuestions" required>
@@ -20,7 +20,7 @@
             
         </div>
         
-        <div class="border-4 border-blue-600 rounded-full bg-blue-300 pt-5">
+        <div class="border-4 border-blue-400 pt-5">
             <label class="libre-baskerville m-16 text-xl text-blue-900" for="category">Category</label>
 
 
@@ -88,7 +88,7 @@
         </div>
         
 
-        <div class="border-4 border-green-600 rounded-full pt-5 bg-green-300 md:bg-blue-300 md:border-blue-600">
+        <div class="border-4 border-green-400 pt-5 md:border-blue-400">
             <label class=" libre-baskerville m-16 text-xl text-green-900 md:text-blue-900" for="difficulty">Difficulty</label>
 
             <select class=" max-w-none w-56 raleway rounded border-2 border-gray-700 block mx-16 mt-6 <% if (!tryDifferentDifficulty) { %> mb-8 <% } %>" type="text" placeholder="Difficulty" name="difficulty">
@@ -103,7 +103,7 @@
         </div>
         
 
-        <div class="border-4 border-blue-600 rounded-full pt-5 bg-blue-300 md:bg-green-300 md:border-green-600">
+        <div class="border-4 border-blue-400 pt-5 md:border-green-400">
             <label class="libre-baskerville m-16 text-xl text-blue-900 md:text-green-900" for="type">Type</label>
 
             <select class="max-w-none w-56 raleway rounded border-2 border-gray-700 block mx-16 mt-6 <% if (!tryDifferentType) { %> mb-8 <% } %>" type="text" placeholder="Type" name="type">
@@ -118,7 +118,7 @@
 
     </section>
 
-    <button class="bg-white mx-none submit-button button-expand absolute logo-image libre-baskerville rounded border-2 border-blue-600 block p-4 my-4 text-xl md:text-2xl text-blue-600" type="submit">Submit</button>
+    <button class="bg-white mx-none submit-button button-expand absolute logo-image libre-baskerville rounded border-2 border-blue-400 block p-4 my-4 text-xl md:text-2xl text-blue-400" type="submit">Submit</button>
 
 </form>
 
