@@ -5,6 +5,8 @@ mongoose.connect("mongodb+srv://admin-alwin:aGq5DdasHMkw5Di@tailwindtrivia.g4cpx
 
 const answerSchema = new Schema({
     correctAnswers: {},
+    listOfQuestions: {},
+    questionDifficulties: {},
     questionTypes: {}
 });
 

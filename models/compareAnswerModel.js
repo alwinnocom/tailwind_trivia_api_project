@@ -4,18 +4,23 @@ const { Schema } = require('mongoose');
 mongoose.connect("mongodb+srv://admin-alwin:aGq5DdasHMkw5Di@tailwindtrivia.g4cpx.mongodb.net/question?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const compare_answerSchema = new Schema({
-    question_number: String,
-
-    points_earned: Number,
-    points_possible: Number,
-
-    totalPointsPossible: Number,
+    type_of_document: String,
 
     yourPointsEarned: Number,
 
     yourCorrectQuestions: Number,
 
     accuracy: String,
+
+    question_number: String,
+    question_difficulty: String,
+    actual_question: String,
+
+    points_earned: Number,
+    points_possible: Number,
+
+    totalPointsPossible: Number,
+
     result: String,
     correct_result: String
 });

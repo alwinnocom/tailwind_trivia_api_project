@@ -5,6 +5,8 @@ const saveData = (questionData) => {
     
         let correctAnswers = {};
         let questionTypes = {};
+        let questionDifficulties = {};
+        let listOfQuestions = {};
 
         for (i = 0; i < questionData.length; i++) {
 
@@ -31,6 +33,8 @@ const saveData = (questionData) => {
 
             correctAnswers[i] = correctAnswer;
             questionTypes[i] = questionData[i].type;
+            listOfQuestions[i] = question;
+            questionDifficulties[i] = questionData[i].difficulty.charAt(0).toUpperCase() + questionData[i].difficulty.slice(1);
 
             // https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
 
@@ -51,6 +55,8 @@ const saveData = (questionData) => {
 
         let answerOne = new Answer({
             correctAnswers: correctAnswers,
+            listOfQuestions: listOfQuestions,
+            questionDifficulties: questionDifficulties,
             questionTypes: questionTypes
         })
         

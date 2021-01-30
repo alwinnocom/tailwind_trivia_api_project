@@ -285,7 +285,8 @@ app.route('/results')
 
           else {
             realAnswers = response[0].correctAnswers;
-
+            listOfAllQuestions = response[0].listOfQuestions;
+            listOfQuestionDifficulties = response[0].questionDifficulties;
             questionTypeVerifier = response[0].questionTypes;
             
             let totalPointsPossible = 0;
@@ -304,6 +305,7 @@ app.route('/results')
                 }
 
                 let countTotalPoints = new Compare_Answer({
+                  type_of_document: "Count Total Points.",
                   totalPointsPossible: totalPointsPossible
                 })
 
@@ -319,6 +321,9 @@ app.route('/results')
                     if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
                     
                       let compareAnswer = new Compare_Answer({
+                        actual_question: listOfAllQuestions[i],
+                        question_difficulty: listOfQuestionDifficulties[i], 
+
                         question_number: `${i+1}`,  
                         points_earned: 0,
                         points_possible: 1,
@@ -333,6 +338,9 @@ app.route('/results')
 
                     else if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "multiple") {
                         let compareAnswer = new Compare_Answer({
+                          actual_question: listOfAllQuestions[i],
+                          question_difficulty: listOfQuestionDifficulties[i], 
+
                           question_number: `${i+1}`,  
                           points_earned: 0,
                           points_possible: 3,
@@ -349,6 +357,9 @@ app.route('/results')
 
                         if (questionTypeVerifier[i] === "boolean") {
                           let compareAnswer = new Compare_Answer({
+                            actual_question: listOfAllQuestions[i],
+                            question_difficulty: listOfQuestionDifficulties[i], 
+
                             question_number: `${i+1}`,  
                             points_earned: 1,
                             points_possible: 1,
@@ -365,6 +376,9 @@ app.route('/results')
                       
                         else {
                           let compareAnswer = new Compare_Answer({
+                            actual_question: listOfAllQuestions[i],
+                            question_difficulty: listOfQuestionDifficulties[i], 
+
                             question_number: `${i+1}`,  
                             points_earned: 3,
                             points_possible: 3,
@@ -385,6 +399,7 @@ app.route('/results')
                 }
 
                 let userScore = new Compare_Answer({
+                  type_of_document: "User Score.",
                   yourPointsEarned: yourPointsEarned,
                   yourCorrectQuestions: yourCorrectQuestions
                 })
