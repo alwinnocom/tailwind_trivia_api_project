@@ -37,7 +37,7 @@
 
 <section class="ml-6 mr-6 md:grid grid-cols-2 gap-8">
 
-    <% for (let index = 0; index < response.length; index++) { %>
+    <% for (let index = 1; index < response.length; index++) { %>
 
         <!-- If question number is not found, then it isn't a dataset that should be viewed anyway, so skip it. -->
         <% if (!response[index].question_number) { 

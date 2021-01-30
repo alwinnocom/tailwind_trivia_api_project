@@ -103,7 +103,7 @@ app.route('/questions')
 
         return new Promise ((resolve, reject) => {
         if (isNaN(numberOfQuestions) || numberOfQuestions < 1 || numberOfQuestions > 25) {
-            reject("Please type a valid number of questions between 1 and 30.");
+            reject("Please type a valid number of questions between 1 and 25.");
         }
     
         else if (!numberOfQuestions) {
@@ -304,13 +304,12 @@ app.route('/results')
 
                 countTotalPoints.save();
 
-
-            let i = 0;
+            // let i = 0;
             let yourPointsEarned = 0;
             let yourCorrectQuestions = 0;
 
-                while (userAnswers[i] !== undefined) {
-
+                // while (userAnswers[i] !== undefined) {
+                for (i = 0; i < numberOfQuestions; i++) {
                     if (realAnswers[i] !== userAnswers[i] && questionTypeVerifier[i] === "boolean") {
                     
                       let compareAnswer = new Compare_Answer({
@@ -385,6 +384,7 @@ app.route('/results')
                 })
 
                 userScore.save();
+                
 
               resolve("Compare Answer is complete. You can go to results.ejs now.")
           }
