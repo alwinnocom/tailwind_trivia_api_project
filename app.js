@@ -92,7 +92,7 @@ app.route('/questions')
         if (err) {
           console.log("Compare_Answer Delete Many Error is ", err);
         }
-      });
+      })
 
 
     //   Answer.deleteMany((err) => {
