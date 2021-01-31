@@ -52,7 +52,7 @@
             </span>
         </p>
         <p> Category: <em><%= category %></em></p>
-        <p> Difficulty: <em><%= difficulty %></em></p>
+        <p> Difficulty: <em><%= difficulty.charAt(0).toUpperCase() + difficulty.slice(1) %></em></p>
         
     </div>
 
@@ -94,7 +94,9 @@
     <div class="border-2 rounded <% if (response[index].accuracy === `Correct!`) { %> border-green-500 text-green-600 <% } else { %> border-red-500 text-red-600 <% } %> order-<%= response[index].question_number - 1%> ">
         <p class="libre-baskerville text-xl ml-6 py-2"> Question <%= response[index].question_number %> </p>
 
-        <p class="libre-baskerville text-sm ml-6 mr-2 py-2 text-gray-700"><span class="text-blue-600">(<%= response[index].question_difficulty %>) </span><%= response[index].actual_question %></p>
+        <p class="libre-baskerville text-sm ml-6 mr-2 py-2 text-gray-700"><span class="text-blue-600 <% if (difficulty !== "Any") { %>
+            hidden
+        <% } %>">(<%= response[index].question_difficulty %>) </span><%= response[index].actual_question %></p>
 
         <div class="block border-2 border-l-0 border-r-0 border-opacity-50 border-dotted <% if (response[index].accuracy === `Correct!`) { %> border-green-500 text-green-600 <% } else { %> border-red-500 text-red-600 <% } %>">
             <p class="roboto-condensed text-lg text-blue-700 ml-6 py-2"> Points Earned: <%= response[index].points_earned %>
