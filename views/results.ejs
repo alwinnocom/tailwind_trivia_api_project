@@ -64,13 +64,13 @@
         <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 70) { %>
             <p>You'll do better after more studying.</p>
         <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 80) { %>
-            <p>Doing alright. Let's aim for better!</p>
+            <p>Not bad. Let's aim for better!</p>
         <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 90) { %>
-            <p>Not bad. Can you make it to 100%?</p>
+            <p>Good job! Can you make it to 100%?</p>
         <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 100) { %>
             <p>So close! Almost right on the money!</p>
         <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) === 100) { %>
-            <p>Nice! You are truly a Trivia Master!</p>
+            <p>Nice! You truly are a Trivia Master!</p>
         <% } else { %>
             <p>Learn and improve every day.</p>
         <% } %>
