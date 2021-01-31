@@ -38,7 +38,7 @@
         <div class="flex flex-column bg-white">
             <div class="m-2 order-2">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= ejsResponse[index]._id %> ></input>
+                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" required name= <%= ejsResponse[index]._id %> ></input>
                 <label class="text-lg roboto-condensed ml-2" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
             </div>
             <div class="m-2 <% if (ejsResponse[index].incorrectAnswers[0] === 'False') { %>
@@ -47,7 +47,7 @@
                 order-first
                 <% } %>">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name="<%= ejsResponse[index]._id %>"></input>
+                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" required name="<%= ejsResponse[index]._id %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
             </div>
         </div>
@@ -58,22 +58,22 @@
         <section class="md:relative md:inset-x-0 md:bottom-0 grid grid-rows-4 bg-white">
             <div class="m-2 border-opacity-75 border-green-200 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" name= <%= ejsResponse[index]._id %> ></input>
+                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].correctAnswer) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].correctAnswer %>" required name= <%= ejsResponse[index]._id %> ></input>
                 <label class="text-lg roboto-condensed ml-2" for="<%= ejsResponse[index].correctAnswer %>"><%= ejsResponse[index].correctAnswer %></label>
             </div> 
             <div class="m-2 order-<%= Math.floor(Math.random()*12) + 1; %>">         
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" name= "<%= ejsResponse[index]._id %>"></input>
+                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[0]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[0] %>" required name= "<%= ejsResponse[index]._id %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[0] %>"><%= ejsResponse[index].incorrectAnswers[0] %></label>
             </div> 
             <div class="m-2 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
-                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[1]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[1] %>" name= "<%= ejsResponse[index]._id %>"></input>
+                <input class="ml-2" <% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[1]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[1] %>" required name= "<%= ejsResponse[index]._id %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[1] %>"><%= ejsResponse[index].incorrectAnswers[1] %></label>
             </div> 
             <div class="m-2 order-<%= Math.floor(Math.random()*12) + 1; %>">
                 
-                <input class="ml-2"<% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[2]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[2] %>" name= "<%= ejsResponse[index]._id %>"></input>
+                <input class="ml-2"<% if (savedUserResponse[index] === ejsResponse[index].incorrectAnswers[2]) { %> checked <% } %> type="radio" value="<%= ejsResponse[index].incorrectAnswers[2] %>" required name= "<%= ejsResponse[index]._id %>"></input>
                 <label class="text-lg roboto-condensed ml-2"  for="<%= ejsResponse[index].incorrectAnswers[2] %>"><%= ejsResponse[index].incorrectAnswers[2] %></label>
             </div> 
         </section>

@@ -253,7 +253,9 @@ app.route('/results')
 
 
   .post((req, res) => {
-    let userAnswers = req.body;
+    // Reset userAnswers to nothing.
+    let userAnswers = ""; 
+    userAnswers = req.body;
 
     let realAnswers;
     let questionTypeVerifier;
@@ -289,32 +291,33 @@ app.route('/results')
             listOfQuestionDifficulties = response[0].questionDifficulties;
             questionTypeVerifier = response[0].questionTypes;
             
-            let totalPointsPossible = 0;
-            let j = 0;
+            // let totalPointsPossible = 0;
+            // let j = 0;
 
-                while (questionTypeVerifier[j] !== undefined) {
-                    if (questionTypeVerifier[j] === "boolean") {
-                        totalPointsPossible += 1;
-                        j++;
-                    }
+            //     while (questionTypeVerifier[j] !== undefined) {
+            //         if (questionTypeVerifier[j] === "boolean") {
+            //             totalPointsPossible += 1;
+            //             j++;
+            //         }
 
-                    else {
-                        totalPointsPossible += 3;
-                        j++;
-                    }
-                }
+            //         else {
+            //             totalPointsPossible += 3;
+            //             j++;
+            //         }
+            //     }
 
-                let countTotalPoints = new Compare_Answer({
-                  type_of_document: "Count Total Points.",
-                  totalPointsPossible: totalPointsPossible
-                })
+            //     let countTotalPoints = new Compare_Answer({
+            //       type_of_document: "Count Total Points.",
+            //       totalPointsPossible: totalPointsPossible
+            //     })
 
-                countTotalPoints.save();
+            //     countTotalPoints.save();
 
 
             let i = 0;
             let yourPointsEarned = 0;
             let yourCorrectQuestions = 0;
+            let totalPointsPossible = 0;
 
                 while (userAnswers[i] !== undefined) {
 
@@ -332,6 +335,8 @@ app.route('/results')
                         correct_result: realAnswers[i]
                       })
 
+                      totalPointsPossible += 1;
+
                       compareAnswer.save()
 
                     }
@@ -348,6 +353,8 @@ app.route('/results')
                           result: userAnswers[i],
                           correct_result: realAnswers[i]
                         })
+
+                        totalPointsPossible += 3;
 
                         compareAnswer.save()
                     }
@@ -370,6 +377,7 @@ app.route('/results')
 
                           yourPointsEarned += 1;
                           yourCorrectQuestions += 1;
+                          totalPointsPossible += 1;
 
                           compareAnswer.save();
                         }
@@ -389,6 +397,7 @@ app.route('/results')
 
                           yourPointsEarned += 3;
                           yourCorrectQuestions += 1;
+                          totalPointsPossible += 3;
 
                           compareAnswer.save();
                         }
@@ -401,7 +410,8 @@ app.route('/results')
                 let userScore = new Compare_Answer({
                   type_of_document: "User Score.",
                   yourPointsEarned: yourPointsEarned,
-                  yourCorrectQuestions: yourCorrectQuestions
+                  yourCorrectQuestions: yourCorrectQuestions,
+                  totalPointsPossible: totalPointsPossible
                 })
 
                 userScore.save();
