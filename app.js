@@ -245,7 +245,9 @@ app.route('/results')
             savedUserResponse: savedUserResponse,
             numberOfQuestions: numberOfQuestions,
             hideAllCorrectAnswers: hideAllCorrectAnswers,
-            percent_correct: (parseInt(response[response.length - 1].yourCorrectQuestions) / parseInt(numberOfQuestions)) * 100
+            percent_correct: (parseInt(response[response.length - 1].yourCorrectQuestions) / parseInt(numberOfQuestions)) * 100,
+            category: category_list[category],
+            difficulty: difficulty.charAt(0).toUpperCase() + difficulty.slice(1)
           });
       }
     });
