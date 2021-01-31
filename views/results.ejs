@@ -36,18 +36,18 @@
 
     </div>
 
-    <% for (let index = 0; index < response.length; index++) { %>
+    <% for (let j = 0; j < response.length; j++) { %>
 
         <!-- If type_of_document is not found, then it isn't a dataset that should be viewed anyway, so skip it. -->
-        <% if (!response[index].type_of_document) { 
+        <% if (!response[j].type_of_document) { 
             continue
         } %>
 
     <!-- Modified version of Left Accent Border https://tailwindcomponents.com/component/left-accent-border -->
     <div class="ml-6 mr-6 my-5 py-2 px-3 border-l-4 bg-blue-100 border-blue-700 text-blue-700">
         <p class="font-bold text-xl">Final Score: 
-            <span class="font-normal text-lg"><%= response[index].yourPointsEarned %> / <%= response[index].totalPointsPossible %> 
-                <span class="text-purple-700">(<%= Math.round((response[index].yourPointsEarned / response[index].totalPointsPossible) * 100) %>%)
+            <span class="font-normal text-lg"><%= response[j].yourPointsEarned %> / <%= response[j].totalPointsPossible %> 
+                <span class="text-purple-700">(<%= Math.round((response[j].yourPointsEarned / response[j].totalPointsPossible) * 100) %>%)
                 </span> 
             </span>
         </p>
@@ -57,20 +57,22 @@
     </div>
 
     <div class="ml-6 mr-6 mt-5 mb-8 py-2 px-3 border-l-4 bg-green-100 border-green-700 text-green-700">
-        <p class="font-bold text-xl">Correct Answers: <span class="font-normal text-lg"><%= response[index].yourCorrectQuestions %> / <%= response.length - 1 %></span> </p>
-        
-        <% if (Math.round((response[index].yourPointsEarned / response[index].totalPointsPossible) * 100) < 50) { %>
+        <p class="font-bold text-xl">Correct Answers: <span class="font-normal text-lg"><%= response[j].yourCorrectQuestions %> / <%= response.length - 1 %></span> </p>
+
+        <% if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 50) { %>
             <p>That's alright. Try again next time!</p>
-        <% } else if (50 <= Math.round((response[index].yourPointsEarned / response[index].totalPointsPossible) * 100) < 70) { %>
+        <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 70) { %>
             <p>You'll do better after more studying.</p>
-        <% } else if (70 <= Math.round((response[index].yourPointsEarned / response[index].totalPointsPossible) * 100) < 80) { %>
+        <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 80) { %>
             <p>Doing alright. Let's aim for better!</p>
-        <% } else if (80 <= Math.round((response[index].yourPointsEarned / response[index].totalPointsPossible) * 100) < 90) { %>
+        <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 90) { %>
             <p>Not bad. Can you make it to 100%?</p>
-        <% } else if (90 <= Math.round((response[index].yourPointsEarned / response[index].totalPointsPossible) * 100) < 100) { %>
+        <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) < 100) { %>
             <p>So close! Almost right on the money!</p>
+        <% } else if ( Math.round(response[j].yourPointsEarned * 100 / response[j].totalPointsPossible) === 100) { %>
+            <p>Nice! You are truly a Trivia Master!</p>
         <% } else { %>
-            <p>Nice! You're truly a Trivia Master!</p>
+            <p>Learn and improve every day.</p>
         <% } %>
     </div>
 
